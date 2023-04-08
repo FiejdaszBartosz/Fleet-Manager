@@ -54,4 +54,11 @@ public class EmployeesRepository {
                 id
         );
     }
+
+    public boolean checkCredentials(String login, String password) {
+        String query = "SELECT COUNT(*) FROM moloft.employees WHERE login = ? AND password = ?";
+        Integer count = jdbcTemplate.queryForObject(query, Integer.class, login, password);
+        return count != null && count > 0;
+    }
+
 }
