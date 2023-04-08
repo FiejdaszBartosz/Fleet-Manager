@@ -1,5 +1,6 @@
 package com.bfiejdasz.fleet_manager_rest_api.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.sql.Date;
@@ -28,6 +29,7 @@ public class PlanedRepairsEntity {
     private Date time;
     @ManyToOne
     @JoinColumn(name = "vehicle", referencedColumnName = "id_vehicles", insertable=false, updatable=false)
+    @JsonIgnore
     private VehiclesEntity vehiclesByVehicle;
 
     public long getIdPlanedRepairs() {

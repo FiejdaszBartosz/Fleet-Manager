@@ -20,7 +20,7 @@ public class RoleController {
         this.roleRepository = roleRepository;
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<RoleEntity> getRoleById(@RequestParam("id") long id) {
         Optional<RoleEntity> optionalRole = roleRepository.findById(id);
 

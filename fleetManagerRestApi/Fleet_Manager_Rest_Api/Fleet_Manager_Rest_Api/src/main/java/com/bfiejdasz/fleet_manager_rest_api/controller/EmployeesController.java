@@ -18,7 +18,7 @@ public class EmployeesController {
         this.employeesRepository = employeesRepository;
     }
 
-    @GetMapping("")
+    @GetMapping("/getAll")
     public ResponseEntity<List<EmployeesEntity>> getAll() {
         List<EmployeesEntity> employees = employeesRepository.getAll();
         if (employees.isEmpty()) {
@@ -28,7 +28,7 @@ public class EmployeesController {
         }
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<EmployeesEntity> getEmployeeById(@RequestParam("id") long id) {
         EmployeesEntity employee = employeesRepository.getEmployeeById(id);
         if (employee != null) {
@@ -49,7 +49,7 @@ public class EmployeesController {
         }
     }
 
-    @PatchMapping("/")
+    @PatchMapping("")
     public ResponseEntity<Object> update(@RequestParam("id") long id, @RequestBody EmployeesEntity updatedEmployee) {
         EmployeesEntity employee = employeesRepository.getEmployeeById(id);
 
@@ -65,7 +65,7 @@ public class EmployeesController {
         }
     }
 
-    @DeleteMapping("/")
+    @DeleteMapping("")
     public ResponseEntity<Object> delete(@RequestParam("id") long id) {
         int result = employeesRepository.delete(id);
         if (result == 1) {
