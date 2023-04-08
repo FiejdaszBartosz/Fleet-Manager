@@ -1,5 +1,6 @@
 package com.bfiejdasz.fleet_manager_rest_api.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Collection;
@@ -28,9 +29,8 @@ public class EmployeesEntity {
     private Long role;
     @ManyToOne
     @JoinColumn(name = "role", referencedColumnName = "id_roles", insertable=false, updatable=false)
+    @JsonIgnore
     private RoleEntity roleByRole;
-    @OneToMany(mappedBy = "employeesByIdEmployee")
-    private Collection<RidesEmployeesEntity> ridesEmployeesByIdEmployees;
 
     public long getIdEmployees() {
         return idEmployees;
@@ -116,11 +116,4 @@ public class EmployeesEntity {
         this.roleByRole = roleByRole;
     }
 
-    public Collection<RidesEmployeesEntity> getRidesEmployeesByIdEmployees() {
-        return ridesEmployeesByIdEmployees;
-    }
-
-    public void setRidesEmployeesByIdEmployees(Collection<RidesEmployeesEntity> ridesEmployeesByIdEmployees) {
-        this.ridesEmployeesByIdEmployees = ridesEmployeesByIdEmployees;
-    }
 }

@@ -1,5 +1,6 @@
 package com.bfiejdasz.fleet_manager_rest_api.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Collection;
@@ -15,6 +16,7 @@ public class RoleEntity {
     @Column(name = "role_name")
     private String roleName;
     @OneToMany(mappedBy = "roleByRole")
+    @JsonIgnore
     private Collection<EmployeesEntity> employeesByIdRoles;
 
     public long getIdRoles() {
