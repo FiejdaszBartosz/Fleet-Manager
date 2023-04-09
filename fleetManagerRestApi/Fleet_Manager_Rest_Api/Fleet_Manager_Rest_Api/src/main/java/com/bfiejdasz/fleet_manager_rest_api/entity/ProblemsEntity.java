@@ -1,5 +1,7 @@
 package com.bfiejdasz.fleet_manager_rest_api.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.util.Collection;
@@ -12,11 +14,11 @@ public class ProblemsEntity {
     @Column(name = "id_problems")
     private long idProblems;
     @Basic
-    @Column(name = "rideID")
+    @Column(name = "rideid")
     private Long rideId;
     @Basic
-    @Column(name = "problemType")
-    private Long problemType;
+    @Column(name = "type")
+    private Long type;
     @Basic
     @Column(name = "description")
     private String description;
@@ -24,9 +26,12 @@ public class ProblemsEntity {
     @Column(name = "is_solved")
     private Short isSolved;
     @ManyToOne
-    @JoinColumn(name = "problemType", referencedColumnName = "id_problem_types", insertable=false, updatable=false)
+    @JsonProperty("type")
+    @JsonIgnore
+    @JoinColumn(name = "type", referencedColumnName = "id_problem_types", insertable=false, updatable=false)
     private ProblemTypesEntity problemTypesByProblemType;
     @OneToMany(mappedBy = "problemsByProblem")
+    @JsonIgnore
     private Collection<RepairsEntity> repairsByIdProblems;
 
     public long getIdProblems() {
@@ -46,11 +51,11 @@ public class ProblemsEntity {
     }
 
     public Long getProblemType() {
-        return problemType;
+        return type;
     }
 
-    public void setProblemType(Long problemType) {
-        this.problemType = problemType;
+    public void setProblemType(Long type) {
+        this.type = type;
     }
 
     public String getDescription() {
@@ -78,7 +83,7 @@ public class ProblemsEntity {
 
         if (idProblems != that.idProblems) return false;
         if (rideId != null ? !rideId.equals(that.rideId) : that.rideId != null) return false;
-        if (problemType != null ? !problemType.equals(that.problemType) : that.problemType != null) return false;
+        if (type != null ? !type.equals(that.type) : that.type != null) return false;
         if (description != null ? !description.equals(that.description) : that.description != null) return false;
         if (isSolved != null ? !isSolved.equals(that.isSolved) : that.isSolved != null) return false;
 
@@ -89,7 +94,7 @@ public class ProblemsEntity {
     public int hashCode() {
         int result = (int) (idProblems ^ (idProblems >>> 32));
         result = 31 * result + (rideId != null ? rideId.hashCode() : 0);
-        result = 31 * result + (problemType != null ? problemType.hashCode() : 0);
+        result = 31 * result + (type != null ? type.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (isSolved != null ? isSolved.hashCode() : 0);
         return result;

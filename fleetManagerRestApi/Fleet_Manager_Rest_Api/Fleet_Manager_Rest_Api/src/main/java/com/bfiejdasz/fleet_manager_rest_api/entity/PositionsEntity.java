@@ -12,7 +12,7 @@ public class PositionsEntity {
     @Column(name = "id_positions")
     private long idPositions;
     @Basic
-    @Column(name = "rideID")
+    @Column(name = "rideid")
     private Long rideId;
     @Basic
     @Column(name = "x_cord")

@@ -12,7 +12,7 @@ public class RidesEntity {
     @Column(name = "id_rides")
     private long idRides;
     @Basic
-    @Column(name = "rideID")
+    @Column(name = "rideid")
     private Long rideId;
     @Basic
     @Column(name = "vehicle")
@@ -36,16 +36,16 @@ public class RidesEntity {
     @Column(name = "stop_fuel")
     private Integer stopFuel;
     @ManyToOne
-    @JoinColumn(name = "rideID", referencedColumnName = "rideID", insertable=false, updatable=false)
+    @JoinColumn(name = "rideid", referencedColumnName = "rideid", insertable=false, updatable=false)
     private PositionsEntity positionsByRideId;
     @ManyToOne
-    @JoinColumn(name = "rideID", referencedColumnName = "rideID", insertable=false, updatable=false)
+    @JoinColumn(name = "rideid", referencedColumnName = "rideid", insertable=false, updatable=false)
     private ProblemsEntity problemsByRideId;
     @ManyToOne
     @JoinColumn(name = "vehicle", referencedColumnName = "id_vehicles", insertable=false, updatable=false)
     private VehiclesEntity vehiclesByVehicle;
     @ManyToOne
-    @JoinColumn(name = "rideID", referencedColumnName = "rideID", insertable=false, updatable=false)
+    @JoinColumn(name = "rideid", referencedColumnName = "rideid", insertable=false, updatable=false)
     private RidesEmployeesEntity ridesEmployeesByRideId;
 
     public long getIdRides() {

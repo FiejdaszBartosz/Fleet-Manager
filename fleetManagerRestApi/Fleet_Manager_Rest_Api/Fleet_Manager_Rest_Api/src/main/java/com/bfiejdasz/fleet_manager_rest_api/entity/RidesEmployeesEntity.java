@@ -10,7 +10,7 @@ public class RidesEmployeesEntity {
     @Column(name = "id_rides_employees")
     private long idRidesEmployees;
     @Basic
-    @Column(name = "rideID")
+    @Column(name = "rideid")
     private Long rideId;
     @Basic
     @Column(name = "id_employee")
