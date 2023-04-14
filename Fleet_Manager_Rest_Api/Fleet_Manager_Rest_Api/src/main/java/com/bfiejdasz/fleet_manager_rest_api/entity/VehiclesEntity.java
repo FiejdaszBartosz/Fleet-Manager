@@ -1,5 +1,6 @@
 package com.bfiejdasz.fleet_manager_rest_api.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Collection;
@@ -36,10 +37,13 @@ public class VehiclesEntity {
     @Column(name = "in_use")
     private Short inUse;
     @OneToMany(mappedBy = "vehiclesByVehicle")
+    @JsonIgnore
     private Collection<PlanedRepairsEntity> planedRepairsByIdVehicles;
     @OneToMany(mappedBy = "vehiclesByVehicle")
+    @JsonIgnore
     private Collection<RepairsEntity> repairsByIdVehicles;
     @OneToMany(mappedBy = "vehiclesByVehicle")
+    @JsonIgnore
     private Collection<RidesEntity> ridesByIdVehicles;
 
     public long getIdVehicles() {
