@@ -1,5 +1,6 @@
 package com.bfiejdasz.fleet_manager_rest_api.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -19,9 +20,11 @@ public class RepairsEntity {
     @Column(name = "description")
     private String description;
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "vehicle", referencedColumnName = "id_vehicles", insertable=false, updatable=false)
     private VehiclesEntity vehiclesByVehicle;
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "problem", referencedColumnName = "id_problems", insertable=false, updatable=false)
     private ProblemsEntity problemsByProblem;
 
