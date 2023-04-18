@@ -7,6 +7,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface IPositionsRepository extends JpaRepository<PositionsEntity, Long> {
-    @Query("SELECT p FROM PositionsEntity p WHERE p.rideId = :id")
+    @Query("SELECT p FROM PositionsEntity p WHERE p.rideid = :id")
     List<PositionsEntity> findAllByRideid(@Param("id") Long carId);
 }

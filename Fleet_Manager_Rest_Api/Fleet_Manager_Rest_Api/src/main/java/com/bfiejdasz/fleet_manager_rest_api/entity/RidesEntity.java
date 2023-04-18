@@ -1,8 +1,10 @@
 package com.bfiejdasz.fleet_manager_rest_api.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Table(name = "rides", schema = "moloft", catalog = "postgres")
@@ -36,17 +38,17 @@ public class RidesEntity {
     @Column(name = "stop_fuel")
     private Integer stopFuel;
     @ManyToOne
-    @JoinColumn(name = "rideid", referencedColumnName = "rideid", insertable=false, updatable=false)
-    private PositionsEntity positionsByRideId;
-    @ManyToOne
-    @JoinColumn(name = "rideid", referencedColumnName = "rideid", insertable=false, updatable=false)
-    private ProblemsEntity problemsByRideId;
-    @ManyToOne
     @JoinColumn(name = "vehicle", referencedColumnName = "id_vehicles", insertable=false, updatable=false)
     private VehiclesEntity vehiclesByVehicle;
     @ManyToOne
     @JoinColumn(name = "rideid", referencedColumnName = "rideid", insertable=false, updatable=false)
     private RidesEmployeesEntity ridesEmployeesByRideId;
+    @ManyToOne
+    @JoinColumn(name = "rideid", referencedColumnName = "rideid", insertable=false, updatable=false)
+    private PositionsEntity positionsByRideid;
+    @ManyToOne
+    @JoinColumn(name = "rideid", referencedColumnName = "rideid", insertable=false, updatable=false)
+    private ProblemsEntity problemsByRideid;
 
     public long getIdRides() {
         return idRides;
@@ -154,22 +156,6 @@ public class RidesEntity {
         return result;
     }
 
-    public PositionsEntity getPositionsByRideId() {
-        return positionsByRideId;
-    }
-
-    public void setPositionsByRideId(PositionsEntity positionsByRideId) {
-        this.positionsByRideId = positionsByRideId;
-    }
-
-    public ProblemsEntity getProblemsByRideId() {
-        return problemsByRideId;
-    }
-
-    public void setProblemsByRideId(ProblemsEntity problemsByRideId) {
-        this.problemsByRideId = problemsByRideId;
-    }
-
     public VehiclesEntity getVehiclesByVehicle() {
         return vehiclesByVehicle;
     }
@@ -184,5 +170,21 @@ public class RidesEntity {
 
     public void setRidesEmployeesByRideId(RidesEmployeesEntity ridesEmployeesByRideId) {
         this.ridesEmployeesByRideId = ridesEmployeesByRideId;
+    }
+
+    public PositionsEntity getPositionsByRideid() {
+        return positionsByRideid;
+    }
+
+    public void setPositionsByRideid(PositionsEntity positionsByRideid) {
+        this.positionsByRideid = positionsByRideid;
+    }
+
+    public ProblemsEntity getProblemsByRideid() {
+        return problemsByRideid;
+    }
+
+    public void setProblemsByRideid(ProblemsEntity problemsByRideid) {
+        this.problemsByRideid = problemsByRideid;
     }
 }

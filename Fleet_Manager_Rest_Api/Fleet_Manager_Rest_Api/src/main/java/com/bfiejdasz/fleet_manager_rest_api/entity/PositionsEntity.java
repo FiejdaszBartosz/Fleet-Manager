@@ -3,6 +3,7 @@ package com.bfiejdasz.fleet_manager_rest_api.entity;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.util.Collection;
 
 @Entity
 @Table(name = "positions", schema = "moloft", catalog = "postgres")
@@ -13,7 +14,7 @@ public class PositionsEntity {
     private long idPositions;
     @Basic
     @Column(name = "rideid")
-    private Long rideId;
+    private Long rideid;
     @Basic
     @Column(name = "x_cord")
     private Double xCord;
@@ -23,6 +24,8 @@ public class PositionsEntity {
     @Basic
     @Column(name = "time")
     private Timestamp time;
+    @OneToMany(mappedBy = "positionsByRideid")
+    private Collection<RidesEntity> positionsByRideid;
 
     public long getIdPositions() {
         return idPositions;
@@ -32,12 +35,12 @@ public class PositionsEntity {
         this.idPositions = idPositions;
     }
 
-    public Long getRideId() {
-        return rideId;
+    public Long getRideid() {
+        return rideid;
     }
 
-    public void setRideId(Long rideId) {
-        this.rideId = rideId;
+    public void setRideid(Long rideid) {
+        this.rideid = rideid;
     }
 
     public Double getxCord() {
@@ -72,7 +75,7 @@ public class PositionsEntity {
         PositionsEntity that = (PositionsEntity) o;
 
         if (idPositions != that.idPositions) return false;
-        if (rideId != null ? !rideId.equals(that.rideId) : that.rideId != null) return false;
+        if (rideid != null ? !rideid.equals(that.rideid) : that.rideid != null) return false;
         if (xCord != null ? !xCord.equals(that.xCord) : that.xCord != null) return false;
         if (yCord != null ? !yCord.equals(that.yCord) : that.yCord != null) return false;
         if (time != null ? !time.equals(that.time) : that.time != null) return false;
@@ -83,10 +86,18 @@ public class PositionsEntity {
     @Override
     public int hashCode() {
         int result = (int) (idPositions ^ (idPositions >>> 32));
-        result = 31 * result + (rideId != null ? rideId.hashCode() : 0);
+        result = 31 * result + (rideid != null ? rideid.hashCode() : 0);
         result = 31 * result + (xCord != null ? xCord.hashCode() : 0);
         result = 31 * result + (yCord != null ? yCord.hashCode() : 0);
         result = 31 * result + (time != null ? time.hashCode() : 0);
         return result;
+    }
+
+    public Collection<RidesEntity> getPositionsByRideid() {
+        return positionsByRideid;
+    }
+
+    public void setPositionsByRideid(Collection<RidesEntity> positionsByRideid) {
+        this.positionsByRideid = positionsByRideid;
     }
 }

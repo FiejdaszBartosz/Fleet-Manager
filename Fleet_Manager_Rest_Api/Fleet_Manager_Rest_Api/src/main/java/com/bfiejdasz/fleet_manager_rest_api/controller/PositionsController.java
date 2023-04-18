@@ -70,7 +70,7 @@ public class PositionsController {
         if (optional.isPresent()) {
             PositionsEntity temp = optional.get();
 
-            if(positionsEntity.getRideId() != null) temp.setRideId(positionsEntity.getRideId());
+            if(positionsEntity.getRideid() != null) temp.setRideid(positionsEntity.getRideid());
             if(positionsEntity.getxCord() != null) temp.setxCord(positionsEntity.getxCord());
             if(positionsEntity.getyCord() != null) temp.setyCord(positionsEntity.getyCord());
             if(positionsEntity.getTime() != null) temp.setTime(positionsEntity.getTime());
