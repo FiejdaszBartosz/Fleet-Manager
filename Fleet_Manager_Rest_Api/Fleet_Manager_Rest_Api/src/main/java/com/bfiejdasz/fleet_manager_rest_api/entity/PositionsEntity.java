@@ -24,8 +24,9 @@ public class PositionsEntity {
     @Basic
     @Column(name = "time")
     private Timestamp time;
-    @OneToMany(mappedBy = "positionsByRideid")
-    private Collection<RidesEntity> positionsByRideid;
+    @ManyToOne
+    @JoinColumn(name = "rideid", referencedColumnName = "rideid", insertable=false, updatable=false)
+    private RidesEntity positionsByRideid;
 
     public long getIdPositions() {
         return idPositions;
@@ -93,11 +94,5 @@ public class PositionsEntity {
         return result;
     }
 
-    public Collection<RidesEntity> getPositionsByRideid() {
-        return positionsByRideid;
-    }
 
-    public void setPositionsByRideid(Collection<RidesEntity> positionsByRideid) {
-        this.positionsByRideid = positionsByRideid;
-    }
 }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -43,12 +44,12 @@ public class RidesEntity {
     @ManyToOne
     @JoinColumn(name = "rideid", referencedColumnName = "rideid", insertable=false, updatable=false)
     private RidesEmployeesEntity ridesEmployeesByRideId;
-    @ManyToOne
-    @JoinColumn(name = "rideid", referencedColumnName = "rideid", insertable=false, updatable=false)
-    private PositionsEntity positionsByRideid;
-    @ManyToOne
-    @JoinColumn(name = "rideid", referencedColumnName = "rideid", insertable=false, updatable=false)
-    private ProblemsEntity problemsByRideid;
+
+    @OneToMany(mappedBy = "problemsByRideid")
+    private Collection<ProblemsEntity> problemsByRideid;
+
+    @OneToMany(mappedBy = "positionsByRideid")
+    private Collection<PositionsEntity> positionsByRideid;
 
     public long getIdRides() {
         return idRides;
@@ -172,19 +173,19 @@ public class RidesEntity {
         this.ridesEmployeesByRideId = ridesEmployeesByRideId;
     }
 
-    public PositionsEntity getPositionsByRideid() {
-        return positionsByRideid;
-    }
-
-    public void setPositionsByRideid(PositionsEntity positionsByRideid) {
-        this.positionsByRideid = positionsByRideid;
-    }
-
-    public ProblemsEntity getProblemsByRideid() {
+    public Collection<ProblemsEntity> getProblemsByRideid() {
         return problemsByRideid;
     }
 
-    public void setProblemsByRideid(ProblemsEntity problemsByRideid) {
+    public void setProblemsByRideid(Collection<ProblemsEntity> problemsByRideid) {
         this.problemsByRideid = problemsByRideid;
+    }
+
+    public Collection<PositionsEntity> getPositionsByRideid() {
+        return positionsByRideid;
+    }
+
+    public void setPositionsByRideid(Collection<PositionsEntity> positionsByRideid) {
+        this.positionsByRideid = positionsByRideid;
     }
 }

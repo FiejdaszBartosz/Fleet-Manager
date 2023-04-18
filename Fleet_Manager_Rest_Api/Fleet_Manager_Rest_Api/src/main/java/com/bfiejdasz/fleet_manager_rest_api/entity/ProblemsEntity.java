@@ -33,8 +33,9 @@ public class ProblemsEntity {
     @OneToMany(mappedBy = "problemsByProblem")
     @JsonIgnore
     private Collection<RepairsEntity> repairsByIdProblems;
-    @OneToMany(mappedBy = "problemsByRideid")
-    private Collection<RidesEntity> problemsByRideid;
+    @ManyToOne
+    @JoinColumn(name = "rideid", referencedColumnName = "rideid", insertable=false, updatable=false)
+    private RidesEntity problemsByRideid;
 
     public long getIdProblems() {
         return idProblems;
@@ -116,13 +117,5 @@ public class ProblemsEntity {
 
     public void setRepairsByIdProblems(Collection<RepairsEntity> repairsByIdProblems) {
         this.repairsByIdProblems = repairsByIdProblems;
-    }
-
-    public Collection<RidesEntity> getProblemsByRideid() {
-        return problemsByRideid;
-    }
-
-    public void setProblemsByRideid(Collection<RidesEntity> problemsByRideid) {
-        this.problemsByRideid = problemsByRideid;
     }
 }
