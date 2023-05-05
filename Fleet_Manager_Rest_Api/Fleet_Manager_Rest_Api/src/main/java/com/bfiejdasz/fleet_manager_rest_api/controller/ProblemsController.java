@@ -1,5 +1,6 @@
 package com.bfiejdasz.fleet_manager_rest_api.controller;
 
+import com.bfiejdasz.fleet_manager_rest_api.entity.PositionsEntity;
 import com.bfiejdasz.fleet_manager_rest_api.entity.ProblemsEntity;
 import com.bfiejdasz.fleet_manager_rest_api.repository.IProblemsRepository;
 import org.springframework.http.HttpStatus;
@@ -38,6 +39,17 @@ public class ProblemsController {
             return ResponseEntity.status(HttpStatus.OK).body(output);
         } else {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+        }
+    }
+
+    @GetMapping("/rideid")
+    public ResponseEntity<List<ProblemsEntity>> getProblemByRideId(@RequestParam("id") long id) {
+        List<ProblemsEntity> output = problemsRepository.findProblemsByRideid(id);
+
+        if(output.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+        } else {
+            return ResponseEntity.status(HttpStatus.OK).body(output);
         }
     }
 

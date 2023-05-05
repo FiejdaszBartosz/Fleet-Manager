@@ -43,7 +43,7 @@ public class PositionsController {
     }
 
     @GetMapping("/rideid")
-    public ResponseEntity<List<PositionsEntity>> getProblemById(@RequestParam("id") long id) {
+    public ResponseEntity<List<PositionsEntity>> getPositionsById(@RequestParam("id") long id) {
         List<PositionsEntity> output = positionsRepository.findAllByRideid(id);
 
         if(output.isEmpty()) {
