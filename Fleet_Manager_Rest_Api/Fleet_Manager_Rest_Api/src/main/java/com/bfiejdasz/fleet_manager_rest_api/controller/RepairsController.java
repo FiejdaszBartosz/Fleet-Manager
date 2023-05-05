@@ -1,5 +1,6 @@
 package com.bfiejdasz.fleet_manager_rest_api.controller;
 
+import com.bfiejdasz.fleet_manager_rest_api.entity.ProblemsEntity;
 import com.bfiejdasz.fleet_manager_rest_api.entity.RepairsEntity;
 import com.bfiejdasz.fleet_manager_rest_api.repository.IRepairsRepository;
 import org.springframework.http.HttpStatus;
@@ -30,6 +31,18 @@ public class RepairsController {
     }
 
     @GetMapping("")
+    public ResponseEntity<RepairsEntity> getRepairsById(@RequestParam("id") long id) {
+        Optional<RepairsEntity> optional = repairsRepository.findById(id);
+
+        if(optional.isPresent()) {
+            RepairsEntity output = optional.get();
+            return ResponseEntity.status(HttpStatus.OK).body(output);
+        } else {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+        }
+    }
+
+    @GetMapping("/vehicleid")
     public ResponseEntity<List<RepairsEntity>> getRepairsForVehicle(@RequestParam("id") long id) {
         List<RepairsEntity> output = repairsRepository.findAllByVehicleId(id);
 
