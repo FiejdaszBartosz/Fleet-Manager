@@ -1,9 +1,7 @@
 package com.bfiejdasz.fleet_manager_android_app.api.api_controllers;
 
 import com.bfiejdasz.fleet_manager_android_app.api.ApiClient;
-import com.bfiejdasz.fleet_manager_android_app.api.api_interfaces.IApiEmployees;
 import com.bfiejdasz.fleet_manager_android_app.api.api_interfaces.IApiPositions;
-import com.bfiejdasz.fleet_manager_android_app.api.entity.EmployeesEntity;
 import com.bfiejdasz.fleet_manager_android_app.api.entity.PositionsEntity;
 
 import java.util.List;
