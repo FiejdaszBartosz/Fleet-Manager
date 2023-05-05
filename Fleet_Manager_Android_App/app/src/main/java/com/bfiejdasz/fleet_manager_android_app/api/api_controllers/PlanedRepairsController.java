@@ -2,7 +2,6 @@ package com.bfiejdasz.fleet_manager_android_app.api.api_controllers;
 
 import com.bfiejdasz.fleet_manager_android_app.api.ApiClient;
 import com.bfiejdasz.fleet_manager_android_app.api.api_interfaces.IApiPlanedRepairs;
-import com.bfiejdasz.fleet_manager_android_app.api.entity.EmployeesEntity;
 import com.bfiejdasz.fleet_manager_android_app.api.entity.PlanedRepairsEntity;
 
 import java.util.List;
