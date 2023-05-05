@@ -8,11 +8,11 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-public interface IAPIEmployees {
+public interface IApiEmployees {
     @GET("employees/getAll")
     Call<List<EmployeesEntity>> getUsers();
 
@@ -24,4 +24,7 @@ public interface IAPIEmployees {
 
     @POST("employees")
     Call<EmployeesEntity> createUser(@Body EmployeesEntity employee);
+
+    @PATCH("employees")
+    Call<EmployeesEntity> updateUserById(@Query("id") int id, @Body EmployeesEntity employee);
 }

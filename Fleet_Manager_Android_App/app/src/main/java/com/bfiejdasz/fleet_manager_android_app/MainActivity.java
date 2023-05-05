@@ -4,13 +4,9 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 
-import com.bfiejdasz.fleet_manager_android_app.api.ApiClient;
 import com.bfiejdasz.fleet_manager_android_app.api.api_controllers.EmployeesController;
-import com.bfiejdasz.fleet_manager_android_app.api.api_interfaces.IAPIEmployees;
 import com.bfiejdasz.fleet_manager_android_app.api.entity.EmployeesEntity;
 import com.bfiejdasz.fleet_manager_android_app.locationsFeatures.LocationProviderProxy;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;

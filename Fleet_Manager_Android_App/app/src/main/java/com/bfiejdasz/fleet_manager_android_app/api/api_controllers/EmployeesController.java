@@ -1,7 +1,7 @@
 package com.bfiejdasz.fleet_manager_android_app.api.api_controllers;
 
 import com.bfiejdasz.fleet_manager_android_app.api.ApiClient;
-import com.bfiejdasz.fleet_manager_android_app.api.api_interfaces.IAPIEmployees;
+import com.bfiejdasz.fleet_manager_android_app.api.api_interfaces.IApiEmployees;
 import com.bfiejdasz.fleet_manager_android_app.api.entity.EmployeesEntity;
 
 import java.util.List;
@@ -10,10 +10,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 
 public class EmployeesController {
-    private final IAPIEmployees apiEmployees;
+    private final IApiEmployees apiEmployees;
 
     public EmployeesController() {
-        apiEmployees = ApiClient.getClient().create(IAPIEmployees.class);
+        apiEmployees = ApiClient.getClient().create(IApiEmployees.class);
     }
 
     public void getUsers(Callback<List<EmployeesEntity>> callback) {
@@ -39,4 +39,11 @@ public class EmployeesController {
         BaseController<EmployeesEntity> baseController = new BaseController<>(call);
         baseController.execute(callback);
     }
+
+    public void updateUserById(int id, EmployeesEntity employee, final Callback<EmployeesEntity> callback) {
+        Call<EmployeesEntity> call = apiEmployees.updateUserById(id, employee);
+        BaseController<EmployeesEntity> baseController = new BaseController<>(call);
+        baseController.execute(callback);
+    }
+
 }
