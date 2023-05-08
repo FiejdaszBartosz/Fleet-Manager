@@ -91,6 +91,17 @@ public class RidesEntity {
         this.stopFuel = stopFuel;
     }
 
+    public RidesEntity(int km, int fuel, long vehicle) {
+        this.startKm = km;
+        this.startFuel = fuel;
+        this.vehicle = vehicle;
+        createRideId();
+    }
+
+    private void createRideId() {
+        this.rideId = (long) hashCode();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
