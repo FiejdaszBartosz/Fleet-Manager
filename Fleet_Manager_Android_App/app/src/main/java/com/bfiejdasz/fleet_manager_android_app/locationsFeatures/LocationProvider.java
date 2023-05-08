@@ -46,11 +46,14 @@ public class LocationProvider implements ILocationProvider {
         mapView.getOverlays().add(myLocationOverlay);
 
         GeoPoint startPoint = myLocationOverlay.getMyLocation();
-        Location location = new Location("OpenStreetMap");
-        location.setLatitude(startPoint.getLatitude());
-        location.setLongitude(startPoint.getLongitude());
-
-        return location;
+        if (startPoint != null) {
+            Location location = new Location("OpenStreetMap");
+            location.setLatitude(startPoint.getLatitude());
+            location.setLongitude(startPoint.getLongitude());
+            return location;
+        } else {
+            return null;
+        }
     }
 
     public void getLocationsWithInterval(List<Location> locations, long timeInterval) {
