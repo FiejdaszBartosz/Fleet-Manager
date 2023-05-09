@@ -1,5 +1,7 @@
 package com.bfiejdasz.fleet_manager_android_app.api.api_controllers;
 
+import com.bfiejdasz.fleet_manager_android_app.api.CustomHttpException;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -21,7 +23,10 @@ public class BaseController<T> {
                 if (response.isSuccessful()) {
                     callback.onResponse(call, response);
                 } else {
-                    callback.onFailure(call, new Exception(response.message()));
+                    int statusCode = response.code();
+                    String errorMessage = response.message();
+                    CustomHttpException customHttpException = new CustomHttpException(errorMessage, statusCode);
+                    callback.onFailure(call, customHttpException);
                 }
             }
 

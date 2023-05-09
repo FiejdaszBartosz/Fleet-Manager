@@ -55,10 +55,14 @@ public class EmployeesRepository {
         );
     }
 
-    public boolean checkCredentials(String login, String password) {
-        String query = "SELECT COUNT(*) FROM moloft.employees WHERE login = ? AND password = ?";
-        Integer count = jdbcTemplate.queryForObject(query, Integer.class, login, password);
-        return count != null && count > 0;
+    public EmployeesEntity checkCredentials(String login, String password) {
+        String query = "SELECT * FROM moloft.employees WHERE login = ? AND password = ?";
+        List<EmployeesEntity> employees = jdbcTemplate.query(query, new BeanPropertyRowMapper<>(EmployeesEntity.class), login, password);
+        if (employees.size() > 0) {
+            return employees.get(0);
+        } else {
+            return null;
+        }
     }
 
 }

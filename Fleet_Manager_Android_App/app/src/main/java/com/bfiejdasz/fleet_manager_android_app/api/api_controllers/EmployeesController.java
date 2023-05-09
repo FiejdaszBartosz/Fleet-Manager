@@ -46,4 +46,10 @@ public class EmployeesController {
         baseController.execute(callback);
     }
 
+    public void checkCredentials(String login, String pass, Callback<EmployeesEntity> callback) {
+        Call<EmployeesEntity> call = apiEmployees.checkCredentials(login, pass);
+        BaseController<EmployeesEntity> baseController = new BaseController<>(call);
+        baseController.execute(callback);
+    }
+
 }

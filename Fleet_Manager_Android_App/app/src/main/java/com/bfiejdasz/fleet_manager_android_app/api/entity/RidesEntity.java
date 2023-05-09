@@ -91,14 +91,7 @@ public class RidesEntity {
         this.stopFuel = stopFuel;
     }
 
-    public RidesEntity(int km, int fuel, long vehicle) {
-        this.startKm = km;
-        this.startFuel = fuel;
-        this.vehicle = vehicle;
-        createRideId();
-    }
-
-    private void createRideId() {
+    public void createRideId() {
         this.rideId = (long) hashCode();
     }
 

@@ -27,4 +27,7 @@ public interface IApiEmployees {
 
     @PATCH("employees")
     Call<EmployeesEntity> updateUserById(@Query("id") int id, @Body EmployeesEntity employee);
+
+    @GET("employees/login")
+    Call<EmployeesEntity> checkCredentials(@Query("login") String login, @Query("password") String pass);
 }

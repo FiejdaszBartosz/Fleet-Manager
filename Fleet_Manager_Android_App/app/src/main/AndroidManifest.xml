@@ -28,6 +28,9 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".appFeatures.userSession.StandardUser" />
+        <activity android:name=".appFeatures.userSession.LoginOperation" />
+
     </application>
 
 </manifest>

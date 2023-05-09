@@ -76,8 +76,14 @@ public class EmployeesController {
     }
 
     @GetMapping("/login")
-    public boolean checkCredentials(@RequestParam("login") String login, @RequestParam("password") String password) {
-        return employeesRepository.checkCredentials(login, password);
+    public ResponseEntity<EmployeesEntity> checkCredentials(@RequestParam("login") String login, @RequestParam("password") String password) {
+        EmployeesEntity employee = employeesRepository.checkCredentials(login, password);
+        if (employee != null) {
+            return ResponseEntity.ok(employee);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
     }
+
 
 }
