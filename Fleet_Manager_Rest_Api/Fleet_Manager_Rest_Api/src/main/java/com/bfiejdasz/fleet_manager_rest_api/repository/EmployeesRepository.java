@@ -1,6 +1,7 @@
 package com.bfiejdasz.fleet_manager_rest_api.repository;
 
 import com.bfiejdasz.fleet_manager_rest_api.entity.EmployeesEntity;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -56,13 +57,22 @@ public class EmployeesRepository {
     }
 
     public EmployeesEntity checkCredentials(String login, String password) {
-        String query = "SELECT * FROM moloft.employees WHERE login = ? AND password = ?";
-        List<EmployeesEntity> employees = jdbcTemplate.query(query, new BeanPropertyRowMapper<>(EmployeesEntity.class), login, password);
-        if (employees.size() > 0) {
-            return employees.get(0);
+        String query = "SELECT * FROM moloft.employees WHERE login = ?";
+        EmployeesEntity employee = jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<>(EmployeesEntity.class), login);
+        if (employee == null) {
+            return null;
+        }
+
+        String storedHash = employee.getPassword();
+        boolean match = BCrypt.checkpw(password, storedHash);
+
+        if (match) {
+            return employee;
         } else {
             return null;
         }
     }
+
+
 
 }

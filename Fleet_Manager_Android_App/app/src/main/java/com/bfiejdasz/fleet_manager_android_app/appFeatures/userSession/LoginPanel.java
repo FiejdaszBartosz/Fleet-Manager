@@ -7,31 +7,30 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bfiejdasz.fleet_manager_android_app.R;
-import com.bfiejdasz.fleet_manager_android_app.api.CustomHttpException;
 import com.bfiejdasz.fleet_manager_android_app.api.api_controllers.EmployeesController;
 import com.bfiejdasz.fleet_manager_android_app.api.entity.EmployeesEntity;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.ErrorHandler;
-
-import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginOperation extends AppCompatActivity {
+import org.mindrot.jbcrypt.BCrypt;
+
+public class LoginPanel extends AppCompatActivity {
     private Context context;
     private EditText usernameEditText;
     private EditText passwordEditText;
+    private Button loginButton;
 
     private UserSession userSession;
 
-    public LoginOperation() {
+    public LoginPanel() {
         this.context = this;
         this.userSession = UserSession.getInstance();
     }
@@ -43,7 +42,7 @@ public class LoginOperation extends AppCompatActivity {
 
         usernameEditText = findViewById(R.id.usernameEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
-        Button loginButton = findViewById(R.id.loginButton);
+        loginButton = findViewById(R.id.loginButton);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +61,6 @@ public class LoginOperation extends AppCompatActivity {
         } else {
 
             EmployeesController employeesController = new EmployeesController();
-
             employeesController.checkCredentials(login, password, new Callback<EmployeesEntity>() {
                 @Override
                 public void onResponse(Call<EmployeesEntity> call, Response<EmployeesEntity> response) {

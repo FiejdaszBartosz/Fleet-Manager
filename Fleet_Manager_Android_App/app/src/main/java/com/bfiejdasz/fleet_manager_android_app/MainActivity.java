@@ -1,21 +1,11 @@
 package com.bfiejdasz.fleet_manager_android_app;
 
 import android.content.Intent;
-import android.location.Location;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
-import android.util.Log;
 
-import com.bfiejdasz.fleet_manager_android_app.api.api_controllers.EmployeesController;
-import com.bfiejdasz.fleet_manager_android_app.api.api_controllers.RidesController;
-import com.bfiejdasz.fleet_manager_android_app.api.entity.EmployeesEntity;
-import com.bfiejdasz.fleet_manager_android_app.api.entity.RidesEntity;
-import com.bfiejdasz.fleet_manager_android_app.appFeatures.userSession.LoginOperation;
+import com.bfiejdasz.fleet_manager_android_app.appFeatures.userSession.LoginPanel;
 import com.bfiejdasz.fleet_manager_android_app.locationsFeatures.LocationProviderProxy;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -93,8 +83,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        LoginOperation loginOperation = new LoginOperation();
-        Intent intent = new Intent(this, LoginOperation.class);
+        LoginPanel loginOperation = new LoginPanel();
+        Intent intent = new Intent(this, LoginPanel.class);
         startActivity(intent);
         finish();
     }
