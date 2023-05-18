@@ -2,6 +2,7 @@ package com.bfiejdasz.fleet_manager_android_app.appFeatures.userSession;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +11,10 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bfiejdasz.fleet_manager_android_app.R;
+import com.bfiejdasz.fleet_manager_android_app.api.api_controllers.RidesController;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class RidePanel extends AppCompatActivity {
 
@@ -20,58 +25,43 @@ public class RidePanel extends AppCompatActivity {
     private Context context;
     private UserSession userSession;
     private RideSession rideSession;
-
-    private boolean isRunning = false;
-
-    public RidePanel() {
-        this.context = this;
-        this.userSession = UserSession.getInstance();
-        this.rideSession = RideSession.getInstance();
-    }
+    private CountDownTimer countDownTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ride_panel);
 
+        this.context = this;
+        this.userSession = UserSession.getInstance();
+        this.rideSession = RideSession.getInstance();
+        rideSession.setContext(context);
+        rideSession.setAll();
+
         userNameTextView = findViewById(R.id.userName);
         timerTextView = findViewById(R.id.timer);
         stopButton = findViewById(R.id.stopButton);
 
         userNameTextView.setText(userSession.getEmployee().getName());
-
         stopButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                rideSession.stopTimer();
-                isRunning = false;
-                Log.i("CZAS", String.valueOf(rideSession.getCurrentTime()));
+                rideSession.timeTimer.stop();
+                rideSession.locationTimer.stop();
+                Log.i("CZAS", String.valueOf(rideSession.timeTimer.getCurrentTime()));
             }
         });
 
-        this.isRunning = true;
-        rideSession.startTimer();
+        rideSession.timeTimer.start();
+        startCountdown();
 
-        new Thread(new Runnable() {
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                while (!Thread.interrupted() && isRunning) {
-                    final long currentTime = rideSession.getCurrentTime();
-                    final String formattedTime = formatTime(currentTime);
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            timerTextView.setText(formattedTime);
-                        }
-                    });
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
+                rideSession.locationTimer.start();
             }
-        }).start();
+        }, 5000);
     }
 
     private String formatTime(long timeInMillis) {
@@ -84,32 +74,29 @@ public class RidePanel extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        rideSession.stopTimer();
-        stopThread();
-    }
-
-    private void stopThread() {
-        final Thread thread = Thread.currentThread();
-        if (thread != null) {
-            thread.interrupt();
+        rideSession.timeTimer.stop();
+        rideSession.locationTimer.stop();
+        if (countDownTimer != null) {
+            countDownTimer.cancel();
         }
     }
 
-    private void updateTimerTextView() {
-        while (isRunning) {
-            final long currentTime = rideSession.getCurrentTime();
-            final String formattedTime = formatTime(currentTime);
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    timerTextView.setText(formattedTime);
-                }
-            });
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+    private void startCountdown() {
+        countDownTimer = new CountDownTimer(Long.MAX_VALUE, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                long currentTime = rideSession.timeTimer.getCurrentTime();
+                String formattedTime = formatTime(currentTime);
+                timerTextView.setText(formattedTime);
             }
-        }
+
+            @Override
+            public void onFinish() {
+                rideSession.timeTimer.stop();
+            }
+        };
+
+        countDownTimer.start();
     }
 }
+

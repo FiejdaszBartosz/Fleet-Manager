@@ -8,11 +8,16 @@ public class LocationProviderProxy implements ILocationProvider {
 
     public LocationProviderProxy(Context context) {
         this.locationProvider = new LocationProvider(context);
+        this.locationProvider.startLocationUpdates();
     }
 
     @Override
     public Location getCurrentLocation() {
         locationProvider.askForPermissions();
         return locationProvider.getCurrentLocation();
+    }
+
+    public void stopGettingLocation() {
+        this.locationProvider.stopLocationUpdates();
     }
 }

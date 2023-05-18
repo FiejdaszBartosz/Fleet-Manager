@@ -40,9 +40,10 @@ public class PositionsController {
         baseController.execute(callback);
     }
 
-    public void createPosition(PositionsEntity position, Callback<PositionsEntity> callback) {
-        Call<PositionsEntity> call = apiPositions.createPosition(position);
-        BaseController<PositionsEntity> baseController = new BaseController<>(call);
+    public void createPosition(List<PositionsEntity> position, Callback<List<PositionsEntity>> callback) {
+        PositionsEntity p = position.get(0);
+        Call<List<PositionsEntity>> call = apiPositions.createPosition(position);
+        BaseController<List<PositionsEntity>> baseController = new BaseController<>(call);
         baseController.execute(callback);
     }
 

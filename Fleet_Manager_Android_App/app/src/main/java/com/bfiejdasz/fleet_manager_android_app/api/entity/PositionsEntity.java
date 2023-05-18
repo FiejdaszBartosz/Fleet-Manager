@@ -1,13 +1,14 @@
 package com.bfiejdasz.fleet_manager_android_app.api.entity;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public class PositionsEntity {
     private long idPositions;
     private Long rideid;
     private Double xCord;
     private Double yCord;
-    private Timestamp time;
+    private String time;
     private RidesEntity positionsByRideid;
 
     public long getIdPositions() {
@@ -42,11 +43,11 @@ public class PositionsEntity {
         this.yCord = yCord;
     }
 
-    public Timestamp getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Timestamp time) {
+    public void setTime(String time) {
         this.time = time;
     }
 

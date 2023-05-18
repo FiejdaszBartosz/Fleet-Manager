@@ -1,8 +1,12 @@
 package com.bfiejdasz.fleet_manager_rest_api.entity;
 
+import com.bfiejdasz.fleet_manager_rest_api.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 @Entity
@@ -23,7 +27,8 @@ public class PositionsEntity {
     private Double yCord;
     @Basic
     @Column(name = "time")
-    private Timestamp time;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS")
+    private LocalDateTime time;
     @ManyToOne
     @JoinColumn(name = "rideid", referencedColumnName = "rideid", insertable=false, updatable=false)
     private RidesEntity positionsByRideid;
@@ -59,12 +64,13 @@ public class PositionsEntity {
     public void setyCord(Double yCord) {
         this.yCord = yCord;
     }
-
-    public Timestamp getTime() {
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS")
+    public LocalDateTime getTime() {
         return time;
     }
 
-    public void setTime(Timestamp time) {
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS")
+    public void setTime(LocalDateTime time) {
         this.time = time;
     }
 

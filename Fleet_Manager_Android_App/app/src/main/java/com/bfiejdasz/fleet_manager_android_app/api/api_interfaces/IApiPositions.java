@@ -26,7 +26,7 @@ public interface IApiPositions {
     Call<Void> deletePositionById(@Query("id") int id);
 
     @POST("positions")
-    Call<PositionsEntity> createPosition(@Body PositionsEntity position);
+    Call<List<PositionsEntity>> createPosition(@Body List<PositionsEntity> position);
 
     @PATCH("positions")
     Call<PositionsEntity> updatePositionById(@Query("id") int id, @Body PositionsEntity position);

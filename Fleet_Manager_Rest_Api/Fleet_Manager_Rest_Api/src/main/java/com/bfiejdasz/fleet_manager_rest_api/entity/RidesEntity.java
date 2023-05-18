@@ -1,9 +1,15 @@
 package com.bfiejdasz.fleet_manager_rest_api.entity;
 
+import com.bfiejdasz.fleet_manager_rest_api.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -22,10 +28,12 @@ public class RidesEntity {
     private Long vehicle;
     @Basic
     @Column(name = "start_time")
-    private Timestamp startTime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS")
+    private LocalDateTime startTime;
     @Basic
     @Column(name = "stop_time")
-    private Timestamp stopTime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS")
+    private LocalDateTime stopTime;
     @Basic
     @Column(name = "start_km")
     private Integer startKm;
@@ -74,20 +82,20 @@ public class RidesEntity {
     public void setVehicle(Long vehicle) {
         this.vehicle = vehicle;
     }
-
-    public Timestamp getStartTime() {
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS")
+    public LocalDateTime getStartTime() {
         return startTime;
     }
-
-    public void setStartTime(Timestamp startTime) {
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS")
+    public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }
-
-    public Timestamp getStopTime() {
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS")
+    public LocalDateTime getStopTime() {
         return stopTime;
     }
-
-    public void setStopTime(Timestamp stopTime) {
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS")
+    public void setStopTime(LocalDateTime stopTime) {
         this.stopTime = stopTime;
     }
 

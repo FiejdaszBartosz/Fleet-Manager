@@ -1,14 +1,15 @@
 package com.bfiejdasz.fleet_manager_android_app.api.entity;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 public class RidesEntity {
     private long idRides;
     private Long rideId;
     private Long vehicle;
-    private Timestamp startTime;
-    private Timestamp stopTime;
+    private String startTime;
+    private String stopTime;
     private Integer startKm;
     private Integer stopKm;
 
@@ -43,19 +44,19 @@ public class RidesEntity {
         this.vehicle = vehicle;
     }
 
-    public Timestamp getStartTime() {
+    public String getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Timestamp startTime) {
+    public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 
-    public Timestamp getStopTime() {
+    public String getStopTime() {
         return stopTime;
     }
 
-    public void setStopTime(Timestamp stopTime) {
+    public void setStopTime(String stopTime) {
         this.stopTime = stopTime;
     }
 
@@ -126,7 +127,7 @@ public class RidesEntity {
         result = 31 * result + (stopKm != null ? stopKm.hashCode() : 0);
         result = 31 * result + (startFuel != null ? startFuel.hashCode() : 0);
         result = 31 * result + (stopFuel != null ? stopFuel.hashCode() : 0);
-        return result;
+        return Math.abs(result);
     }
 
     public VehiclesEntity getVehiclesByVehicle() {

@@ -3,7 +3,6 @@ package com.bfiejdasz.fleet_manager_android_app.appFeatures.userSession;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,13 +13,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bfiejdasz.fleet_manager_android_app.R;
 import com.bfiejdasz.fleet_manager_android_app.api.api_controllers.EmployeesController;
 import com.bfiejdasz.fleet_manager_android_app.api.entity.EmployeesEntity;
-import com.bfiejdasz.fleet_manager_android_app.appFeatures.ErrorHandler;
+import com.bfiejdasz.fleet_manager_android_app.exceptions.ErrorHandler;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import org.mindrot.jbcrypt.BCrypt;
 
 public class LoginPanel extends AppCompatActivity {
     private Context context;
@@ -30,11 +27,6 @@ public class LoginPanel extends AppCompatActivity {
 
     private UserSession userSession;
 
-    public LoginPanel() {
-        this.context = this;
-        this.userSession = UserSession.getInstance();
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +35,9 @@ public class LoginPanel extends AppCompatActivity {
         usernameEditText = findViewById(R.id.usernameEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
         loginButton = findViewById(R.id.loginButton);
+
+        this.context = this;
+        this.userSession = UserSession.getInstance();
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,7 +69,11 @@ public class LoginPanel extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<EmployeesEntity> call, Throwable t) {
-                    ErrorHandler.handleException(context, t);
+                    try {
+                        ErrorHandler.handleException(t);
+                    } catch (Exception e) {
+                        ErrorHandler.logWithToastErrors(context, t);
+                    }
                 }
             });
         }

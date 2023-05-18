@@ -56,6 +56,7 @@ public class PositionsController {
     @PostMapping("")
     public ResponseEntity<Object> add(@RequestBody List<PositionsEntity> positionsEntities) {
         try {
+            PositionsEntity positionsEntity = positionsEntities.get(0);
             positionsRepository.saveAll(positionsEntities);
             return ResponseEntity.status(HttpStatus.CREATED).body(null);
         } catch (Exception e) {

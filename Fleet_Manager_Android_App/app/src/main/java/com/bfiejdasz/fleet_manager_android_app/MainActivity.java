@@ -1,33 +1,47 @@
 package com.bfiejdasz.fleet_manager_android_app;
 
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.userSession.LoginPanel;
 import com.bfiejdasz.fleet_manager_android_app.locationsFeatures.LocationProviderProxy;
 
+import java.util.concurrent.TimeUnit;
+
 public class MainActivity extends AppCompatActivity {
 
     private LocationProviderProxy locationProvider;
 
-    /*
+/*
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         locationProvider = new LocationProviderProxy(this);
 
-        Location currentLocation = locationProvider.getCurrentLocation();
-        if (currentLocation != null) {
-            double latitude = currentLocation.getLatitude();
-            double longitude = currentLocation.getLongitude();
-            Log.i("MainActivity", "Current location: (" + latitude + ", " + longitude + ")");
-        } else {
-            Log.i("MainActivity", "Could not get current location");
-        }
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Location currentLocation = locationProvider.getCurrentLocation();
+                if (currentLocation != null) {
+                    double latitude = currentLocation.getLatitude();
+                    double longitude = currentLocation.getLongitude();
+                    Log.i("GPS", "Current location: (" + latitude + ", " + longitude + ")");
+                } else {
+                    Log.i("GPS", "Could not get current location");
+                }
 
+                handler.postDelayed(this, 1000); // Aktualizacja co 1 sekundę
+            }
+        }, 0);
     }
+
 
 
     @Override
@@ -76,8 +90,8 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("TEST", "BLAD2 " + t.toString());
             }
         });
-    }
-     */
+    }*/
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

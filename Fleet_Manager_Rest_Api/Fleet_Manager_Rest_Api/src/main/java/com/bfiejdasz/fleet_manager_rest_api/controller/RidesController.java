@@ -42,6 +42,7 @@ public class RidesController {
     @PostMapping("")
     public ResponseEntity<Object> add(@RequestBody RidesEntity ride) {
         try {
+            RidesEntity rideee = ride;
             ridesRepository.save(ride);
             return ResponseEntity.status(HttpStatus.CREATED).body(null);
         } catch (Exception e) {
