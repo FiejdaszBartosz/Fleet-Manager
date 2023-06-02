@@ -18,7 +18,9 @@ public class LocationProvider implements LocationListener {
     private LocationManager locationManager;
     private Location currentLocation;
 
-    public static String[] PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
+    private static final String[] PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
+    private static final int PERMISSION_REQUEST_CODE = 1;
+    private static final long MIN_TIME_BETWEEN_UPDATES = 10000;
 
     public LocationProvider(Context context) {
         this.context = context;
@@ -26,18 +28,17 @@ public class LocationProvider implements LocationListener {
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
     }
 
-    public void askForPermissions() {
+    public void checkLocationPermissions() {
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions((Activity) context, PERMISSIONS, 1);
+            ActivityCompat.requestPermissions((Activity) context, PERMISSIONS, PERMISSION_REQUEST_CODE);
         }
     }
 
-
     public void startLocationUpdates() {
-        askForPermissions();
+        checkLocationPermissions();
         try {
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 0, this);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BETWEEN_UPDATES, 0, this);
         } catch (SecurityException e) {
             e.printStackTrace();
         }
@@ -66,5 +67,6 @@ public class LocationProvider implements LocationListener {
         // Do nothing
     }
 }
+
 
 

@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bfiejdasz.fleet_manager_android_app.R;
 import com.bfiejdasz.fleet_manager_android_app.api.entity.EmployeesEntity;
+import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.DriverFactory;
+import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.RideFactorySingleton;
 
 public class StandardUser extends AppCompatActivity implements IUser {
     private EmployeesEntity employee;
@@ -49,7 +51,9 @@ public class StandardUser extends AppCompatActivity implements IUser {
     }
 
     private void startRidePanel() {
-        Intent intent = new Intent(this, RidePanel.class);
+        RideFactorySingleton temp = RideFactorySingleton.getInstance();
+        temp.setRideFactory(new DriverFactory());
+        Intent intent = new Intent(this, RidePanelV2.class);
         startActivity(intent);
         finish();
     }

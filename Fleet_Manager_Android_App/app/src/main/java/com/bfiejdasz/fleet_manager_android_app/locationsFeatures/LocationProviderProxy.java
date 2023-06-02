@@ -4,7 +4,7 @@ import android.content.Context;
 import android.location.Location;
 
 public class LocationProviderProxy implements ILocationProvider {
-    private final LocationProvider locationProvider;
+    private LocationProvider locationProvider;
 
     public LocationProviderProxy(Context context) {
         this.locationProvider = new LocationProvider(context);
@@ -13,7 +13,7 @@ public class LocationProviderProxy implements ILocationProvider {
 
     @Override
     public Location getCurrentLocation() {
-        locationProvider.askForPermissions();
+        locationProvider.checkLocationPermissions();
         return locationProvider.getCurrentLocation();
     }
 
@@ -21,3 +21,4 @@ public class LocationProviderProxy implements ILocationProvider {
         this.locationProvider.stopLocationUpdates();
     }
 }
+

@@ -2,23 +2,12 @@ package com.bfiejdasz.fleet_manager_android_app.appFeatures.userSession.timers;
 
 import android.location.Location;
 
-import com.bfiejdasz.fleet_manager_android_app.api.CustomHttpException;
 import com.bfiejdasz.fleet_manager_android_app.api.api_controllers.PositionsController;
 import com.bfiejdasz.fleet_manager_android_app.api.entity.PositionsEntity;
 import com.bfiejdasz.fleet_manager_android_app.api.entity.RidesEntity;
-import com.bfiejdasz.fleet_manager_android_app.appFeatures.TimestampGenerator;
-import com.bfiejdasz.fleet_manager_android_app.appFeatures.userSession.RideSession;
 import com.bfiejdasz.fleet_manager_android_app.exceptions.ErrorHandler;
-import com.bfiejdasz.fleet_manager_android_app.exceptions.UnexpectedErrorException;
-import com.bfiejdasz.fleet_manager_android_app.exceptions.apiExceptions.BadRequestException;
-import com.bfiejdasz.fleet_manager_android_app.exceptions.apiExceptions.ForbiddenException;
-import com.bfiejdasz.fleet_manager_android_app.exceptions.apiExceptions.NetworkException;
-import com.bfiejdasz.fleet_manager_android_app.exceptions.apiExceptions.NotFoundException;
-import com.bfiejdasz.fleet_manager_android_app.exceptions.apiExceptions.ServerErrorException;
-import com.bfiejdasz.fleet_manager_android_app.exceptions.apiExceptions.UnauthorizedException;
 import com.bfiejdasz.fleet_manager_android_app.locationsFeatures.LocationProviderProxy;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
