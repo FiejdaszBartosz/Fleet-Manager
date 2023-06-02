@@ -3,7 +3,6 @@ package com.bfiejdasz.fleet_manager_android_app.appFeatures.userSession;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -53,7 +52,7 @@ public class StandardUser extends AppCompatActivity implements IUser {
     private void startRidePanel() {
         RideFactorySingleton temp = RideFactorySingleton.getInstance();
         temp.setRideFactory(new DriverFactory());
-        Intent intent = new Intent(this, RidePanelV2.class);
+        Intent intent = new Intent(this, RidePanel.class);
         startActivity(intent);
         finish();
     }

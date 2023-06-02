@@ -22,17 +22,12 @@ public class LocationProvider implements LocationListener {
     private static final int PERMISSION_REQUEST_CODE = 1;
     private static final long MIN_TIME_BETWEEN_UPDATES = 10000;
 
+    private boolean locationPermissionsChecked = false;
+
     public LocationProvider(Context context) {
         this.context = context;
         Configuration.getInstance().load(context, androidx.preference.PreferenceManager.getDefaultSharedPreferences(context));
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-    }
-
-    public void checkLocationPermissions() {
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions((Activity) context, PERMISSIONS, PERMISSION_REQUEST_CODE);
-        }
     }
 
     public void startLocationUpdates() {
@@ -52,6 +47,15 @@ public class LocationProvider implements LocationListener {
         return currentLocation;
     }
 
+    private void checkLocationPermissions() {
+        if (!locationPermissionsChecked &&
+                ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions((Activity) context, PERMISSIONS, PERMISSION_REQUEST_CODE);
+            locationPermissionsChecked = true;
+        }
+    }
+
     @Override
     public void onLocationChanged(Location location) {
         currentLocation = location;
@@ -67,6 +71,7 @@ public class LocationProvider implements LocationListener {
         // Do nothing
     }
 }
+
 
 
 

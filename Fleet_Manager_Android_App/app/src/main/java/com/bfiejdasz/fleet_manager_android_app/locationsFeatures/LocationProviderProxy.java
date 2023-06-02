@@ -13,7 +13,6 @@ public class LocationProviderProxy implements ILocationProvider {
 
     @Override
     public Location getCurrentLocation() {
-        locationProvider.checkLocationPermissions();
         return locationProvider.getCurrentLocation();
     }
 
