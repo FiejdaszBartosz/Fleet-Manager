@@ -72,7 +72,7 @@ public class LoginPanel extends AppCompatActivity {
                     try {
                         ErrorHandler.handleException(t);
                     } catch (Exception e) {
-                        ErrorHandler.logWithToastErrors(context, t);
+                        ErrorHandler.logWithToastErrors(context, e);
                     }
                 }
             });
