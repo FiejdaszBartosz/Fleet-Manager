@@ -38,6 +38,18 @@ public class VehiclesController {
         }
     }
 
+    @GetMapping("/getByPlate")
+    public ResponseEntity<VehiclesEntity> getVehicleByLicensePlate(@RequestParam("licensePlate") String licensePlate) {
+        Optional<VehiclesEntity> optional = vehiclesRepository.findByLicensePlate(licensePlate);
+
+        if(optional.isPresent()) {
+            VehiclesEntity output = optional.get();
+            return ResponseEntity.status(HttpStatus.OK).body(output);
+        } else {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+        }
+    }
+
     @PostMapping("")
     public ResponseEntity<Object> add(@RequestBody List<VehiclesEntity> vehicles) {
         try {
@@ -72,6 +84,22 @@ public class VehiclesController {
         }
     }
 
+    @PutMapping("/changeInUseVehicle")
+    public ResponseEntity<HttpStatus> bookVehicle(@RequestParam("licencePlate") String licencePlate, @RequestParam("inUse") Short inUse) {
+        Optional<VehiclesEntity> optional = vehiclesRepository.findByLicensePlate(licencePlate);
+
+        if (optional.isPresent()) {
+            VehiclesEntity vehicle = optional.get();
+            vehicle.setInUse(inUse);
+            vehiclesRepository.save(vehicle);
+            return ResponseEntity.status(HttpStatus.OK).body(null);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
+
     @DeleteMapping("")
     public ResponseEntity<HttpStatus> deleteVehicle(@RequestParam("id") long id) {
         Optional<VehiclesEntity> optional = vehiclesRepository.findById(id);
@@ -83,4 +111,16 @@ public class VehiclesController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/inUse")
+    public ResponseEntity<Short> checkInUse(@RequestParam("licencePlate") String licencePlate) {
+        Optional<VehiclesEntity> optional = vehiclesRepository.findByLicensePlate(licencePlate);
+
+        if (optional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.OK).body(optional.get().getInUse());
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+
 }

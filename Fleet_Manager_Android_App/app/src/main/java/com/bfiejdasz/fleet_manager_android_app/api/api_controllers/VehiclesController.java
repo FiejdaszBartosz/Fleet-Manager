@@ -45,4 +45,22 @@ public class VehiclesController {
         BaseController<VehiclesEntity> baseController = new BaseController<>(call);
         baseController.execute(callback);
     }
+
+    public void getVehiclesByLicencePlate(String plate, Callback<VehiclesEntity> callback) {
+        Call<VehiclesEntity> call = apiVehicles.getVehicleByLicensePlate(plate);
+        BaseController<VehiclesEntity> baseController = new BaseController<>(call);
+        baseController.execute(callback);
+    }
+
+    public void isVehicleInUse(String licencePlate, Callback<Short> callback) {
+        Call<Short> call = apiVehicles.checkInUse(licencePlate);
+        BaseController<Short> baseController = new BaseController<>(call);
+        baseController.execute(callback);
+    }
+
+    public void bookVehicle(String licencePlate, Short inUse, Callback<Void> callback) {
+        Call<Void> call = apiVehicles.changeInUseVehicle(licencePlate, inUse);
+        BaseController<Void> baseController = new BaseController<>(call);
+        baseController.execute(callback);
+    }
 }

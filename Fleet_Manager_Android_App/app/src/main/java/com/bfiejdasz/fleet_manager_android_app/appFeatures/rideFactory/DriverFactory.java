@@ -15,6 +15,15 @@ public class DriverFactory implements IRideFactory {
     }
 
     @Override
+    public ChooseVehicle choseVehicle() throws ContextNotSetException {
+        if (context == null)
+            throw new ContextNotSetException("Driver Factory -> ChooseVehicle - Context not set");
+        ChooseVehicle chooseVehicle = new ChooseVehicleDriver();
+        chooseVehicle.setContext(context);
+        return chooseVehicle;
+    }
+
+    @Override
     public void setContext(Context context) {
         this.context = context;
     }

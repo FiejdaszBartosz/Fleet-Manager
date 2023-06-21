@@ -32,6 +32,7 @@
         <activity android:name=".appFeatures.userSession.StandardUser" />
         <activity android:name=".appFeatures.userSession.LoginPanel" />
         <activity android:name=".appFeatures.userSession.RidePanel" />
+        <activity android:name=".appFeatures.userSession.ChooseVehiclePanel" />
 
     </application>
 
