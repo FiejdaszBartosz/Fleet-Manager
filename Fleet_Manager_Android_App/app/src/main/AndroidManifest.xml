@@ -33,6 +33,8 @@
         <activity android:name=".appFeatures.userSession.LoginPanel" />
         <activity android:name=".appFeatures.userSession.RidePanel" />
         <activity android:name=".appFeatures.userSession.ChooseVehiclePanel" />
+        <activity android:name=".appFeatures.userSession.CheckInPanel" />
+        <activity android:name=".appFeatures.userSession.CheckInListPanels" />
 
     </application>
 

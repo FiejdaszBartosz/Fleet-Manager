@@ -40,7 +40,7 @@ public class ProblemsController {
         baseController.execute(callback);
     }
 
-    public void createPosition(ProblemsEntity problem, Callback<ProblemsEntity> callback) {
+    public void createProblem(ProblemsEntity problem, Callback<ProblemsEntity> callback) {
         Call<ProblemsEntity> call = apiProblems.createProblem(problem);
         BaseController<ProblemsEntity> baseController = new BaseController<>(call);
         baseController.execute(callback);

@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bfiejdasz.fleet_manager_android_app.R;
-import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.ContextNotSetException;
+import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.errors.ContextNotSetException;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.IRideFactory;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.RideFactorySingleton;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.RideLoop;

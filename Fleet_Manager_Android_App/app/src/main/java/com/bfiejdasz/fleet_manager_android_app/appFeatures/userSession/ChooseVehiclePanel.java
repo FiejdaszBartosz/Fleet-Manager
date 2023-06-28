@@ -1,6 +1,7 @@
 package com.bfiejdasz.fleet_manager_android_app.appFeatures.userSession;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,9 +10,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bfiejdasz.fleet_manager_android_app.MainActivity;
 import com.bfiejdasz.fleet_manager_android_app.R;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.ChooseVehicle;
-import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.ContextNotSetException;
+import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.errors.ContextNotSetException;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.IRideFactory;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.RideFactorySingleton;
 
@@ -68,6 +70,9 @@ public class ChooseVehiclePanel extends AppCompatActivity {
                 futureResultBook.thenAcceptAsync(success -> {
                     if (success) {
                         runOnUiThread(() -> Toast.makeText(context, "Pojazd zarezerwowany", Toast.LENGTH_SHORT).show());
+                        Intent intent = new Intent(this, CheckInPanel.class);
+                        startActivity(intent);
+                        finish();
                     } else {
                         runOnUiThread(() -> Toast.makeText(context, "Błąd", Toast.LENGTH_SHORT).show());
                     }

@@ -1,6 +1,12 @@
-package com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory;
+package com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.dirver;
 
 import android.content.Context;
+
+import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.CheckInList;
+import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.ChooseVehicle;
+import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.errors.ContextNotSetException;
+import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.IRideFactory;
+import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.RideLoop;
 
 public class DriverFactory implements IRideFactory {
     private Context context;
@@ -21,6 +27,13 @@ public class DriverFactory implements IRideFactory {
         ChooseVehicle chooseVehicle = new ChooseVehicleDriver();
         chooseVehicle.setContext(context);
         return chooseVehicle;
+    }
+
+    @Override
+    public CheckInList checkInList() throws ContextNotSetException {
+        if (context == null)
+            throw new ContextNotSetException("Driver Factory -> ChooseVehicle - Context not set");
+        return new CheckInListDriver();
     }
 
     @Override

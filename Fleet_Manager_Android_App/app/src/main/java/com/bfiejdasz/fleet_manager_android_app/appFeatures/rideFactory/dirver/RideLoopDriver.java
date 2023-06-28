@@ -1,6 +1,7 @@
-package com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory;
+package com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.dirver;
 
 import com.bfiejdasz.fleet_manager_android_app.api.entity.RidesEntity;
+import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.RideLoop;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.userSession.timers.LocationTimer;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.userSession.timers.TimeTimer;
 import com.bfiejdasz.fleet_manager_android_app.locationsFeatures.LocationProviderProxy;
