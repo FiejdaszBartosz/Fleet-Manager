@@ -17,6 +17,7 @@ public class ProblemsEntity {
     @Column(name = "rideid")
     private Long rideId;
     @Basic
+    @JsonProperty("type")
     @Column(name = "type")
     private Long type;
     @Basic
@@ -26,7 +27,7 @@ public class ProblemsEntity {
     @Column(name = "is_solved")
     private Short isSolved;
     @ManyToOne
-    @JsonProperty("type")
+    @JsonProperty("problem_type")
     @JsonIgnore
     @JoinColumn(name = "type", referencedColumnName = "id_problem_types", insertable=false, updatable=false)
     private ProblemTypesEntity problemTypesByProblemType;

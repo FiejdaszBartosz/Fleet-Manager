@@ -8,6 +8,8 @@ import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.errors.Pr
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.userSession.RideSession;
 import com.bfiejdasz.fleet_manager_android_app.exceptions.ErrorHandler;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 import retrofit2.Call;
@@ -35,10 +37,13 @@ public abstract class CheckInList {
 
     public CompletableFuture<Boolean> sendAnswerToServer() throws ProblemNotSetError {
         if (problem != null) {
+            List<ProblemsEntity> problemsList = new ArrayList<>();
+            problemsList.add(problem);
+
             CompletableFuture<Boolean> futureResult = new CompletableFuture<>();
-            problemsController.createProblem(problem, new Callback<ProblemsEntity>() {
+            problemsController.createProblem(problemsList, new Callback<List<ProblemsEntity>>() {
                 @Override
-                public void onResponse(Call<ProblemsEntity> call, Response<ProblemsEntity> response) {
+                public void onResponse(Call<List<ProblemsEntity>> call, Response<List<ProblemsEntity>> response) {
                     if (response.isSuccessful()) {
                         futureResult.complete(true);
                     } else {
@@ -47,7 +52,7 @@ public abstract class CheckInList {
                 }
 
                 @Override
-                public void onFailure(Call<ProblemsEntity> call, Throwable t) {
+                public void onFailure(Call<List<ProblemsEntity>> call, Throwable t) {
                     try {
                         ErrorHandler.handleException(t);
                     } catch (Exception e) {
@@ -56,6 +61,7 @@ public abstract class CheckInList {
                     futureResult.complete(false);
                 }
             });
+
 
             return futureResult;
         } else {

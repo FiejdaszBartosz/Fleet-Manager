@@ -50,16 +50,10 @@ public class StandardUser extends AppCompatActivity implements IUser {
     }
 
     private void startRidePanel() {
-        /*
         RideFactorySingleton temp = RideFactorySingleton.getInstance();
         temp.setRideFactory(new DriverFactory());
-        Intent intent = new Intent(this, RidePanel.class);
-        startActivity(intent);
-        finish();
-        */
-
-        RideFactorySingleton temp = RideFactorySingleton.getInstance();
-        temp.setRideFactory(new DriverFactory());
+        RideSession rideSession = RideSession.getInstance();
+        rideSession.setRide();
         Intent intent = new Intent(this, ChooseVehiclePanel.class);
         startActivity(intent);
         finish();

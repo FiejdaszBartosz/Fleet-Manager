@@ -1,5 +1,7 @@
 package com.bfiejdasz.fleet_manager_android_app.appFeatures.userSession;
 
+import android.util.Log;
+
 import com.bfiejdasz.fleet_manager_android_app.api.api_controllers.RidesController;
 import com.bfiejdasz.fleet_manager_android_app.api.entity.RidesEntity;
 import com.bfiejdasz.fleet_manager_android_app.exceptions.ErrorHandler;
@@ -34,10 +36,13 @@ public class RideSession {
     public void setRide() {
         ride.setStartTime(String.valueOf(LocalDateTime.now()));
         ride.createRideId();
+
         ridesController.createRide(ride, new Callback<RidesEntity>() {
             @Override
             public void onResponse(Call<RidesEntity> call, Response<RidesEntity> response) {
-
+                if (!response.isSuccessful()) {
+                    Log.e("EXCEPTION", "RideSession -> setRide");
+                }
             }
 
             @Override

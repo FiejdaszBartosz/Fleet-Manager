@@ -1,6 +1,7 @@
 package com.bfiejdasz.fleet_manager_android_app.appFeatures.userSession;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -19,12 +20,8 @@ public class RidePanel extends AppCompatActivity {
     private TextView userNameTextView;
     private TextView timerTextView;
     private Button stopButton;
-
     private Context context;
-
     private UserSession userSession;
-    private RideSession rideSession;
-    private IRideFactory rideFactory;
     private RideLoop rideLoop;
 
     @Override
@@ -33,15 +30,11 @@ public class RidePanel extends AppCompatActivity {
         setContentView(R.layout.ride_panel);
 
         this.context = this;
+        RideFactorySingleton.getInstance().getRideFactory().setContext(context);
         this.userSession = UserSession.getInstance();
-        this.rideSession = RideSession.getInstance();
-        rideSession.setRide();
-
-        rideFactory = RideFactorySingleton.getInstance().getRideFactory();
-        rideFactory.setContext(context);
 
         try {
-            rideLoop = rideFactory.rideLoop();
+            rideLoop = RideFactorySingleton.getInstance().getRideFactory().rideLoop();
         } catch (ContextNotSetException e) {
             throw new RuntimeException(e);
         }
@@ -55,6 +48,10 @@ public class RidePanel extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 rideLoop.endLoop();
+
+                Intent intent = new Intent(context, EndRidePanel.class);
+                startActivity(intent);
+                finish();
             }
         });
 

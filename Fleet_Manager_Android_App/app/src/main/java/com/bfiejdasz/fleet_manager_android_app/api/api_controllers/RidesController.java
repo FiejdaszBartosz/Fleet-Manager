@@ -40,7 +40,7 @@ public class RidesController {
         baseController.execute(callback);
     }
 
-    public void updateRideById(int id, RidesEntity ride, final Callback<RidesEntity> callback) {
+    public void updateRideById(long id, RidesEntity ride, final Callback<RidesEntity> callback) {
         Call<RidesEntity> call = apiRides.updateRideById(id, ride);
         BaseController<RidesEntity> baseController = new BaseController<>(call);
         baseController.execute(callback);

@@ -4,6 +4,7 @@ import com.bfiejdasz.fleet_manager_android_app.api.ApiClient;
 import com.bfiejdasz.fleet_manager_android_app.api.api_interfaces.IApiProblems;
 import com.bfiejdasz.fleet_manager_android_app.api.entity.ProblemsEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -40,9 +41,9 @@ public class ProblemsController {
         baseController.execute(callback);
     }
 
-    public void createProblem(ProblemsEntity problem, Callback<ProblemsEntity> callback) {
-        Call<ProblemsEntity> call = apiProblems.createProblem(problem);
-        BaseController<ProblemsEntity> baseController = new BaseController<>(call);
+    public void createProblem(List<ProblemsEntity> problem, Callback<List<ProblemsEntity>> callback) {
+        Call<List<ProblemsEntity>> call = apiProblems.createProblem(problem);
+        BaseController<List<ProblemsEntity>> baseController = new BaseController<>(call);
         baseController.execute(callback);
     }
 

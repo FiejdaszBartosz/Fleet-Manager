@@ -90,9 +90,21 @@ public abstract class ChooseVehicle {
         return futureResult;
     }
 
+    public CompletableFuture<VehiclesEntity> getVehicleByPlate(String plate) {
+        CompletableFuture<VehiclesEntity> futureResult = new CompletableFuture<>();
 
+        vehiclesController.getVehiclesByLicencePlate(plate, new Callback<VehiclesEntity>() {
+            @Override
+            public void onResponse(Call<VehiclesEntity> call, Response<VehiclesEntity> response) {
+                futureResult.complete(response.body());
+            }
 
-    protected void addPassenger() {
+            @Override
+            public void onFailure(Call<VehiclesEntity> call, Throwable t) {
+                futureResult.completeExceptionally(t);
+            }
+        });
 
+        return futureResult;
     }
 }

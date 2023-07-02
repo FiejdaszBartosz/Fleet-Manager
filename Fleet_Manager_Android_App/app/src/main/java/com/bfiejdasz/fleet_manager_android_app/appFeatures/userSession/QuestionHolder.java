@@ -33,7 +33,7 @@ public class QuestionHolder {
     }
 
     public boolean hasNextQuestion() {
-        return currentIndex < questions.size() - 1;
+        return currentIndex < questions.size();
     }
 
     public Pair<String, Integer> getNextQuestion() {

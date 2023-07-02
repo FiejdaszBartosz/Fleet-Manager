@@ -9,6 +9,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface IRidesRepository extends JpaRepository<RidesEntity, Long> {
-    @Query("SELECT p FROM RidesEmployeesEntity p WHERE p.rideId = :id")
+    @Query("SELECT p FROM RidesEntity p WHERE p.rideId = :id")
     RidesEntity findByRideid(@Param("id") Long carId);
 }

@@ -2,6 +2,7 @@ package com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.dirver;
 
 import android.content.Context;
 
+import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.AddVehicleParameter;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.CheckInList;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.ChooseVehicle;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.errors.ContextNotSetException;
@@ -34,6 +35,13 @@ public class DriverFactory implements IRideFactory {
         if (context == null)
             throw new ContextNotSetException("Driver Factory -> ChooseVehicle - Context not set");
         return new CheckInListDriver();
+    }
+
+    @Override
+    public AddVehicleParameter addVehicleParameter() throws ContextNotSetException {
+        if (context == null)
+            throw new ContextNotSetException("Driver Factory -> AddVehicleParameter - Context not set");
+        return new AddVehicleParameterDriver();
     }
 
     @Override

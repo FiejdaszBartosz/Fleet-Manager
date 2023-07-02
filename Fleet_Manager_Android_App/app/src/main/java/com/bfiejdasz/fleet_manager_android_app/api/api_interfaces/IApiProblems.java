@@ -26,7 +26,7 @@ public interface IApiProblems {
     Call<Void> deleteProblemById(@Query("id") int id);
 
     @POST("problems")
-    Call<ProblemsEntity> createProblem(@Body ProblemsEntity position);
+    Call<List<ProblemsEntity>> createProblem(@Body List<ProblemsEntity>  position);
 
     @PATCH("problems")
     Call<ProblemsEntity> updateProblemById(@Query("id") int id, @Body ProblemsEntity position);

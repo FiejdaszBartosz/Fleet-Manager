@@ -26,6 +26,6 @@ public interface IApiRides {
     Call<RidesEntity> createRide(@Body RidesEntity ride);
 
     @PATCH("rides")
-    Call<RidesEntity> updateRideById(@Query("id") int id, @Body RidesEntity ride);
+    Call<RidesEntity> updateRideById(@Query("id") long id, @Body RidesEntity temp);
 
 }

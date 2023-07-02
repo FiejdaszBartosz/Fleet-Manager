@@ -51,28 +51,28 @@ public class RidesController {
     }
 
     @PatchMapping("")
-    public ResponseEntity<RidesEntity> updateVehicle(@RequestParam("id") long id, @RequestBody RidesEntity temp) {
+    public ResponseEntity<RidesEntity> updateRideById(@RequestParam("id") long id, @RequestBody RidesEntity temp) {
         RidesEntity ride  = ridesRepository.findByRideid(id);
 
         if (ride != null) {
-            if(ride.getVehicle() != null) temp.setVehicle(ride.getVehicle());
-            if(ride.getStartTime() != null) temp.setStartTime(ride.getStartTime());
-            if(ride.getStopTime() != null) temp.setStopTime(ride.getStopTime());
-            if(ride.getStartKm() != null) temp.setStartKm(ride.getStartKm());
-            if(ride.getStopKm() != null) temp.setStopKm(ride.getStopKm());
-            if(ride.getStartFuel() != null) temp.setStartFuel(ride.getStartFuel());
-            if(ride.getStopFuel() != null) temp.setStopFuel(ride.getStopFuel());
+            if(temp.getVehicle() != null) ride.setVehicle(temp.getVehicle());
+            if(temp.getStartTime() != null) ride.setStartTime(temp.getStartTime());
+            if(temp.getStopTime() != null) ride.setStopTime(temp.getStopTime());
+            if(temp.getStartKm() != null) ride.setStartKm(temp.getStartKm());
+            if(temp.getStopKm() != null) ride.setStopKm(temp.getStopKm());
+            if(temp.getStartFuel() != null) ride.setStartFuel(temp.getStartFuel());
+            if(temp.getStopFuel() != null) ride.setStopFuel(temp.getStopFuel());
 
-            ridesRepository.save(temp);
+            ridesRepository.save(ride);
 
-            return ResponseEntity.ok(temp);
+            return ResponseEntity.ok(ride);
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
     @DeleteMapping("")
-    public ResponseEntity<HttpStatus> deleteVehicle(@RequestParam("id") long id) {
+    public ResponseEntity<HttpStatus> deleteRide(@RequestParam("id") long id) {
         RidesEntity ride  = ridesRepository.findByRideid(id);
 
         if (ride != null) {

@@ -35,6 +35,8 @@
         <activity android:name=".appFeatures.userSession.ChooseVehiclePanel" />
         <activity android:name=".appFeatures.userSession.CheckInPanel" />
         <activity android:name=".appFeatures.userSession.CheckInListPanels" />
+        <activity android:name=".appFeatures.userSession.EndRidePanel" />
+        <activity android:name=".appFeatures.userSession.AddVehicleParametersPanel" />
 
     </application>
 

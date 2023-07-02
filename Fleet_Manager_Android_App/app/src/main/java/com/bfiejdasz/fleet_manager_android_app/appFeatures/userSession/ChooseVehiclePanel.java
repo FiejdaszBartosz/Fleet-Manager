@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bfiejdasz.fleet_manager_android_app.MainActivity;
 import com.bfiejdasz.fleet_manager_android_app.R;
+import com.bfiejdasz.fleet_manager_android_app.api.entity.VehiclesEntity;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.ChooseVehicle;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.errors.ContextNotSetException;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.IRideFactory;
@@ -70,7 +71,15 @@ public class ChooseVehiclePanel extends AppCompatActivity {
                 futureResultBook.thenAcceptAsync(success -> {
                     if (success) {
                         runOnUiThread(() -> Toast.makeText(context, "Pojazd zarezerwowany", Toast.LENGTH_SHORT).show());
-                        Intent intent = new Intent(this, CheckInPanel.class);
+
+                        CompletableFuture<VehiclesEntity> futureResultVehicle = chooseVehicle.getVehicleByPlate(licensePlate);
+                        futureResultVehicle.thenAcceptAsync(successVehicle -> {
+                            if (successVehicle != null) {
+                                RideSession.getInstance().getRide().setVehiclesByVehicle(successVehicle);
+                            }
+                        });
+
+                        Intent intent = new Intent(this, AddVehicleParametersPanel.class);
                         startActivity(intent);
                         finish();
                     } else {

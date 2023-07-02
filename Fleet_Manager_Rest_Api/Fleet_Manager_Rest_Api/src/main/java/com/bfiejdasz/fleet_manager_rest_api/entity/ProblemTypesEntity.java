@@ -8,7 +8,7 @@ public class ProblemTypesEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id_problem_types")
-    private long idProblemTypes;
+    private Long idProblemTypes;
     @Basic
     @Column(name = "name")
     private String name;

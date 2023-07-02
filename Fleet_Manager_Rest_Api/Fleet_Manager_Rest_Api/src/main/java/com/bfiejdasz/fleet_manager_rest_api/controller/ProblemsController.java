@@ -57,9 +57,9 @@ public class ProblemsController {
     public ResponseEntity<Object> add(@RequestBody List<ProblemsEntity> problemsEntities) {
         try {
             problemsRepository.saveAll(problemsEntities);
-            return ResponseEntity.status(HttpStatus.CREATED).body(null);
+            return ResponseEntity.status(HttpStatus.CREATED).body(problemsEntities);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
 
