@@ -9,5 +9,4 @@ public interface IRideFactory {
     ChooseVehicle choseVehicle() throws ContextNotSetException;
     CheckInList checkInList() throws ContextNotSetException;
     AddVehicleParameter addVehicleParameter() throws ContextNotSetException;
-    void setContext(Context context);
 }

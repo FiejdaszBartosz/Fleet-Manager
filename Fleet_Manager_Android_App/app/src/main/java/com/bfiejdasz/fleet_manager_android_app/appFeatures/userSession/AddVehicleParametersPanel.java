@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bfiejdasz.fleet_manager_android_app.R;
+import com.bfiejdasz.fleet_manager_android_app.appFeatures.ApplicationContextSingleton;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.RideFactorySingleton;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.dirver.AddVehicleParameterDriver;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.errors.ParameterNotSetError;
@@ -24,17 +25,18 @@ public class AddVehicleParametersPanel extends AppCompatActivity {
     private EditText editTextFuelLevel;
     private Button buttonNext;
     private AddVehicleParameterDriver addVehicleParameterDriver;
-    private Context context;
+    private ApplicationContextSingleton appContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.update_vehicle_parameters_panel);
-        this.context = this;
-        RideFactorySingleton.getInstance().getRideFactory().setContext(context);
+
+        appContext = ApplicationContextSingleton.getInstance();
+        Context context = this;
+        appContext.setAppContext(context);
 
         addVehicleParameterDriver = new AddVehicleParameterDriver();
-        addVehicleParameterDriver.setContext(context);
 
         textViewKilometers = findViewById(R.id.textViewKilometers);
         editTextKilometers = findViewById(R.id.editTextKilometers);
@@ -67,10 +69,10 @@ public class AddVehicleParametersPanel extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             } catch (ParameterNotSetError e) {
-                Toast.makeText(context, "Nieoczekiwany blad", Toast.LENGTH_SHORT).show();
+                Toast.makeText(appContext.getAppContext(), "Nieoczekiwany blad", Toast.LENGTH_SHORT).show();
             }
         } else {
-            Toast.makeText(context, "Uzupelnij pola", Toast.LENGTH_SHORT).show();
+            Toast.makeText(appContext.getAppContext(), "Uzupelnij pola", Toast.LENGTH_SHORT).show();
         }
     }
 }

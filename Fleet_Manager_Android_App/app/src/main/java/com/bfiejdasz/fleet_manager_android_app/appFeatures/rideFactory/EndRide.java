@@ -3,7 +3,10 @@ package com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory;
 import android.content.Context;
 import android.util.Log;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.bfiejdasz.fleet_manager_android_app.api.entity.RidesEntity;
+import com.bfiejdasz.fleet_manager_android_app.appFeatures.ApplicationContextSingleton;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.errors.ParameterNotSetError;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.userSession.RideSession;
 import com.bfiejdasz.fleet_manager_android_app.exceptions.ErrorHandler;
@@ -15,19 +18,16 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public abstract class EndRide {
-    protected Context context;
+    protected ApplicationContextSingleton appContext;
     protected RideSession rideSession;
 
     public EndRide() {
         this.rideSession = RideSession.getInstance();
+        this.appContext = ApplicationContextSingleton.getInstance();
     }
 
     public Context getContext() {
-        return context;
-    }
-
-    public void setContext(Context context) {
-        this.context = context;
+        return appContext.getAppContext();
     }
 
     public CompletableFuture<Boolean> updateRideParameters() {
@@ -48,7 +48,7 @@ public abstract class EndRide {
                 try {
                     ErrorHandler.handleException(t);
                 } catch (Exception e) {
-                    ErrorHandler.logWithToastErrors(context, e);
+                    ErrorHandler.logWithToastErrors(appContext.getAppContext(), e);
                 }
                 futureResult.complete(false);
             }

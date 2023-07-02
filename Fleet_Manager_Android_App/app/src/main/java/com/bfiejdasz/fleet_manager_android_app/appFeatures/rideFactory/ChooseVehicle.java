@@ -5,6 +5,7 @@ import android.content.Context;
 import com.bfiejdasz.fleet_manager_android_app.api.api_controllers.VehiclesController;
 import com.bfiejdasz.fleet_manager_android_app.api.entity.PositionsEntity;
 import com.bfiejdasz.fleet_manager_android_app.api.entity.VehiclesEntity;
+import com.bfiejdasz.fleet_manager_android_app.appFeatures.ApplicationContextSingleton;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.userSession.IUser;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.userSession.RideSession;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.userSession.UserSession;
@@ -21,21 +22,18 @@ public abstract class ChooseVehicle {
     protected UserSession userSession;
     protected RideSession rideSession;
     protected VehiclesController vehiclesController;
-    protected Context context;
+    protected ApplicationContextSingleton appContext;
 
 
     protected ChooseVehicle() {
         this.userSession = UserSession.getInstance();
         this.rideSession = RideSession.getInstance();
         this.vehiclesController = new VehiclesController();
+        this.appContext = ApplicationContextSingleton.getInstance();
     }
 
     public Context getContext() {
-        return context;
-    }
-
-    public void setContext(Context context) {
-        this.context = context;
+        return appContext.getAppContext();
     }
 
     public CompletableFuture<Boolean> bookVehicle(String licencePlate) {
@@ -58,7 +56,7 @@ public abstract class ChooseVehicle {
                                 try {
                                     ErrorHandler.handleException(t);
                                 } catch (Exception e) {
-                                    ErrorHandler.logWithToastErrors(context, e);
+                                    ErrorHandler.logWithToastErrors(appContext.getAppContext(), e);
                                 }
                                 futureResult.complete(false);
                             }

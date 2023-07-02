@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bfiejdasz.fleet_manager_android_app.R;
 import com.bfiejdasz.fleet_manager_android_app.api.api_controllers.EmployeesController;
 import com.bfiejdasz.fleet_manager_android_app.api.entity.EmployeesEntity;
+import com.bfiejdasz.fleet_manager_android_app.appFeatures.ApplicationContextSingleton;
 import com.bfiejdasz.fleet_manager_android_app.exceptions.ErrorHandler;
 
 import retrofit2.Call;
@@ -20,11 +21,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginPanel extends AppCompatActivity {
-    private Context context;
     private EditText usernameEditText;
     private EditText passwordEditText;
     private Button loginButton;
-
+    private ApplicationContextSingleton appContext;
     private UserSession userSession;
 
     @Override
@@ -36,7 +36,10 @@ public class LoginPanel extends AppCompatActivity {
         passwordEditText = findViewById(R.id.passwordEditText);
         loginButton = findViewById(R.id.loginButton);
 
-        this.context = this;
+        appContext = ApplicationContextSingleton.getInstance();
+        Context context = this;
+        appContext.setAppContext(context);
+
         this.userSession = UserSession.getInstance();
 
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -52,7 +55,7 @@ public class LoginPanel extends AppCompatActivity {
         String password = passwordEditText.getText().toString();
 
         if (login.isEmpty() || password.isEmpty()) {
-            Toast.makeText(context, "Uzupełnij login i hasło", Toast.LENGTH_SHORT).show();
+            Toast.makeText(appContext.getAppContext(), "Uzupełnij login i hasło", Toast.LENGTH_SHORT).show();
         } else {
 
             EmployeesController employeesController = new EmployeesController();
@@ -63,7 +66,7 @@ public class LoginPanel extends AppCompatActivity {
                         userSession.login(response.body());
                         startStandardUserActivity();
                     } else {
-                        Toast.makeText(context, "Nieoczekiwany błąd", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(appContext.getAppContext(), "Nieoczekiwany błąd", Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -72,7 +75,7 @@ public class LoginPanel extends AppCompatActivity {
                     try {
                         ErrorHandler.handleException(t);
                     } catch (Exception e) {
-                        ErrorHandler.logWithToastErrors(context, e);
+                        ErrorHandler.logWithToastErrors(appContext.getAppContext(), e);
                     }
                 }
             });

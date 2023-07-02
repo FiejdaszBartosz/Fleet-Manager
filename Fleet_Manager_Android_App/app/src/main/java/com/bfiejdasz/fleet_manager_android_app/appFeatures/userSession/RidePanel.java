@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bfiejdasz.fleet_manager_android_app.R;
+import com.bfiejdasz.fleet_manager_android_app.appFeatures.ApplicationContextSingleton;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.errors.ContextNotSetException;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.IRideFactory;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.RideFactorySingleton;
@@ -20,7 +21,7 @@ public class RidePanel extends AppCompatActivity {
     private TextView userNameTextView;
     private TextView timerTextView;
     private Button stopButton;
-    private Context context;
+    private ApplicationContextSingleton appContext;
     private UserSession userSession;
     private RideLoop rideLoop;
 
@@ -29,8 +30,10 @@ public class RidePanel extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ride_panel);
 
-        this.context = this;
-        RideFactorySingleton.getInstance().getRideFactory().setContext(context);
+        appContext = ApplicationContextSingleton.getInstance();
+        Context context = this;
+        appContext.setAppContext(context);
+
         this.userSession = UserSession.getInstance();
 
         try {

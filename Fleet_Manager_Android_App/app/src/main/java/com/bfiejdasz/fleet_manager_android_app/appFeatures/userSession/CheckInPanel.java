@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bfiejdasz.fleet_manager_android_app.R;
 import com.bfiejdasz.fleet_manager_android_app.api.api_controllers.ProblemsController;
 import com.bfiejdasz.fleet_manager_android_app.api.entity.ProblemsEntity;
+import com.bfiejdasz.fleet_manager_android_app.appFeatures.ApplicationContextSingleton;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.CheckInList;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.RideFactorySingleton;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.dirver.CheckInListDriver;
@@ -28,7 +29,7 @@ public class CheckInPanel extends AppCompatActivity {
     private TextView questionTextView;
     private EditText answerEditText;
     private Button nextButton;
-    private Context context;
+    private ApplicationContextSingleton appContext;
     private QuestionHolder questionHolder;
     private Pair<String, Integer> question;
     private CheckInList checkInList;
@@ -37,8 +38,11 @@ public class CheckInPanel extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.checkin_panel);
-        this.context = this;
-        RideFactorySingleton.getInstance().getRideFactory().setContext(context);
+
+        appContext = ApplicationContextSingleton.getInstance();
+        Context context = this;
+        appContext.setAppContext(context);
+
         questionHolder = QuestionHolder.getInstance();
 
 
@@ -47,8 +51,6 @@ public class CheckInPanel extends AppCompatActivity {
         } catch (ContextNotSetException e) {
             throw new RuntimeException(e);
         }
-
-        checkInList.setContext(context);
 
         questionTextView = findViewById(R.id.questionTextView);
         answerEditText = findViewById(R.id.answerEditText);
@@ -110,9 +112,5 @@ public class CheckInPanel extends AppCompatActivity {
 
     public String getAnswer() {
         return answerEditText.getText().toString();
-    }
-
-    public Context getContext() {
-        return context;
     }
 }

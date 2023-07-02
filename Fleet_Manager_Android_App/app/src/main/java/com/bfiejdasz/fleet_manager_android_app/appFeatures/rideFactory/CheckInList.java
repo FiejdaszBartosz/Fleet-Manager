@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.bfiejdasz.fleet_manager_android_app.api.api_controllers.ProblemsController;
 import com.bfiejdasz.fleet_manager_android_app.api.entity.ProblemsEntity;
+import com.bfiejdasz.fleet_manager_android_app.appFeatures.ApplicationContextSingleton;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.errors.ProblemNotSetError;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.userSession.RideSession;
 import com.bfiejdasz.fleet_manager_android_app.exceptions.ErrorHandler;
@@ -19,20 +20,17 @@ import retrofit2.Response;
 public abstract class CheckInList {
     protected ProblemsController problemsController;
     protected ProblemsEntity problem;
-    protected Context context;
+    protected ApplicationContextSingleton appContext;
     protected RideSession rideSession;
 
     public CheckInList() {
+        this.appContext = ApplicationContextSingleton.getInstance();
         this.problemsController = new ProblemsController();
         this.rideSession = RideSession.getInstance();
     }
 
     public Context getContext() {
-        return context;
-    }
-
-    public void setContext(Context context) {
-        this.context = context;
+        return appContext.getAppContext();
     }
 
     public CompletableFuture<Boolean> sendAnswerToServer() throws ProblemNotSetError {
@@ -56,7 +54,7 @@ public abstract class CheckInList {
                     try {
                         ErrorHandler.handleException(t);
                     } catch (Exception e) {
-                        ErrorHandler.logWithToastErrors(context, e);
+                        ErrorHandler.logWithToastErrors(appContext.getAppContext(), e);
                     }
                     futureResult.complete(false);
                 }

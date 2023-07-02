@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.bfiejdasz.fleet_manager_android_app.api.api_controllers.RidesController;
 import com.bfiejdasz.fleet_manager_android_app.api.entity.RidesEntity;
+import com.bfiejdasz.fleet_manager_android_app.appFeatures.ApplicationContextSingleton;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.userSession.RideSession;
 import com.bfiejdasz.fleet_manager_android_app.exceptions.ErrorHandler;
 
@@ -15,18 +16,15 @@ import retrofit2.Response;
 
 public abstract class AddVehicleParameter {
     protected RideSession rideSession;
-    protected Context context;
+    protected ApplicationContextSingleton appContext;
 
     public AddVehicleParameter() {
+        appContext = ApplicationContextSingleton.getInstance();
         this.rideSession = RideSession.getInstance();
     }
 
     public Context getContext() {
-        return context;
-    }
-
-    public void setContext(Context context) {
-        this.context = context;
+        return appContext.getAppContext();
     }
 
     public CompletableFuture<Boolean> updateRideParameters() {
@@ -47,7 +45,7 @@ public abstract class AddVehicleParameter {
                 try {
                     ErrorHandler.handleException(t);
                 } catch (Exception e) {
-                    ErrorHandler.logWithToastErrors(context, e);
+                    ErrorHandler.logWithToastErrors(appContext.getAppContext(), e);
                 }
                 futureResult.complete(false);
             }

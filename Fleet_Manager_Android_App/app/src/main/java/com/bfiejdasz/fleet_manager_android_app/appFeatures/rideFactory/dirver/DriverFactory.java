@@ -2,6 +2,7 @@ package com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.dirver;
 
 import android.content.Context;
 
+import com.bfiejdasz.fleet_manager_android_app.appFeatures.ApplicationContextSingleton;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.AddVehicleParameter;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.CheckInList;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.ChooseVehicle;
@@ -10,42 +11,23 @@ import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.IRideFact
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.RideLoop;
 
 public class DriverFactory implements IRideFactory {
-    private Context context;
-
     @Override
-    public RideLoop rideLoop() throws ContextNotSetException {
-        if (context == null)
-            throw new ContextNotSetException("Driver Factory -> RideLoop - Context not set");
-        RideLoopDriver rideLoopDriver = new RideLoopDriver();
-        rideLoopDriver.setContext(context);
-        return rideLoopDriver;
+    public RideLoop rideLoop() {
+        return new RideLoopDriver();
     }
 
     @Override
-    public ChooseVehicle choseVehicle() throws ContextNotSetException {
-        if (context == null)
-            throw new ContextNotSetException("Driver Factory -> ChooseVehicle - Context not set");
-        ChooseVehicle chooseVehicle = new ChooseVehicleDriver();
-        chooseVehicle.setContext(context);
-        return chooseVehicle;
+    public ChooseVehicle choseVehicle() {
+        return new ChooseVehicleDriver();
     }
 
     @Override
-    public CheckInList checkInList() throws ContextNotSetException {
-        if (context == null)
-            throw new ContextNotSetException("Driver Factory -> ChooseVehicle - Context not set");
+    public CheckInList checkInList() {
         return new CheckInListDriver();
     }
 
     @Override
-    public AddVehicleParameter addVehicleParameter() throws ContextNotSetException {
-        if (context == null)
-            throw new ContextNotSetException("Driver Factory -> AddVehicleParameter - Context not set");
+    public AddVehicleParameter addVehicleParameter() {
         return new AddVehicleParameterDriver();
-    }
-
-    @Override
-    public void setContext(Context context) {
-        this.context = context;
     }
 }
