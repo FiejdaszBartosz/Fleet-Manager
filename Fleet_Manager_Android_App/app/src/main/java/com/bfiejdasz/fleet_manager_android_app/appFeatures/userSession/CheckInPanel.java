@@ -45,7 +45,6 @@ public class CheckInPanel extends AppCompatActivity {
 
         questionHolder = QuestionHolder.getInstance();
 
-
         try {
             checkInList = RideFactorySingleton.getInstance().getRideFactory().checkInList();
         } catch (ContextNotSetException e) {
@@ -63,9 +62,8 @@ public class CheckInPanel extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String answer = answerEditText.getText().toString();
-                if (!answer.equals("")) {
+                if (!answer.isEmpty()) {
                     ProblemsEntity problem = new ProblemsEntity();
-
                     problem.setDescription(answer);
                     problem.setProblemType((long) question.second);
                     problem.setRideId(RideSession.getInstance().getRide().getRideId());

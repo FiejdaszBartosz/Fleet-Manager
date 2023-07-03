@@ -7,6 +7,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+
 
     <application
         android:allowBackup="true"
@@ -34,9 +38,11 @@
         <activity android:name=".appFeatures.userSession.RidePanel" />
         <activity android:name=".appFeatures.userSession.ChooseVehiclePanel" />
         <activity android:name=".appFeatures.userSession.CheckInPanel" />
-        <activity android:name=".appFeatures.userSession.CheckInListPanels" />
         <activity android:name=".appFeatures.userSession.EndRidePanel" />
         <activity android:name=".appFeatures.userSession.AddVehicleParametersPanel" />
+
+        <activity android:name=".appFeatures.managerSession.ManagerMainPanel" />
+        <activity android:name=".appFeatures.managerSession.RideTrackerPanel" />
 
     </application>
 

@@ -51,5 +51,4 @@ public class EmployeesController {
         BaseController<EmployeesEntity> baseController = new BaseController<>(call);
         baseController.execute(callback);
     }
-
 }

@@ -59,8 +59,6 @@ public abstract class CheckInList {
                     futureResult.complete(false);
                 }
             });
-
-
             return futureResult;
         } else {
             throw new ProblemNotSetError("Problem wasn't set");

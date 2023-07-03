@@ -14,7 +14,11 @@ import com.bfiejdasz.fleet_manager_android_app.R;
 import com.bfiejdasz.fleet_manager_android_app.api.api_controllers.EmployeesController;
 import com.bfiejdasz.fleet_manager_android_app.api.entity.EmployeesEntity;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.ApplicationContextSingleton;
+import com.bfiejdasz.fleet_manager_android_app.appFeatures.managerSession.ManagerMainPanel;
 import com.bfiejdasz.fleet_manager_android_app.exceptions.ErrorHandler;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -64,7 +68,7 @@ public class LoginPanel extends AppCompatActivity {
                 public void onResponse(Call<EmployeesEntity> call, Response<EmployeesEntity> response) {
                     if (response.isSuccessful()) {
                         userSession.login(response.body());
-                        startStandardUserActivity();
+                        choosePanelByRole(userSession.getEmployee());
                     } else {
                         Toast.makeText(appContext.getAppContext(), "Nieoczekiwany błąd", Toast.LENGTH_SHORT).show();
                     }
@@ -87,5 +91,25 @@ public class LoginPanel extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+    private void startManagerActivity() {
+        Intent intent = new Intent(this, ManagerMainPanel.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private void choosePanelByRole(EmployeesEntity employee) {
+        Map<Long, Runnable> roleActivities = new HashMap<>();
+        roleActivities.put(1L, this::startStandardUserActivity);
+        roleActivities.put(2L, this::startManagerActivity);
+
+        Runnable activity = roleActivities.get(employee.getRole());
+        if (activity != null) {
+            activity.run();
+        } else {
+            Toast.makeText(appContext.getAppContext(), "Nieznana rola", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }
 
