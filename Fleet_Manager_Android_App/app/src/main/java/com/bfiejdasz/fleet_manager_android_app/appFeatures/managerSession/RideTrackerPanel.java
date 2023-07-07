@@ -1,11 +1,16 @@
 package com.bfiejdasz.fleet_manager_android_app.appFeatures.managerSession;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bfiejdasz.fleet_manager_android_app.R;
+import com.bfiejdasz.fleet_manager_android_app.api.entity.PositionsEntity;
+import com.bfiejdasz.fleet_manager_android_app.appFeatures.ApplicationContextSingleton;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.managerBackend.ILocationPointsCallback;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.managerBackend.LocationPoints;
 
@@ -20,15 +25,22 @@ import org.osmdroid.views.overlay.ItemizedOverlayWithFocus;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class RideTrackerPanel extends AppCompatActivity implements ILocationPointsCallback {
     private TextView rideIdTextView;
     private MapView mapView;
+    private List<PositionsEntity> positionsEntityList;
+    private ApplicationContextSingleton appContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ride_tracker_panel);
+
+        appContext = ApplicationContextSingleton.getInstance();
+        Context context = this;
+        appContext.setAppContext(context);
 
         rideIdTextView = findViewById(R.id.rideIdTextView);
         mapView = findViewById(R.id.mapView);
@@ -41,27 +53,40 @@ public class RideTrackerPanel extends AppCompatActivity implements ILocationPoin
         Bundle b = getIntent().getExtras();
         int id = b.getInt("rideID");
 
+        setRideId(b.toString());
+
+        positionsEntityList = new ArrayList<>();
+
         LocationPoints locationPoints = new LocationPoints(id);
         locationPoints.downloadPoints(this);
     }
 
     @Override
-    public void onPointsDownloaded(List<GeoPoint> positions) {
-        setRideId("1832733771");
-        showPositionsOnMap(positions);
+    public void onPointsDownloaded(List<PositionsEntity> positions) {
+        if (positions != null) {
+            showPositionsOnMap(positions);
+            positionsEntityList.addAll(positions);
+        } else {
+            Toast.makeText(appContext.getAppContext(), "Podane RideID nieistnieje", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, ManagerMainPanel.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     public void setRideId(String rideId) {
         rideIdTextView.setText("Ride ID: " + rideId);
     }
 
-    public void showPositionsOnMap(List<GeoPoint> positions) {
-        List<OverlayItem> overlayItems = createOverlayItems(positions);
+    public void showPositionsOnMap(List<PositionsEntity> positions) {
+        List<GeoPoint> geoPointList = convertToGeoPoint(positions);
+
+        List<OverlayItem> overlayItems = createOverlayItems(geoPointList);
         ItemizedOverlayWithFocus<OverlayItem> itemOverlay = createItemizedOverlay(overlayItems);
         mapView.getOverlays().add(itemOverlay);
 
         if (!positions.isEmpty()) {
-            GeoPoint firstPoint = positions.get(0);
+            GeoPoint firstPoint = geoPointList.get(0);
             mapView.getController().setCenter(firstPoint);
 
             double minLat = firstPoint.getLatitude();
@@ -69,7 +94,7 @@ public class RideTrackerPanel extends AppCompatActivity implements ILocationPoin
             double minLon = firstPoint.getLongitude();
             double maxLon = firstPoint.getLongitude();
 
-            for (GeoPoint point : positions) {
+            for (GeoPoint point : geoPointList) {
                 double lat = point.getLatitude();
                 double lon = point.getLongitude();
                 if (lat < minLat) {
@@ -121,4 +146,11 @@ public class RideTrackerPanel extends AppCompatActivity implements ILocationPoin
                 getApplicationContext()
         );
     }
+
+    private List<GeoPoint> convertToGeoPoint(List<PositionsEntity> positionsEntityList) {
+        return positionsEntityList.stream()
+                .map(temp -> new GeoPoint(temp.getyCord(), temp.getxCord()))
+                .collect(Collectors.toList());
+    }
+
 }

@@ -19,6 +19,9 @@ public class RepairsEntity {
     @Basic
     @Column(name = "description")
     private String description;
+    @Basic
+    @Column(name = "complete")
+    private Short complete;
     @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "vehicle", referencedColumnName = "id_vehicles", insertable=false, updatable=false)
@@ -60,6 +63,14 @@ public class RepairsEntity {
         this.description = description;
     }
 
+    public Short getComplete() {
+        return complete;
+    }
+
+    public void setComplete(Short complete) {
+        this.complete = complete;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -71,6 +82,7 @@ public class RepairsEntity {
         if (vehicle != null ? !vehicle.equals(that.vehicle) : that.vehicle != null) return false;
         if (problem != null ? !problem.equals(that.problem) : that.problem != null) return false;
         if (description != null ? !description.equals(that.description) : that.description != null) return false;
+        if (complete != null ? !complete.equals(that.complete) : that.complete != null) return false;
 
         return true;
     }
@@ -81,6 +93,8 @@ public class RepairsEntity {
         result = 31 * result + (vehicle != null ? vehicle.hashCode() : 0);
         result = 31 * result + (problem != null ? problem.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (complete != null ? complete.hashCode() : 0);
+        result = 31 * result + (complete != null ? complete.hashCode() : 0);
         return result;
     }
 

@@ -14,39 +14,34 @@ import retrofit2.Response;
 
 public class LocationPoints {
     private int id;
-    private List<GeoPoint> points;
     private PositionsController positionsController;
+    private List<PositionsEntity> positionsEntityList;
 
     public LocationPoints(int id) {
         this.id = id;
-        this.points = new ArrayList<>();
+        this.positionsEntityList = new ArrayList<>();
         this.positionsController = new PositionsController();
     }
 
-    private void addPoint(double latitude, double longitude) {
-        GeoPoint point = new GeoPoint(latitude, longitude);
-        points.add(point);
-    }
-
-    public List<GeoPoint> getPoints() {
-        return points;
+    public List<PositionsEntity> getPoints() {
+        return positionsEntityList;
     }
 
     public void downloadPoints(ILocationPointsCallback callback) {
         positionsController.getPositionsByRideId(id, new Callback<List<PositionsEntity>>() {
             @Override
             public void onResponse(Call<List<PositionsEntity>> call, Response<List<PositionsEntity>> response) {
-                if (response.isSuccessful()) {
-                    for (PositionsEntity temp : response.body()) {
-                        addPoint(temp.getyCord(), temp.getxCord());
-                    }
-                    callback.onPointsDownloaded(points);
+                if (response.isSuccessful() && response.body() != null) {
+                    positionsEntityList.addAll(response.body());
+                    callback.onPointsDownloaded(positionsEntityList);
+                } else {
+                    callback.onPointsDownloaded(null);
                 }
             }
 
             @Override
             public void onFailure(Call<List<PositionsEntity>> call, Throwable t) {
-                // Obsługa błędu
+                callback.onPointsDownloaded(null);
             }
         });
     }

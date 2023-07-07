@@ -7,6 +7,7 @@ public class RepairsEntity {
     private String description;
     private VehiclesEntity vehiclesByVehicle;
     private ProblemsEntity problemsByProblem;
+    private Short complete;
 
     public long getIdRepairs() {
         return idRepairs;
@@ -40,6 +41,14 @@ public class RepairsEntity {
         this.description = description;
     }
 
+    public Short getComplete() {
+        return complete;
+    }
+
+    public void setComplete(Short complete) {
+        this.complete = complete;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -51,6 +60,7 @@ public class RepairsEntity {
         if (vehicle != null ? !vehicle.equals(that.vehicle) : that.vehicle != null) return false;
         if (problem != null ? !problem.equals(that.problem) : that.problem != null) return false;
         if (description != null ? !description.equals(that.description) : that.description != null) return false;
+        if (complete != null ? !complete.equals(that.complete) : that.complete != null) return false;
 
         return true;
     }

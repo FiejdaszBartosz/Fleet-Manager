@@ -73,6 +73,7 @@ public class RepairsController {
             if (repairs.getVehicle() != null) temp.setVehicle(repairs.getVehicle());
             if (repairs.getProblem() != null) temp.setProblem(repairs.getProblem());
             if (repairs.getDescription() != null) temp.setDescription(repairs.getDescription());
+            if (repairs.getComplete() != null) temp.setComplete(repairs.getComplete());
 
             repairsRepository.save(temp);
 
