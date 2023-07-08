@@ -26,7 +26,7 @@ public interface IApiRepairs {
     Call<Void> deleteRepairsById(@Query("id") int id);
 
     @POST("repairs")
-    Call<RepairsEntity> createRepairs(@Body RepairsEntity repair);
+    Call<List<RepairsEntity>> createRepairs(@Body List<RepairsEntity> repairs);
 
     @PATCH("repairs")
     Call<RepairsEntity> updateRepairsById(@Query("id") int id, @Body RepairsEntity repair);

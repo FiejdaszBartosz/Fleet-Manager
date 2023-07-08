@@ -57,9 +57,9 @@ public class RepairsController {
     public ResponseEntity<Object> add(@RequestBody List<RepairsEntity> repairs) {
         try {
             repairsRepository.saveAll(repairs);
-            return ResponseEntity.status(HttpStatus.CREATED).body(null);
+            return ResponseEntity.status(HttpStatus.CREATED).body(repairs);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(repairs);
         }
     }
 
@@ -74,6 +74,7 @@ public class RepairsController {
             if (repairs.getProblem() != null) temp.setProblem(repairs.getProblem());
             if (repairs.getDescription() != null) temp.setDescription(repairs.getDescription());
             if (repairs.getComplete() != null) temp.setComplete(repairs.getComplete());
+            if (repairs.getDate() != null) temp.setDate(repairs.getDate());
 
             repairsRepository.save(temp);
 

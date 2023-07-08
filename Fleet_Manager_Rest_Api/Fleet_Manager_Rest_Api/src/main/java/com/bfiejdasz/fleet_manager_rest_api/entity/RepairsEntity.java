@@ -1,7 +1,11 @@
 package com.bfiejdasz.fleet_manager_rest_api.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "repairs", schema = "moloft", catalog = "postgres")
@@ -22,6 +26,10 @@ public class RepairsEntity {
     @Basic
     @Column(name = "complete")
     private Short complete;
+    @Basic
+    @Column(name = "date")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime date;
     @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "vehicle", referencedColumnName = "id_vehicles", insertable=false, updatable=false)
@@ -70,6 +78,14 @@ public class RepairsEntity {
     public void setComplete(Short complete) {
         this.complete = complete;
     }
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    public LocalDateTime getDate() {
+        return date;
+    }
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -83,6 +99,7 @@ public class RepairsEntity {
         if (problem != null ? !problem.equals(that.problem) : that.problem != null) return false;
         if (description != null ? !description.equals(that.description) : that.description != null) return false;
         if (complete != null ? !complete.equals(that.complete) : that.complete != null) return false;
+        if (date != null ? !date.equals(that.date) : that.date != null) return false;
 
         return true;
     }
@@ -95,6 +112,7 @@ public class RepairsEntity {
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (complete != null ? complete.hashCode() : 0);
         result = 31 * result + (complete != null ? complete.hashCode() : 0);
+        result = 31 * result + (date != null ? date.hashCode() : 0);
         return result;
     }
 

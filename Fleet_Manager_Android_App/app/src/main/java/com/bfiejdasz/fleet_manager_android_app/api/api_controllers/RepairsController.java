@@ -42,9 +42,9 @@ public class RepairsController {
         baseController.execute(callback);
     }
 
-    public void createRepair(RepairsEntity repair, Callback<RepairsEntity> callback) {
-        Call<RepairsEntity> call = apiRepairs.createRepairs(repair);
-        BaseController<RepairsEntity> baseController = new BaseController<>(call);
+    public void createRepair(List<RepairsEntity> repairs, Callback<List<RepairsEntity>> callback) {
+        Call<List<RepairsEntity>> call = apiRepairs.createRepairs(repairs);
+        BaseController<List<RepairsEntity>> baseController = new BaseController<>(call);
         baseController.execute(callback);
     }
 

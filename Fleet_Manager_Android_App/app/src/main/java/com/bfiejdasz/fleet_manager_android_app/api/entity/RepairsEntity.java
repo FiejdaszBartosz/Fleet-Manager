@@ -1,5 +1,7 @@
 package com.bfiejdasz.fleet_manager_android_app.api.entity;
 
+import java.sql.Timestamp;
+
 public class RepairsEntity {
     private long idRepairs;
     private Long vehicle;
@@ -8,6 +10,7 @@ public class RepairsEntity {
     private VehiclesEntity vehiclesByVehicle;
     private ProblemsEntity problemsByProblem;
     private Short complete;
+    private String date;
 
     public long getIdRepairs() {
         return idRepairs;
@@ -49,6 +52,14 @@ public class RepairsEntity {
         this.complete = complete;
     }
 
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -61,6 +72,7 @@ public class RepairsEntity {
         if (problem != null ? !problem.equals(that.problem) : that.problem != null) return false;
         if (description != null ? !description.equals(that.description) : that.description != null) return false;
         if (complete != null ? !complete.equals(that.complete) : that.complete != null) return false;
+        if (date != null ? !date.equals(that.date) : that.date != null) return false;
 
         return true;
     }
@@ -71,6 +83,8 @@ public class RepairsEntity {
         result = 31 * result + (vehicle != null ? vehicle.hashCode() : 0);
         result = 31 * result + (problem != null ? problem.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (date != null ? date.hashCode() : 0);
+
         return result;
     }
 

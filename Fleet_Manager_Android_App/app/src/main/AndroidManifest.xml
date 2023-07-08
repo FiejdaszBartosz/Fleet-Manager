@@ -43,6 +43,7 @@
 
         <activity android:name=".appFeatures.managerSession.ManagerMainPanel" />
         <activity android:name=".appFeatures.managerSession.RideTrackerPanel" />
+        <activity android:name=".appFeatures.managerSession.AddRepairPanel" />
 
     </application>
 
