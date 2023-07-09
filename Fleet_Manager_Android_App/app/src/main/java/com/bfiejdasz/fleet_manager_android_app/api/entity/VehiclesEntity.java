@@ -1,8 +1,12 @@
 package com.bfiejdasz.fleet_manager_android_app.api.entity;
 
-import java.util.Collection;
+import com.bfiejdasz.fleet_manager_android_app.api.ITableItem;
 
-public class VehiclesEntity {
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+public class VehiclesEntity implements ITableItem {
     private long idVehicles;
     private String manufacture;
     private String model;
@@ -120,6 +124,40 @@ public class VehiclesEntity {
         result = 31 * result + (insurance != null ? insurance.hashCode() : 0);
         result = 31 * result + (inUse != null ? inUse.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public List<String> getColumns() {
+        List<String> columns = new ArrayList<>();
+        columns.add("ID");
+        columns.add("Manufacturer");
+        columns.add("Model");
+        columns.add("Year");
+        columns.add("VIN");
+        columns.add("License Plate");
+        columns.add("Mileage");
+        columns.add("Insurance");
+        columns.add("In Use");
+        return columns;
+    }
+
+    @Override
+    public List<String> getValues() {
+        List<String> values = new ArrayList<>();
+        values.add(String.valueOf(getIdVehicles()));
+        values.add(getValueOrNotSet(getManufacture()));
+        values.add(getValueOrNotSet(getModel()));
+        values.add(getValueOrNotSet(String.valueOf(getYear())));
+        values.add(getValueOrNotSet(getVin()));
+        values.add(getValueOrNotSet(getLicensePlate()));
+        values.add(getValueOrNotSet(String.valueOf(getMileage())));
+        values.add(getValueOrNotSet(getInsurance()));
+        values.add(getValueOrNotSet(String.valueOf(getInUse())));
+        return values;
+    }
+
+    private String getValueOrNotSet(String value) {
+        return value != null && !value.isEmpty() ? value : "Not Set";
     }
 
     public Collection<PlanedRepairsEntity> getPlanedRepairsByIdVehicles() {
