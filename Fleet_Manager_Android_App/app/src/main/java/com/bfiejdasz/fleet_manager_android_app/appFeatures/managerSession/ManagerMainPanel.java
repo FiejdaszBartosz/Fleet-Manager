@@ -27,6 +27,7 @@ public class ManagerMainPanel extends AppCompatActivity implements IUser {
     private Button ridePreviewButton;
     private Button addRepairButton;
     private Button vehiclePreviewButton;
+    private Button repairStatusButton;
     private EmployeesEntity employee;
     private ApplicationContextSingleton appContext;
     private String dialogInput = "";
@@ -42,6 +43,7 @@ public class ManagerMainPanel extends AppCompatActivity implements IUser {
         ridePreviewButton = findViewById(R.id.ridePreviewButton);
         addRepairButton = findViewById(R.id.addRepairButtonToPanel);
         vehiclePreviewButton = findViewById(R.id.vehiclesPreviewButton);
+        repairStatusButton = findViewById(R.id.repairStatusButton);
 
         this.employee = UserSession.getInstance().getEmployee();
 
@@ -78,6 +80,13 @@ public class ManagerMainPanel extends AppCompatActivity implements IUser {
                 openVehiclesTable();
             }
         });
+
+        repairStatusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openRepairStatus();
+            }
+        });
     }
 
     private void dialogID() {
@@ -108,7 +117,6 @@ public class ManagerMainPanel extends AppCompatActivity implements IUser {
 
     private void openRideList() {
         Toast.makeText(appContext.getAppContext(), "Otwórz listę przejazdów", Toast.LENGTH_SHORT).show();
-        // Dodaj kod obsługi otwierania listy przejazdów
     }
 
     private void openRidePreview(int id) {
@@ -128,6 +136,12 @@ public class ManagerMainPanel extends AppCompatActivity implements IUser {
 
     private void openVehiclesTable() {
         Intent intent = new Intent(this, VehicleInfoPanel.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private void openRepairStatus() {
+        Intent intent = new Intent(this, RepairStatusPanel.class);
         startActivity(intent);
         finish();
     }
