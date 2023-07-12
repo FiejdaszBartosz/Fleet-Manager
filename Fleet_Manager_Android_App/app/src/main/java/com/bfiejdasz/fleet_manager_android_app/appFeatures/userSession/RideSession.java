@@ -3,6 +3,7 @@ package com.bfiejdasz.fleet_manager_android_app.appFeatures.userSession;
 import android.util.Log;
 
 import com.bfiejdasz.fleet_manager_android_app.api.api_controllers.RidesController;
+import com.bfiejdasz.fleet_manager_android_app.api.api_controllers.RidesEmployeesController;
 import com.bfiejdasz.fleet_manager_android_app.api.entity.RidesEntity;
 import com.bfiejdasz.fleet_manager_android_app.exceptions.ErrorHandler;
 
@@ -16,10 +17,12 @@ public class RideSession {
     private static RideSession instance = null;
     private RidesEntity ride;
     private RidesController ridesController;
+    private RidesEmployeesController ridesEmployeesController;
 
     private RideSession() {
         this.ride = new RidesEntity();
         this.ridesController = new RidesController();
+        this.ridesEmployeesController = new RidesEmployeesController();
     }
 
     public static RideSession getInstance() {
@@ -54,6 +57,8 @@ public class RideSession {
                 }
             }
         });
+
+        
     }
 
     public RidesController getRidesController() {

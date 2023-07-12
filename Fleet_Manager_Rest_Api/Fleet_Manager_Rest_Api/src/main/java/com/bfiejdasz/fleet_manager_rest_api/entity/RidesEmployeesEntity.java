@@ -11,7 +11,7 @@ public class RidesEmployeesEntity {
     @Column(name = "id_rides_employees")
     private long idRidesEmployees;
     @Basic
-    @Column(name = "rideid")
+    @Column(name = "rideid", unique = true)
     private Long rideId;
     @Basic
     @Column(name = "id_employee")

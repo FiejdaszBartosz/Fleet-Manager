@@ -21,7 +21,7 @@ public class RidesEntity {
     @Column(name = "id_rides")
     private long idRides;
     @Basic
-    @Column(name = "rideid")
+    @Column(name = "rideid", unique = true)
     private Long rideId;
     @Basic
     @Column(name = "vehicle")
