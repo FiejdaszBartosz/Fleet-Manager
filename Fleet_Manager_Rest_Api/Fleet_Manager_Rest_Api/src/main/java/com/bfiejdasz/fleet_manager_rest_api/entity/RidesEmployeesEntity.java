@@ -11,7 +11,7 @@ public class RidesEmployeesEntity {
     @Column(name = "id_rides_employees")
     private long idRidesEmployees;
     @Basic
-    @Column(name = "rideid", unique = true)
+    @Column(name = "rideid")
     private Long rideId;
     @Basic
     @Column(name = "id_employee")
@@ -20,6 +20,10 @@ public class RidesEmployeesEntity {
     @JsonIgnore
     @JoinColumn(name = "id_employee", referencedColumnName = "id_employees", insertable=false, updatable=false)
     private EmployeesEntity employeesByIdEmployee;
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "rideid", referencedColumnName = "rideid", insertable=false, updatable=false)
+    private RidesEntity ridesEmployeesByRideid;
 
     public long getIdRidesEmployees() {
         return idRidesEmployees;
@@ -43,6 +47,14 @@ public class RidesEmployeesEntity {
 
     public void setIdEmployee(Long idEmployee) {
         this.idEmployee = idEmployee;
+    }
+
+    public RidesEntity getRidesEntityByRideid() {
+        return ridesEmployeesByRideid;
+    }
+
+    public void setRidesEntityByRideid(RidesEntity ridesEntityByRideid) {
+        this.ridesEmployeesByRideid = ridesEntityByRideid;
     }
 
     @Override

@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.bfiejdasz.fleet_manager_android_app.api.api_controllers.VehiclesController;
 import com.bfiejdasz.fleet_manager_android_app.api.entity.PositionsEntity;
+import com.bfiejdasz.fleet_manager_android_app.api.entity.RidesEntity;
 import com.bfiejdasz.fleet_manager_android_app.api.entity.VehiclesEntity;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.ApplicationContextSingleton;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.userSession.IUser;

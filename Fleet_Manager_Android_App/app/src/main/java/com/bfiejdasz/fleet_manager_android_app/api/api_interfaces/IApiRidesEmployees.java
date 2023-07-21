@@ -8,6 +8,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.PATCH;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface IApiRidesEmployees {
@@ -20,6 +21,6 @@ public interface IApiRidesEmployees {
     @GET("ridesEmployees/getByEmployee")
     Call<List<RidesEmployeesEntity>> getRidesEmployeesByRide(@Query("id") int id);
 
-    @PATCH("ridesEmployees")
-    Call<RidesEmployeesEntity> updateRideEmployeeById(@Query("id") int id, @Body RidesEmployeesEntity ridesEmployees);
+    @POST("ridesEmployees")
+    Call<List<RidesEmployeesEntity>> addRideEmployee(@Body List<RidesEmployeesEntity> ridesEmployees);
 }

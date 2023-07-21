@@ -22,14 +22,10 @@ public class AddVehicleParameterDriver extends AddVehicleParameter {
         rideSession.getRide().setStartFuel(fuel);
     }
 
-    public void updateParameters() throws ParameterNotSetError {
+    public CompletableFuture<Boolean>  updateParameters() throws ParameterNotSetError {
         RidesEntity temp = rideSession.getRide();
         if (temp.getStartFuel() != null && temp.getStartKm() != null) {
-            CompletableFuture<Boolean> futureResult = super.updateRideParameters();
-            futureResult.thenAcceptAsync(success -> {
-                if (!success)
-                    Log.e("EXCEPTION", "updateParameters");
-            });
+            return super.updateRideParameters();
         }
         else
             throw new ParameterNotSetError("updateParameters fuel or start km wasnt set");

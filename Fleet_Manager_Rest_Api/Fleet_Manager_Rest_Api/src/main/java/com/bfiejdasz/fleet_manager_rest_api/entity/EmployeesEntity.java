@@ -31,6 +31,8 @@ public class EmployeesEntity {
     @JoinColumn(name = "role", referencedColumnName = "id_roles", insertable=false, updatable=false)
     @JsonIgnore
     private RoleEntity roleByRole;
+    @OneToMany(mappedBy = "employeesByIdEmployee")
+    private Collection<RidesEmployeesEntity> employeesByIdEmployee;
 
     public long getIdEmployees() {
         return idEmployees;

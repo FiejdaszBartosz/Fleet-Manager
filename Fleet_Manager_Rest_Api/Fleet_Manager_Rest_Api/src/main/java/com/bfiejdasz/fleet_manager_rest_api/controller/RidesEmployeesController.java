@@ -50,7 +50,7 @@ public class RidesEmployeesController {
     public ResponseEntity<Object> add(@RequestBody List<RidesEmployeesEntity> ridesEmployees) {
         try {
             ridesEmployeesRepository.saveAll(ridesEmployees);
-            return ResponseEntity.status(HttpStatus.CREATED).body(null);
+            return ResponseEntity.status(HttpStatus.CREATED).body(ridesEmployees);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }

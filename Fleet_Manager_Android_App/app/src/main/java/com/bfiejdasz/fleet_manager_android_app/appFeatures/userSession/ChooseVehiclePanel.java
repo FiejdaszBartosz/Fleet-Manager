@@ -26,7 +26,6 @@ public class ChooseVehiclePanel extends AppCompatActivity {
     private Button buttonSubmit;
     private ApplicationContextSingleton appContext;
     private IRideFactory rideFactory;
-
     private ChooseVehicle chooseVehicle;
 
     @Override
@@ -79,7 +78,10 @@ public class ChooseVehiclePanel extends AppCompatActivity {
                         CompletableFuture<VehiclesEntity> futureResultVehicle = chooseVehicle.getVehicleByPlate(licensePlate);
                         futureResultVehicle.thenAcceptAsync(successVehicle -> {
                             if (successVehicle != null) {
-                                RideSession.getInstance().getRide().setVehiclesByVehicle(successVehicle);
+                                RideSession temp = RideSession.getInstance();
+                                temp.getRide().setVehicle(successVehicle.getIdVehicles());
+                                temp.getRide().setVehiclesByVehicle(successVehicle);
+                                temp.updateRide();
                             }
                         });
 

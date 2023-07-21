@@ -17,6 +17,8 @@ import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.RideFacto
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.dirver.AddVehicleParameterDriver;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.errors.ParameterNotSetError;
 
+import java.util.concurrent.CompletableFuture;
+
 public class AddVehicleParametersPanel extends AppCompatActivity {
 
     private TextView textViewKilometers;
@@ -63,11 +65,19 @@ public class AddVehicleParametersPanel extends AppCompatActivity {
             addVehicleParameterDriver.addStartKm(Integer.parseInt(kilometers));
             addVehicleParameterDriver.addStartFuel(Integer.parseInt(fuelLevel));
 
+
             try {
-                addVehicleParameterDriver.updateParameters();
-                Intent intent = new Intent(this, CheckInPanel.class);
-                startActivity(intent);
-                finish();
+                CompletableFuture<Boolean> completableFuture = addVehicleParameterDriver.updateParameters();
+                completableFuture.thenAcceptAsync(result -> {
+                    if (result) {
+                        Intent intent = new Intent(this, CheckInPanel.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Toast.makeText(appContext.getAppContext(), "Nieoczekiwany blad", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
             } catch (ParameterNotSetError e) {
                 Toast.makeText(appContext.getAppContext(), "Nieoczekiwany blad", Toast.LENGTH_SHORT).show();
             }

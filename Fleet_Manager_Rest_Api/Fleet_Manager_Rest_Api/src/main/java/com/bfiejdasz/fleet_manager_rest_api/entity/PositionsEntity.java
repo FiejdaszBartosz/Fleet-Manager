@@ -17,7 +17,7 @@ public class PositionsEntity {
     @Column(name = "id_positions")
     private long idPositions;
     @Basic
-    @Column(name = "rideid", unique = true)
+    @Column(name = "rideid")
     private Long rideid;
     @Basic
     @Column(name = "x_cord")

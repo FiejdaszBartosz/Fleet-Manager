@@ -44,7 +44,7 @@ public class RidesController {
         try {
             RidesEntity rideee = ride;
             ridesRepository.save(ride);
-            return ResponseEntity.status(HttpStatus.CREATED).body(null);
+            return ResponseEntity.status(HttpStatus.CREATED).body(ride);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
@@ -65,7 +65,7 @@ public class RidesController {
 
             ridesRepository.save(ride);
 
-            return ResponseEntity.ok(ride);
+            return ResponseEntity.status(HttpStatus.OK).body(temp);
         } else {
             return ResponseEntity.notFound().build();
         }

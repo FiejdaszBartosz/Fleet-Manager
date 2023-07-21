@@ -49,9 +49,8 @@ public class RidesEntity {
     @ManyToOne
     @JoinColumn(name = "vehicle", referencedColumnName = "id_vehicles", insertable=false, updatable=false)
     private VehiclesEntity vehiclesByVehicle;
-    @ManyToOne
-    @JoinColumn(name = "rideid", referencedColumnName = "rideid", insertable=false, updatable=false)
-    private RidesEmployeesEntity ridesEmployeesByRideId;
+    @OneToMany(mappedBy = "ridesEmployeesByRideid")
+    private Collection<RidesEmployeesEntity> ridesEmployeesByRideid;
 
     @OneToMany(mappedBy = "problemsByRideid")
     private Collection<ProblemsEntity> problemsByRideid;
@@ -173,13 +172,6 @@ public class RidesEntity {
         this.vehiclesByVehicle = vehiclesByVehicle;
     }
 
-    public RidesEmployeesEntity getRidesEmployeesByRideId() {
-        return ridesEmployeesByRideId;
-    }
-
-    public void setRidesEmployeesByRideId(RidesEmployeesEntity ridesEmployeesByRideId) {
-        this.ridesEmployeesByRideId = ridesEmployeesByRideId;
-    }
 
     public Collection<ProblemsEntity> getProblemsByRideid() {
         return problemsByRideid;
@@ -195,5 +187,13 @@ public class RidesEntity {
 
     public void setPositionsByRideid(Collection<PositionsEntity> positionsByRideid) {
         this.positionsByRideid = positionsByRideid;
+    }
+
+    public Collection<RidesEmployeesEntity> getRidesEmployeesByRideId() {
+        return ridesEmployeesByRideid;
+    }
+
+    public void setRidesEmployeesByRideId(Collection<RidesEmployeesEntity> ridesEmployeesByRideId) {
+        this.ridesEmployeesByRideid = ridesEmployeesByRideId;
     }
 }

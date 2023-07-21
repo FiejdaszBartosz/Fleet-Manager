@@ -14,7 +14,7 @@ public class ProblemsEntity {
     @Column(name = "id_problems")
     private long idProblems;
     @Basic
-    @Column(name = "rideid", unique = true)
+    @Column(name = "rideid")
     private Long rideId;
     @Basic
     @JsonProperty("type")

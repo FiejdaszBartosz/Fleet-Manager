@@ -36,9 +36,9 @@ public class RidesEmployeesController {
         baseController.execute(callback);
     }
 
-    public void updateRideEmployeeById(int id, RidesEmployeesEntity ridesEmployees, final Callback<RidesEmployeesEntity> callback) {
-        Call<RidesEmployeesEntity> call = apiRidesEmployees.updateRideEmployeeById(id, ridesEmployees);
-        BaseController<RidesEmployeesEntity> baseController = new BaseController<>(call);
+    public void addRideEmployee(List<RidesEmployeesEntity> ridesEmployeesEntities, Callback<List<RidesEmployeesEntity>> callback) {
+        Call<List<RidesEmployeesEntity>> call = apiRidesEmployees.addRideEmployee(ridesEmployeesEntities);
+        BaseController<List<RidesEmployeesEntity>> baseController = new BaseController<>(call);
         baseController.execute(callback);
     }
 }
