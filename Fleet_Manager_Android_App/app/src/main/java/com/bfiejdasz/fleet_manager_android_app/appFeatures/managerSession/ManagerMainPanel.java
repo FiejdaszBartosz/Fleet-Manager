@@ -116,7 +116,9 @@ public class ManagerMainPanel extends AppCompatActivity implements IUser {
     }
 
     private void openRideList() {
-        Toast.makeText(appContext.getAppContext(), "Otwórz listę przejazdów", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, VehicleStatusPanel.class);
+        startActivity(intent);
+        finish();
     }
 
     private void openRidePreview(int id) {

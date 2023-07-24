@@ -17,7 +17,7 @@ public interface IApiPlanedRepairs {
     Call<List<PlanedRepairsEntity>> getUsers();
 
     @GET("planedRepairs")
-    Call<PlanedRepairsEntity> getUserByVehicleId(@Query("id") int id);
+    Call<List<PlanedRepairsEntity>> getUserByVehicleId(@Query("id") long id);
 
     @DELETE("planedRepairs")
     Call<Void> deletePlanedRepairsById(@Query("id") int id);

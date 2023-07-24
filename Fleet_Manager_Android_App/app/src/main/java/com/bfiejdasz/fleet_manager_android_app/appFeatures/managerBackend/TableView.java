@@ -9,8 +9,8 @@ import com.bfiejdasz.fleet_manager_android_app.api.ITableItem;
 import java.util.List;
 
 public class TableView {
-    private TableLayout tableLayout;
-    private List<String> columns;
+    protected TableLayout tableLayout;
+    protected List<String> columns;
 
     public TableView(TableLayout tableLayout, List<String> columns) {
         this.tableLayout = tableLayout;
@@ -37,7 +37,7 @@ public class TableView {
         tableLayout.addView(row);
     }
 
-    private void addColumnNames() {
+    protected void addColumnNames() {
         TableRow row = new TableRow(tableLayout.getContext());
         TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(
                 TableRow.LayoutParams.MATCH_PARENT,

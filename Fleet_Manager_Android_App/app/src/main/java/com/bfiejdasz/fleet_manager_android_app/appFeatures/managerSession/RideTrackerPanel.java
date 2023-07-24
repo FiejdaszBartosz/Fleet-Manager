@@ -133,13 +133,11 @@ public class RideTrackerPanel extends AppCompatActivity implements ILocationPoin
                 new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
                     @Override
                     public boolean onItemSingleTapUp(final int index, final OverlayItem item) {
-                        // Obsługa kliknięcia na punkt
                         return true;
                     }
 
                     @Override
                     public boolean onItemLongPress(final int index, final OverlayItem item) {
-                        // Obsługa przytrzymania punktu
                         return false;
                     }
                 },

@@ -1,5 +1,6 @@
 package com.bfiejdasz.fleet_manager_rest_api.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
@@ -16,6 +17,7 @@ public class PlanedRepairsEntity {
     @Column(name = "vehicle")
     private Long vehicle;
     @Basic
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS")
     @Column(name = "date")
     private Date date;
     @Basic
@@ -25,6 +27,7 @@ public class PlanedRepairsEntity {
     @Column(name = "km")
     private Integer km;
     @Basic
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS")
     @Column(name = "time")
     private Date time;
     @ManyToOne

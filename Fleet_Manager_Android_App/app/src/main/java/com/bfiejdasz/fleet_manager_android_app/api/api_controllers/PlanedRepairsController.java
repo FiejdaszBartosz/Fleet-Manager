@@ -22,9 +22,9 @@ public class PlanedRepairsController {
         baseController.execute(callback);
     }
 
-    public void getPlanedRepairsByVehicleId(int id, Callback<PlanedRepairsEntity> callback) {
-        Call<PlanedRepairsEntity> call = apiPlanedRepairs.getUserByVehicleId(id);
-        BaseController<PlanedRepairsEntity> baseController = new BaseController<>(call);
+    public void getPlanedRepairsByVehicleId(long id, Callback<List<PlanedRepairsEntity>> callback) {
+        Call<List<PlanedRepairsEntity>> call = apiPlanedRepairs.getUserByVehicleId(id);
+        BaseController<List<PlanedRepairsEntity>> baseController = new BaseController<>(call);
         baseController.execute(callback);
     }
 

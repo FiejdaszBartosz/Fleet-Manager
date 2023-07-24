@@ -31,7 +31,7 @@ public class PlanedRepairsController {
 
     @GetMapping("")
     public ResponseEntity<List<PlanedRepairsEntity>> getPlanedRepairsForVehicle(@RequestParam("id") long id) {
-        List<PlanedRepairsEntity> output = planedRepairsRepository.findAllByVehicleId(id);
+         List<PlanedRepairsEntity> output = planedRepairsRepository.findAllByVehicleId(id);
 
         if(output.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
