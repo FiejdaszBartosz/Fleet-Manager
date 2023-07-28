@@ -151,4 +151,8 @@ public class RideTrackerPanel extends AppCompatActivity implements ILocationPoin
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }

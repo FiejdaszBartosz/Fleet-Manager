@@ -9,6 +9,7 @@ import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.ApplicationContextSingleton;
+import com.bfiejdasz.fleet_manager_android_app.appFeatures.PermissionsActivity;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.userSession.LoginPanel;
 import com.bfiejdasz.fleet_manager_android_app.locationsFeatures.LocationProviderProxy;
 
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         ApplicationContextSingleton applicationContextSingleton = ApplicationContextSingleton.getInstance();
 
         LoginPanel loginOperation = new LoginPanel();
-        Intent intent = new Intent(this, LoginPanel.class);
+        Intent intent = new Intent(this, PermissionsActivity.class);
         startActivity(intent);
         finish();
     }

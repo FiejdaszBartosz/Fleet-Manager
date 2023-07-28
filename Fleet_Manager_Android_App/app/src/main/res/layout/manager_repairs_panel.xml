@@ -27,41 +27,21 @@
         tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/rideListButton"
+        android:id="@+id/addRepairButtonToPanel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Lista przejazdów"
+        android:text="Dodaj naprawe"
         app:layout_constraintTop_toBottomOf="@id/userNameTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/ridePreviewButton"
+        android:id="@+id/repairStatusButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Podgląd przejazdu"
-        app:layout_constraintTop_toBottomOf="@id/rideListButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="MissingConstraints" />
-
-    <Button
-        android:id="@+id/repairsPanelButtonToPanel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Panel napraw"
-        app:layout_constraintTop_toBottomOf="@id/ridePreviewButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="MissingConstraints" />
-
-    <Button
-        android:id="@+id/vehiclesPreviewButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pojazdy"
-        app:layout_constraintTop_toBottomOf="@id/repairsPanelButtonToPanel"
+        android:text="Zmien stastus naprawy"
+        app:layout_constraintTop_toBottomOf="@id/addRepairButtonToPanel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="MissingConstraints" />

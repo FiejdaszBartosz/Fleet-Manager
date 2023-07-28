@@ -66,5 +66,10 @@ public class VehicleInfoPanel extends AppCompatActivity {
             tableView.addRow(vehicle);
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }
 

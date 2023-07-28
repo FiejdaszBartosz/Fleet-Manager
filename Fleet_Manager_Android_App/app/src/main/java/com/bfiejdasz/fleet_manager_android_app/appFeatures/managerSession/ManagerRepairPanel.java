@@ -1,0 +1,82 @@
+package com.bfiejdasz.fleet_manager_android_app.appFeatures.managerSession;
+
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.bfiejdasz.fleet_manager_android_app.R;
+import com.bfiejdasz.fleet_manager_android_app.api.entity.EmployeesEntity;
+import com.bfiejdasz.fleet_manager_android_app.appFeatures.ApplicationContextSingleton;
+import com.bfiejdasz.fleet_manager_android_app.appFeatures.userSession.IUser;
+import com.bfiejdasz.fleet_manager_android_app.appFeatures.userSession.UserSession;
+
+public class ManagerRepairPanel extends AppCompatActivity implements IUser {
+    private TextView welcomeTextView;
+    private TextView userNameTextView;
+    private Button addRepairButton;
+    private Button repairStatusButton;
+    private EmployeesEntity employee;
+    private ApplicationContextSingleton appContext;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.manager_repairs_panel);
+
+        welcomeTextView = findViewById(R.id.welcomeTextView);
+        userNameTextView = findViewById(R.id.userNameTextView);
+        addRepairButton = findViewById(R.id.addRepairButtonToPanel);
+        repairStatusButton = findViewById(R.id.repairStatusButton);
+
+        this.employee = UserSession.getInstance().getEmployee();
+
+        userNameTextView.setText(employee.getName());
+
+        appContext = ApplicationContextSingleton.getInstance();
+        Context context = this;
+        appContext.setAppContext(context);
+
+        addRepairButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openAddRepairPreview();
+            }
+        });
+
+        repairStatusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openRepairStatus();
+            }
+        });
+    }
+
+    private void openAddRepairPreview() {
+        Toast.makeText(appContext.getAppContext(), "Otwórz podgląd przejazdu", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, AddRepairPanel.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private void openRepairStatus() {
+        Intent intent = new Intent(this, RepairStatusPanel.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
+
+    @Override
+    public EmployeesEntity getUser() {
+        return this.employee;
+    }
+}

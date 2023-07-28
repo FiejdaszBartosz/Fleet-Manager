@@ -60,4 +60,9 @@ public class VehicleStatusPanel extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }
