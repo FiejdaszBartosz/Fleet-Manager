@@ -50,8 +50,10 @@ public class QuestionHolder {
     }
 
     private void setQuestions() {
-        addQuestion("Question 1", 1);
-        addQuestion("Question 2", 1);
+        addQuestion("Czy występują jakieś problemy z lakierem?", 1);
+        addQuestion("Czy światła działają poprawnie?", 1);
+        addQuestion("Czy poziom płynów jest odpowiedni?", 1);
+        addQuestion("Czy wnętrze pojazdu jest w porządku?", 1);
     }
 }
 

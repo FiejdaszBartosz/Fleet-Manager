@@ -34,6 +34,11 @@ public class PositionsController {
         baseController.execute(callback);
     }
 
+    public void getLatestPositionsForAllRides(Callback<List<PositionsEntity>> callback) {
+        Call<List<PositionsEntity>> call = apiPositions.getLatestPositionsForAllRides();
+        call.enqueue(callback);
+    }
+
     public void deletePositionsById(int id, Callback<Void> callback) {
         Call<Void> call = apiPositions.deletePositionById(id);
         BaseController<Void> baseController = new BaseController<>(call);

@@ -22,6 +22,9 @@ public interface IApiPositions {
     @GET("positions/rideid")
     Call<List<PositionsEntity>> getPositionsByRideId(@Query("id") int id);
 
+    @GET("positions/latest-positions")
+    Call<List<PositionsEntity>> getLatestPositionsForAllRides();
+
     @DELETE("positions")
     Call<Void> deletePositionById(@Query("id") int id);
 

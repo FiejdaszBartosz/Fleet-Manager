@@ -53,6 +53,17 @@ public class PositionsController {
         }
     }
 
+    @GetMapping("/latest-positions")
+    public ResponseEntity<List<PositionsEntity>> getLatestPositionsForAllRides() {
+        List<PositionsEntity> latestPositions = positionsRepository.findLatestPositionForAllRides();
+
+        if (!latestPositions.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.OK).body(latestPositions);
+        } else {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+        }
+    }
+
     @PostMapping("")
     public ResponseEntity<Object> add(@RequestBody List<PositionsEntity> positionsEntities) {
         try {
