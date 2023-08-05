@@ -1,10 +1,14 @@
 package com.bfiejdasz.fleet_manager_android_app.api.entity;
 
+import com.bfiejdasz.fleet_manager_android_app.api.ITableItem;
+
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
-public class RidesEntity {
+public class RidesEntity implements ITableItem {
     private long idRides;
     private Long rideId;
     private Long vehicle;
@@ -16,9 +20,23 @@ public class RidesEntity {
     private Integer startFuel;
     private Integer stopFuel;
     private VehiclesEntity vehiclesByVehicle;
-    private RidesEmployeesEntity ridesEmployeesByRideId;
+    private Collection<RidesEmployeesEntity> ridesEmployeesByRideId;
     private Collection<ProblemsEntity> problemsByRideid;
     private Collection<PositionsEntity> positionsByRideid;
+
+    public RidesEntity(long idRides, Long rideId, Long vehicle, String startTime, String stopTime, Integer startKm, Integer stopKm, Integer startFuel, Integer stopFuel) {
+        this.idRides = idRides;
+        this.rideId = rideId;
+        this.vehicle = vehicle;
+        this.startTime = startTime;
+        this.stopTime = stopTime;
+        this.startKm = startKm;
+        this.stopKm = stopKm;
+        this.startFuel = startFuel;
+        this.stopFuel = stopFuel;
+    }
+
+    public RidesEntity() {}
 
     public long getIdRides() {
         return idRides;
@@ -130,6 +148,38 @@ public class RidesEntity {
         return Math.abs(result);
     }
 
+    @Override
+    public List<String> getColumns() {
+        List<String> columns = new ArrayList<>();
+        columns.add("Ride ID");
+        columns.add("Vehicle");
+        columns.add("Start Time");
+        columns.add("Stop Time");
+        columns.add("Start Km");
+        columns.add("Stop Km");
+        columns.add("Start Fuel");
+        columns.add("Stop Fuel");
+        return columns;
+    }
+
+    @Override
+    public List<String> getValues() {
+        List<String> values = new ArrayList<>();
+        values.add(String.valueOf(getRideId()));
+        values.add(getValueOrNotSet(String.valueOf(getVehicle())));
+        values.add(getValueOrNotSet(String.valueOf(getStartTime())));
+        values.add(getValueOrNotSet(String.valueOf(getStopTime())));
+        values.add(getValueOrNotSet(String.valueOf(getStartKm())));
+        values.add(getValueOrNotSet(String.valueOf(getStopKm())));
+        values.add(getValueOrNotSet(String.valueOf(getStartFuel())));
+        values.add(getValueOrNotSet(String.valueOf(getStopFuel())));
+        return values;
+    }
+
+    private String getValueOrNotSet(String value) {
+        return value != null && !value.isEmpty() ? value : "Not Set";
+    }
+
     public VehiclesEntity getVehiclesByVehicle() {
         return vehiclesByVehicle;
     }
@@ -138,11 +188,11 @@ public class RidesEntity {
         this.vehiclesByVehicle = vehiclesByVehicle;
     }
 
-    public RidesEmployeesEntity getRidesEmployeesByRideId() {
+    public Collection<RidesEmployeesEntity> getRidesEmployeesByRideId() {
         return ridesEmployeesByRideId;
     }
 
-    public void setRidesEmployeesByRideId(RidesEmployeesEntity ridesEmployeesByRideId) {
+    public void setRidesEmployeesByRideId(Collection<RidesEmployeesEntity> ridesEmployeesByRideId) {
         this.ridesEmployeesByRideId = ridesEmployeesByRideId;
     }
 

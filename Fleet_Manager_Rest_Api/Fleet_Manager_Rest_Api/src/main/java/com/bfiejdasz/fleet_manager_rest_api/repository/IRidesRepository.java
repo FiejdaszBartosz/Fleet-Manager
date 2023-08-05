@@ -11,4 +11,7 @@ import java.util.List;
 public interface IRidesRepository extends JpaRepository<RidesEntity, Long> {
     @Query("SELECT p FROM RidesEntity p WHERE p.rideId = :id")
     RidesEntity findByRideid(@Param("id") Long carId);
+
+    @Query("SELECT r FROM RidesEntity r")
+    List<RidesEntity> findAllRides();
 }

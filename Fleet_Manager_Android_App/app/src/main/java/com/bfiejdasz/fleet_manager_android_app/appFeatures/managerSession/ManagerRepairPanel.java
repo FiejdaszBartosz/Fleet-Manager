@@ -21,6 +21,7 @@ public class ManagerRepairPanel extends AppCompatActivity implements IUser {
     private TextView userNameTextView;
     private Button addRepairButton;
     private Button repairStatusButton;
+    private Button vehicleStatusButton;
     private EmployeesEntity employee;
     private ApplicationContextSingleton appContext;
 
@@ -33,6 +34,7 @@ public class ManagerRepairPanel extends AppCompatActivity implements IUser {
         userNameTextView = findViewById(R.id.userNameTextView);
         addRepairButton = findViewById(R.id.addRepairButtonToPanel);
         repairStatusButton = findViewById(R.id.repairStatusButton);
+        vehicleStatusButton = findViewById(R.id.vehicleStatusButton);
 
         this.employee = UserSession.getInstance().getEmployee();
 
@@ -55,6 +57,13 @@ public class ManagerRepairPanel extends AppCompatActivity implements IUser {
                 openRepairStatus();
             }
         });
+
+        vehicleStatusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openVehicleStatusPanel();
+            }
+        });
     }
 
     private void openAddRepairPreview() {
@@ -66,6 +75,12 @@ public class ManagerRepairPanel extends AppCompatActivity implements IUser {
 
     private void openRepairStatus() {
         Intent intent = new Intent(this, RepairStatusPanel.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private void openVehicleStatusPanel() {
+        Intent intent = new Intent(this, VehicleStatusPanel.class);
         startActivity(intent);
         finish();
     }

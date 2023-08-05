@@ -47,6 +47,7 @@
         <activity android:name=".appFeatures.managerSession.RepairStatusPanel" />
         <activity android:name=".appFeatures.managerSession.VehicleStatusPanel" />
         <activity android:name=".appFeatures.managerSession.ManagerRepairPanel" />
+        <activity android:name=".appFeatures.managerSession.RideInfoPanel" />
 
     </application>
 

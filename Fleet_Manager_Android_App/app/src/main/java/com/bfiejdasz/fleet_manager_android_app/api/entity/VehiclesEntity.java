@@ -26,7 +26,20 @@ public class VehiclesEntity implements ITableItem {
     private Collection<PlanedRepairsEntity> planedRepairsByIdVehicles;
     private Collection<RepairsEntity> repairsByIdVehicles;
     private Collection<RidesEntity> ridesByIdVehicles;
-    private CountDownLatch latch;
+
+    public VehiclesEntity(long idVehicles, String manufacture, String model, Integer year, String vin, String licensePlate, Integer mileage, String insurance, Short inUse) {
+        this.idVehicles = idVehicles;
+        this.manufacture = manufacture;
+        this.model = model;
+        this.year = year;
+        this.vin = vin;
+        this.licensePlate = licensePlate;
+        this.mileage = mileage;
+        this.insurance = insurance;
+        this.inUse = inUse;
+    }
+
+    public VehiclesEntity() {}
 
     public long getIdVehicles() {
         return idVehicles;

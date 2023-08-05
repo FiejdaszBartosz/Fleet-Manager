@@ -32,6 +32,7 @@ public class EmployeesEntity {
     @JsonIgnore
     private RoleEntity roleByRole;
     @OneToMany(mappedBy = "employeesByIdEmployee")
+    @JsonIgnore
     private Collection<RidesEmployeesEntity> employeesByIdEmployee;
 
     public long getIdEmployees() {

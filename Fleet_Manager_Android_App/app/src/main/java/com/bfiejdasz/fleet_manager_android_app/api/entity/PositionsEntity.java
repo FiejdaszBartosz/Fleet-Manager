@@ -11,6 +11,16 @@ public class PositionsEntity {
     private String time;
     private RidesEntity positionsByRideid;
 
+    public PositionsEntity(long idPositions, Long rideid, Double xCord, Double yCord, String time) {
+        this.idPositions = idPositions;
+        this.rideid = rideid;
+        this.xCord = xCord;
+        this.yCord = yCord;
+        this.time = time;
+    }
+
+    public PositionsEntity() {}
+
     public long getIdPositions() {
         return idPositions;
     }

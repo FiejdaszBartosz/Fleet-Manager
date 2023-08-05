@@ -31,12 +31,12 @@ public class RepairsEntity {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime date;
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name = "vehicle", referencedColumnName = "id_vehicles", insertable=false, updatable=false)
+    @JsonIgnore
     private VehiclesEntity vehiclesByVehicle;
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name = "problem", referencedColumnName = "id_problems", insertable=false, updatable=false)
+    @JsonIgnore
     private ProblemsEntity problemsByProblem;
 
     public long getIdRepairs() {

@@ -48,14 +48,19 @@ public class RidesEntity {
     private Integer stopFuel;
     @ManyToOne
     @JoinColumn(name = "vehicle", referencedColumnName = "id_vehicles", insertable=false, updatable=false)
+    @JsonIgnore
     private VehiclesEntity vehiclesByVehicle;
+
     @OneToMany(mappedBy = "ridesEmployeesByRideid")
+    @JsonIgnore
     private Collection<RidesEmployeesEntity> ridesEmployeesByRideid;
 
     @OneToMany(mappedBy = "problemsByRideid")
+    @JsonIgnore
     private Collection<ProblemsEntity> problemsByRideid;
 
     @OneToMany(mappedBy = "positionsByRideid")
+    @JsonIgnore
     private Collection<PositionsEntity> positionsByRideid;
 
     public long getIdRides() {
@@ -193,7 +198,7 @@ public class RidesEntity {
         return ridesEmployeesByRideid;
     }
 
-    public void setRidesEmployeesByRideId(Collection<RidesEmployeesEntity> ridesEmployeesByRideId) {
-        this.ridesEmployeesByRideid = ridesEmployeesByRideId;
+    public void setRidesEmployeesByRideId(Collection<RidesEmployeesEntity> ridesEmployeesByRideid) {
+        this.ridesEmployeesByRideid = ridesEmployeesByRideid;
     }
 }

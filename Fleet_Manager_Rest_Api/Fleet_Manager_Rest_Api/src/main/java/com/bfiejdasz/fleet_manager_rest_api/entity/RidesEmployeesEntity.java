@@ -17,12 +17,12 @@ public class RidesEmployeesEntity {
     @Column(name = "id_employee")
     private Long idEmployee;
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name = "id_employee", referencedColumnName = "id_employees", insertable=false, updatable=false)
+    @JsonIgnore
     private EmployeesEntity employeesByIdEmployee;
     @ManyToOne
+    @JoinColumn(name = "rideid", referencedColumnName = "id_rides", insertable=false, updatable=false)
     @JsonIgnore
-    @JoinColumn(name = "rideid", referencedColumnName = "rideid", insertable=false, updatable=false)
     private RidesEntity ridesEmployeesByRideid;
 
     public long getIdRidesEmployees() {

@@ -2,6 +2,7 @@ package com.bfiejdasz.fleet_manager_rest_api.entity;
 
 import com.bfiejdasz.fleet_manager_rest_api.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.*;
 
@@ -30,7 +31,8 @@ public class PositionsEntity {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS")
     private LocalDateTime time;
     @ManyToOne
-    @JoinColumn(name = "rideid", referencedColumnName = "rideid", insertable=false, updatable=false)
+    @JoinColumn(name = "rideid", referencedColumnName = "id_rides", insertable=false, updatable=false)
+    @JsonIgnore
     private RidesEntity positionsByRideid;
 
     public long getIdPositions() {

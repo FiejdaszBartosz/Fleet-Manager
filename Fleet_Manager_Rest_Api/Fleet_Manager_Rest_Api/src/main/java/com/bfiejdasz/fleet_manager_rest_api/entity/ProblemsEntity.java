@@ -28,14 +28,15 @@ public class ProblemsEntity {
     private Short isSolved;
     @ManyToOne
     @JsonProperty("problem_type")
-    @JsonIgnore
     @JoinColumn(name = "type", referencedColumnName = "id_problem_types", insertable=false, updatable=false)
+    @JsonIgnore
     private ProblemTypesEntity problemTypesByProblemType;
     @OneToMany(mappedBy = "problemsByProblem")
     @JsonIgnore
     private Collection<RepairsEntity> repairsByIdProblems;
     @ManyToOne
-    @JoinColumn(name = "rideid", referencedColumnName = "rideid", insertable=false, updatable=false)
+    @JoinColumn(name = "rideid", referencedColumnName = "id_rides", insertable=false, updatable=false)
+    @JsonIgnore
     private RidesEntity problemsByRideid;
 
     public long getIdProblems() {

@@ -107,7 +107,7 @@ public class ManagerMainPanel extends AppCompatActivity implements IUser {
     }
 
     private void openRideList() {
-        Intent intent = new Intent(this, VehicleStatusPanel.class);
+        Intent intent = new Intent(this, RideInfoPanel.class);
         startActivity(intent);
     }
 
