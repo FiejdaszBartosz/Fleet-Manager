@@ -12,10 +12,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 
 public class RepairsController {
-    private final IApiRepairs apiRepairs;
+    private IApiRepairs apiRepairs;
 
     public RepairsController() {
         apiRepairs = ApiClient.getClient().create(IApiRepairs.class);
+    }
+
+    public void setApiRepairs(IApiRepairs apiRepairs) {
+        this.apiRepairs = apiRepairs;
     }
 
     public void getRepairs(Callback<List<RepairsEntity>> callback) {

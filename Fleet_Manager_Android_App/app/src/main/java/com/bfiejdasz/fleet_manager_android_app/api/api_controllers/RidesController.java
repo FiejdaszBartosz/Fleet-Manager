@@ -10,7 +10,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 
 public class RidesController {
-    private final IApiRides apiRides;
+    private IApiRides apiRides;
+
+    public void setApiRides(IApiRides apiRides) {
+        this.apiRides = apiRides;
+    }
 
     public RidesController() {
         apiRides = ApiClient.getClient().create(IApiRides.class);

@@ -12,7 +12,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 
 public class RidesEmployeesController {
-    private final IApiRidesEmployees apiRidesEmployees;
+    private IApiRidesEmployees apiRidesEmployees;
+
+    public void setApiRidesEmployees(IApiRidesEmployees apiRidesEmployees) {
+        this.apiRidesEmployees = apiRidesEmployees;
+    }
 
     public RidesEmployeesController() {
         apiRidesEmployees = ApiClient.getClient().create(IApiRidesEmployees.class);

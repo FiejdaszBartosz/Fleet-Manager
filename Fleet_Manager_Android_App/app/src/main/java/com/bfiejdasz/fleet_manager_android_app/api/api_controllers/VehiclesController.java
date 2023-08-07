@@ -10,7 +10,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 
 public class VehiclesController {
-    private final IApiVehicles apiVehicles;
+    private IApiVehicles apiVehicles;
+
+    public void setApiVehicles(IApiVehicles apiVehicles) {
+        this.apiVehicles = apiVehicles;
+    }
 
     public VehiclesController() {
         apiVehicles = ApiClient.getClient().create(IApiVehicles.class);

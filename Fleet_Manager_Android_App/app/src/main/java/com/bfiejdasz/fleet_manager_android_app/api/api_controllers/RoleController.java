@@ -8,7 +8,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 
 public class RoleController {
-    private final IApiRole apiRole;
+    private IApiRole apiRole;
+
+    public void setApiRole(IApiRole apiRole) {
+        this.apiRole = apiRole;
+    }
 
     public RoleController() {
         apiRole = ApiClient.getClient().create(IApiRole.class);

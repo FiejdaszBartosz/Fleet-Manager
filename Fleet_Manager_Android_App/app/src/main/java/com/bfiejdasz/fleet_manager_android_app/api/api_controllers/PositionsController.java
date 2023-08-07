@@ -10,10 +10,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 
 public class PositionsController {
-    private final IApiPositions apiPositions;
+    private IApiPositions apiPositions;
 
     public PositionsController() {
         apiPositions = ApiClient.getClient().create(IApiPositions.class);
+    }
+
+    public void setApiPositions(IApiPositions apiPositions) {
+        this.apiPositions = apiPositions;
     }
 
     public void getPositions(Callback<List<PositionsEntity>> callback) {

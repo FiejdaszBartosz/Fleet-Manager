@@ -10,10 +10,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 
 public class EmployeesController {
-    private final IApiEmployees apiEmployees;
+    private IApiEmployees apiEmployees;
 
     public EmployeesController() {
         apiEmployees = ApiClient.getClient().create(IApiEmployees.class);
+    }
+
+    public void setApiEmployees(IApiEmployees apiEmployees) {
+        this.apiEmployees = apiEmployees;
     }
 
     public void getUsers(Callback<List<EmployeesEntity>> callback) {

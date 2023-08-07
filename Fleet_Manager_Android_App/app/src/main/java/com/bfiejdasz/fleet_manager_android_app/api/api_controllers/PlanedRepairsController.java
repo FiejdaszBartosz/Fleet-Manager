@@ -10,10 +10,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 
 public class PlanedRepairsController {
-    private final IApiPlanedRepairs apiPlanedRepairs;
+    private IApiPlanedRepairs apiPlanedRepairs;
 
     public PlanedRepairsController() {
         apiPlanedRepairs = ApiClient.getClient().create(IApiPlanedRepairs.class);
+    }
+
+    public void setApiPlanedRepairs(IApiPlanedRepairs apiPlanedRepairs) {
+        this.apiPlanedRepairs = apiPlanedRepairs;
     }
 
     public void getPlanedRepairs(Callback<List<PlanedRepairsEntity>> callback) {

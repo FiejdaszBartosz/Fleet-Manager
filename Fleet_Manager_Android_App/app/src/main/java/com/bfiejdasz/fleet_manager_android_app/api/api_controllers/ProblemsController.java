@@ -11,10 +11,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 
 public class ProblemsController {
-    private final IApiProblems apiProblems;
+    private IApiProblems apiProblems;
 
     public ProblemsController() {
         apiProblems = ApiClient.getClient().create(IApiProblems.class);
+    }
+
+    public void setApiProblems(IApiProblems apiProblems) {
+        this.apiProblems = apiProblems;
     }
 
     public void getProblems(Callback<List<ProblemsEntity>> callback) {
