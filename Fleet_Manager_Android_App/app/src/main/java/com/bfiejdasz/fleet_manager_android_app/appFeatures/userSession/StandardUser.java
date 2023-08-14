@@ -15,8 +15,8 @@ import com.bfiejdasz.fleet_manager_android_app.api.api_controllers.RidesEmployee
 import com.bfiejdasz.fleet_manager_android_app.api.entity.EmployeesEntity;
 import com.bfiejdasz.fleet_manager_android_app.api.entity.RidesEmployeesEntity;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.ApplicationContextSingleton;
-import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.dirver.DriverFactory;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.RideFactorySingleton;
+import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.dirver.DriverFactory;
 import com.bfiejdasz.fleet_manager_android_app.exceptions.ErrorHandler;
 
 import java.util.ArrayList;
@@ -39,8 +39,8 @@ public class StandardUser extends AppCompatActivity implements IUser {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.standar_user_main_panel);
 
-        userNameTextView = findViewById(R.id.userNameTextView);
-        startButton = findViewById(R.id.startButton);
+        userNameTextView = findViewById(R.id.additionalText);
+        startButton = findViewById(R.id.nextButton);
 
         this.employee = UserSession.getInstance().getEmployee();
         this.ridesEmployeesController = new RidesEmployeesController();

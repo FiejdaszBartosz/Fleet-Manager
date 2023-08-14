@@ -1,7 +1,6 @@
 package com.bfiejdasz.fleet_manager_android_app.api.entity;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class PositionsEntity {
     private long idPositions;
@@ -69,12 +68,10 @@ public class PositionsEntity {
         PositionsEntity that = (PositionsEntity) o;
 
         if (idPositions != that.idPositions) return false;
-        if (rideid != null ? !rideid.equals(that.rideid) : that.rideid != null) return false;
-        if (xCord != null ? !xCord.equals(that.xCord) : that.xCord != null) return false;
-        if (yCord != null ? !yCord.equals(that.yCord) : that.yCord != null) return false;
-        if (time != null ? !time.equals(that.time) : that.time != null) return false;
-
-        return true;
+        if (!Objects.equals(rideid, that.rideid)) return false;
+        if (!Objects.equals(xCord, that.xCord)) return false;
+        if (!Objects.equals(yCord, that.yCord)) return false;
+        return Objects.equals(time, that.time);
     }
 
     @Override

@@ -2,11 +2,10 @@ package com.bfiejdasz.fleet_manager_android_app.api.entity;
 
 import com.bfiejdasz.fleet_manager_android_app.api.ITableItem;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 public class RidesEntity implements ITableItem {
     private long idRides;
@@ -122,16 +121,14 @@ public class RidesEntity implements ITableItem {
         RidesEntity that = (RidesEntity) o;
 
         if (idRides != that.idRides) return false;
-        if (rideId != null ? !rideId.equals(that.rideId) : that.rideId != null) return false;
-        if (vehicle != null ? !vehicle.equals(that.vehicle) : that.vehicle != null) return false;
-        if (startTime != null ? !startTime.equals(that.startTime) : that.startTime != null) return false;
-        if (stopTime != null ? !stopTime.equals(that.stopTime) : that.stopTime != null) return false;
-        if (startKm != null ? !startKm.equals(that.startKm) : that.startKm != null) return false;
-        if (stopKm != null ? !stopKm.equals(that.stopKm) : that.stopKm != null) return false;
-        if (startFuel != null ? !startFuel.equals(that.startFuel) : that.startFuel != null) return false;
-        if (stopFuel != null ? !stopFuel.equals(that.stopFuel) : that.stopFuel != null) return false;
-
-        return true;
+        if (!Objects.equals(rideId, that.rideId)) return false;
+        if (!Objects.equals(vehicle, that.vehicle)) return false;
+        if (!Objects.equals(startTime, that.startTime)) return false;
+        if (!Objects.equals(stopTime, that.stopTime)) return false;
+        if (!Objects.equals(startKm, that.startKm)) return false;
+        if (!Objects.equals(stopKm, that.stopKm)) return false;
+        if (!Objects.equals(startFuel, that.startFuel)) return false;
+        return Objects.equals(stopFuel, that.stopFuel);
     }
 
     @Override

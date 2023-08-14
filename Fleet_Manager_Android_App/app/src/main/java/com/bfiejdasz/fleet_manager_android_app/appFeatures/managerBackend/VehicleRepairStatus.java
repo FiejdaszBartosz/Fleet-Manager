@@ -3,7 +3,6 @@ package com.bfiejdasz.fleet_manager_android_app.appFeatures.managerBackend;
 import android.graphics.Color;
 
 import com.bfiejdasz.fleet_manager_android_app.api.ITableItem;
-import com.bfiejdasz.fleet_manager_android_app.api.api_controllers.PlanedRepairsController;
 import com.bfiejdasz.fleet_manager_android_app.api.entity.PlanedRepairsEntity;
 import com.bfiejdasz.fleet_manager_android_app.api.entity.VehiclesEntity;
 
@@ -12,10 +11,6 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class VehicleRepairStatus implements ITableItem {
     private VehiclesEntity vehicle;
@@ -122,11 +117,11 @@ public class VehicleRepairStatus implements ITableItem {
     public int getStatusColor() {
         switch (color) {
             case "Red":
-                return Color.RED;
+                return Color.rgb(232,112,112);
             case "Yellow":
-                return Color.YELLOW;
+                return Color.rgb(246,216,138);
             default:
-                return Color.GREEN;
+                return Color.rgb(160,229,154);
         }
     }
 }

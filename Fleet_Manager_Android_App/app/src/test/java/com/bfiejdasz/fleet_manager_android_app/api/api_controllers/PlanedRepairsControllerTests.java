@@ -1,5 +1,10 @@
 package com.bfiejdasz.fleet_manager_android_app.api.api_controllers;
 
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import com.bfiejdasz.fleet_manager_android_app.api.api_interfaces.IApiPlanedRepairs;
 import com.bfiejdasz.fleet_manager_android_app.api.entity.PlanedRepairsEntity;
 
@@ -8,15 +13,14 @@ import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.Mockito.*;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 class PlanedRepairsControllerTests {
 

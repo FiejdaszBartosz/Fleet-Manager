@@ -1,5 +1,7 @@
 package com.bfiejdasz.fleet_manager_android_app.api.entity;
 
+import java.util.Objects;
+
 public class ProblemTypesEntity {
     private long idProblemTypes;
     private String name;
@@ -28,9 +30,7 @@ public class ProblemTypesEntity {
         ProblemTypesEntity that = (ProblemTypesEntity) o;
 
         if (idProblemTypes != that.idProblemTypes) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-
-        return true;
+        return Objects.equals(name, that.name);
     }
 
     @Override

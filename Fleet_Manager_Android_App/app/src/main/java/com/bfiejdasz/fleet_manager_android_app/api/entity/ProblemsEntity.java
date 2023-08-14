@@ -1,6 +1,7 @@
 package com.bfiejdasz.fleet_manager_android_app.api.entity;
 
 import java.util.Collection;
+import java.util.Objects;
 
 public class ProblemsEntity {
     private long idProblems;
@@ -61,12 +62,10 @@ public class ProblemsEntity {
         ProblemsEntity that = (ProblemsEntity) o;
 
         if (idProblems != that.idProblems) return false;
-        if (rideId != null ? !rideId.equals(that.rideId) : that.rideId != null) return false;
-        if (type != null ? !type.equals(that.type) : that.type != null) return false;
-        if (description != null ? !description.equals(that.description) : that.description != null) return false;
-        if (isSolved != null ? !isSolved.equals(that.isSolved) : that.isSolved != null) return false;
-
-        return true;
+        if (!Objects.equals(rideId, that.rideId)) return false;
+        if (!Objects.equals(type, that.type)) return false;
+        if (!Objects.equals(description, that.description)) return false;
+        return Objects.equals(isSolved, that.isSolved);
     }
 
     @Override

@@ -22,7 +22,7 @@ import com.bfiejdasz.fleet_manager_android_app.appFeatures.userSession.LoginPane
 public class PermissionsActivity extends AppCompatActivity {
     private static final int REQUEST_PERMISSIONS_CODE = 1;
 
-    private String[] requiredPermissions = {
+    private final String[] requiredPermissions = {
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.INTERNET,

@@ -24,7 +24,11 @@ import retrofit2.Response;
 
 public class RepairStatusPanel extends AppCompatActivity {
     private Spinner repairSpinner;
-    private TextView repairDetailsTextView;
+    private TextView idRepairEditText;
+    private TextView idVehicleEditText;
+    private TextView idProblemEditText;
+    private TextView statusEditText;
+    private TextView dateEditText;
     private Button completeRepairButton;
     private RepairsController repairsController;
     private List<RepairsEntity> repairsList;
@@ -35,7 +39,11 @@ public class RepairStatusPanel extends AppCompatActivity {
         setContentView(R.layout.activity_repair_status_panel);
 
         repairSpinner = findViewById(R.id.repairSpinner);
-        repairDetailsTextView = findViewById(R.id.repairDetailsTextView);
+        idRepairEditText = findViewById(R.id.idRepairEditText);
+        idVehicleEditText = findViewById(R.id.idVehicleEditText);
+        idProblemEditText = findViewById(R.id.idProblemEditText);
+        statusEditText = findViewById(R.id.statusEditText);
+        dateEditText = findViewById(R.id.dateEditText);
         completeRepairButton = findViewById(R.id.completeRepairButton);
         repairsController = new RepairsController();
 
@@ -90,14 +98,11 @@ public class RepairStatusPanel extends AppCompatActivity {
     }
 
     private void displayRepairDetails(RepairsEntity repair) {
-        String details = "ID: " + repair.getIdRepairs() + "\n"
-                + "Vehicle: " + repair.getVehicle() + "\n"
-                + "Problem: " + repair.getProblem() + "\n"
-                + "Description: " + repair.getDescription() + "\n"
-                + "Complete: " + repair.getComplete() + "\n"
-                + "Date: " + repair.getDate();
-
-        repairDetailsTextView.setText(details);
+        idRepairEditText.setText(String.valueOf(repair.getIdRepairs()));
+        idVehicleEditText.setText(String.valueOf(repair.getVehicle()));
+        idProblemEditText.setText(String.valueOf(repair.getProblem()));
+        statusEditText.setText(String.valueOf(repair.getComplete()));
+        dateEditText.setText(String.valueOf(repair.getDate()));
     }
 
     private void setupCompleteRepairButton() {

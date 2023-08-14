@@ -20,12 +20,12 @@ import retrofit2.Response;
 
 public class LocationTimer {
     private Timer timer;
-    private long interval;
-    private RidesEntity ridesEntity;
-    private LocationProviderProxy locationProvider;
+    private final long interval;
+    private final RidesEntity ridesEntity;
+    private final LocationProviderProxy locationProvider;
     private final long rideID;
 
-    private PositionsController positionsController;
+    private final PositionsController positionsController;
 
     public LocationTimer(RidesEntity ridesEntity, LocationProviderProxy locationProvider, long interval) {
         this.ridesEntity = ridesEntity;

@@ -1,8 +1,6 @@
 package com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.dirver;
 
 
-import android.util.Log;
-
 import com.bfiejdasz.fleet_manager_android_app.api.entity.RidesEntity;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.AddVehicleParameter;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.errors.ParameterNotSetError;

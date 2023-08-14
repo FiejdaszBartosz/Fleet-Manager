@@ -1,12 +1,7 @@
 package com.bfiejdasz.fleet_manager_android_app.appFeatures.managerSession;
 
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,7 +9,6 @@ import com.bfiejdasz.fleet_manager_android_app.R;
 import com.bfiejdasz.fleet_manager_android_app.api.api_controllers.VehiclesController;
 import com.bfiejdasz.fleet_manager_android_app.api.entity.VehiclesEntity;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.managerBackend.ColoredTableView;
-import com.bfiejdasz.fleet_manager_android_app.appFeatures.managerBackend.TableView;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.managerBackend.VehicleRepairStatus;
 
 import java.util.List;

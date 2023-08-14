@@ -1,7 +1,5 @@
 package com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory;
 
-import android.content.Context;
-
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.errors.ContextNotSetException;
 
 public interface IRideFactory {

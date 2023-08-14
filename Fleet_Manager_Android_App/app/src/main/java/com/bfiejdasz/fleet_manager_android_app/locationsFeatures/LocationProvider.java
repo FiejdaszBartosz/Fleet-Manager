@@ -14,8 +14,8 @@ import org.osmdroid.config.Configuration;
 
 
 public class LocationProvider implements LocationListener {
-    private Context context;
-    private LocationManager locationManager;
+    private final Context context;
+    private final LocationManager locationManager;
     private Location currentLocation;
 
     private static final String[] PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};

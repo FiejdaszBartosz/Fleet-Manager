@@ -3,8 +3,6 @@ package com.bfiejdasz.fleet_manager_android_app.appFeatures.managerBackend;
 import com.bfiejdasz.fleet_manager_android_app.api.api_controllers.PositionsController;
 import com.bfiejdasz.fleet_manager_android_app.api.entity.PositionsEntity;
 
-import org.osmdroid.util.GeoPoint;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,9 +11,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LocationPoints {
-    private int id;
-    private PositionsController positionsController;
-    private List<PositionsEntity> positionsEntityList;
+    private final int id;
+    private final PositionsController positionsController;
+    private final List<PositionsEntity> positionsEntityList;
 
     public LocationPoints(int id) {
         this.id = id;

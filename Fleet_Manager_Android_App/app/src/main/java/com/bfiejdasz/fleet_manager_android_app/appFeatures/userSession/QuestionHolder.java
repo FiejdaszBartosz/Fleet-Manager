@@ -7,7 +7,7 @@ import java.util.List;
 
 public class QuestionHolder {
     private static QuestionHolder instance;
-    private List<Pair<String, Integer>> questions;
+    private final List<Pair<String, Integer>> questions;
     private int currentIndex;
 
     private QuestionHolder() {

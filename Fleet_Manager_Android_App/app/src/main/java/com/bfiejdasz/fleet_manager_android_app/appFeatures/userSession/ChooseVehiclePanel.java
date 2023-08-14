@@ -10,14 +10,13 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.bfiejdasz.fleet_manager_android_app.MainActivity;
 import com.bfiejdasz.fleet_manager_android_app.R;
 import com.bfiejdasz.fleet_manager_android_app.api.entity.VehiclesEntity;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.ApplicationContextSingleton;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.ChooseVehicle;
-import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.errors.ContextNotSetException;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.IRideFactory;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.RideFactorySingleton;
+import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.errors.ContextNotSetException;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -46,7 +45,7 @@ public class ChooseVehiclePanel extends AppCompatActivity {
         }
 
         editTextLicensePlate = findViewById(R.id.editTextLicensePlate);
-        buttonSubmit = findViewById(R.id.buttonSubmit);
+        buttonSubmit = findViewById(R.id.nextButton);
 
 
         buttonSubmit.setOnClickListener(new View.OnClickListener() {

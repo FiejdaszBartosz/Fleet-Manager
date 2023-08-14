@@ -8,8 +8,8 @@ import com.bfiejdasz.fleet_manager_android_app.appFeatures.userSession.timers.Lo
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.userSession.timers.TimeTimer;
 
 public abstract class RideLoop {
-    private RideSession rideSession;
-    private ApplicationContextSingleton appContext;
+    private final RideSession rideSession;
+    private final ApplicationContextSingleton appContext;
     protected TimeTimer timeTimer;
     protected LocationTimer locationTimer;
 
@@ -28,5 +28,5 @@ public abstract class RideLoop {
 
     public abstract void startLoop();
     public abstract void endLoop();
-    public TimeTimer getTimeTimer() {return timeTimer;};
+    public TimeTimer getTimeTimer() {return timeTimer;}
 }

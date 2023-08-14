@@ -1,7 +1,12 @@
 package com.bfiejdasz.fleet_manager_android_app.api.api_controllers;
 
-import com.bfiejdasz.fleet_manager_android_app.api.entity.EmployeesEntity;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import com.bfiejdasz.fleet_manager_android_app.api.api_interfaces.IApiEmployees;
+import com.bfiejdasz.fleet_manager_android_app.api.entity.EmployeesEntity;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,13 +14,12 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 import java.io.IOException;
 
-import static org.mockito.Mockito.*;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 class EmployeesControllerTests {
 

@@ -1,69 +1,76 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp">
 
+    <!-- Logo -->
+    <ImageView
+        android:id="@+id/logoImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/moloft"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Witaj -->
     <TextView
         android:id="@+id/welcomeTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:fontFamily="@font/clash_display_semi_bold"
+        android:textColor="@color/text"
         android:text="Witaj:"
         android:textSize="20sp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="MissingConstraints" />
+        android:layout_marginTop="61dp"/>
 
+    <!-- UserName -->
     <TextView
         android:id="@+id/userNameTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
+        android:textAlignment="center"
+        android:textAppearance="@style/ClashDisplayFontSemiBoldStyle"
+        android:textColor="@color/text"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@id/welcomeTextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="MissingConstraints" />
+        android:textSize="20sp" />
 
+    <!-- Przycisk "Lista przejazdów" -->
     <Button
         android:id="@+id/rideListButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:text="Lista przejazdów"
-        app:layout_constraintTop_toBottomOf="@id/userNameTextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="MissingConstraints" />
+        style="@drawable/main_button" />
 
+    <!-- Przycisk "Podgląd przejazdu" -->
     <Button
         android:id="@+id/ridePreviewButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:text="Podgląd przejazdu"
-        app:layout_constraintTop_toBottomOf="@id/rideListButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="MissingConstraints" />
+        style="@drawable/main_button" />
 
+    <!-- Przycisk "Panel napraw" -->
     <Button
         android:id="@+id/repairsPanelButtonToPanel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:text="Panel napraw"
-        app:layout_constraintTop_toBottomOf="@id/ridePreviewButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="MissingConstraints" />
+        style="@drawable/main_button" />
 
+    <!-- Przycisk "Pojazdy" -->
     <Button
         android:id="@+id/vehiclesPreviewButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:text="Pojazdy"
-        app:layout_constraintTop_toBottomOf="@id/repairsPanelButtonToPanel"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="MissingConstraints" />
+        style="@drawable/main_button"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

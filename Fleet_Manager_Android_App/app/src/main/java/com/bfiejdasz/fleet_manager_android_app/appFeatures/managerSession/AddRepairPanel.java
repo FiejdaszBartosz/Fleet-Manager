@@ -15,7 +15,6 @@ import com.bfiejdasz.fleet_manager_android_app.api.entity.RepairsEntity;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.ApplicationContextSingleton;
 import com.bfiejdasz.fleet_manager_android_app.exceptions.ErrorHandler;
 
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

@@ -12,10 +12,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bfiejdasz.fleet_manager_android_app.R;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.ApplicationContextSingleton;
-import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.errors.ContextNotSetException;
-import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.IRideFactory;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.RideFactorySingleton;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.RideLoop;
+import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.errors.ContextNotSetException;
 
 public class RidePanel extends AppCompatActivity {
     private TextView userNameTextView;

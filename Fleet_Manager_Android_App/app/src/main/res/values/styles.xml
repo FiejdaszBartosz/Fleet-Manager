@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Custom style for MaterialButton to set the background color. -->
+    <style name="FleetManager.PrimaryButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:backgroundTint">@color/primary_button_background</item>
+        <item name="android:textColor">@color/primary_button_font</item>
+        <item name="android:fontFamily">@font/clash_display_medium</item>
+    </style>
+
+
+    <style name="ClashDisplayFontMediumStyle">
+        <item name="android:fontFamily">@font/clash_display_medium</item>
+        <item name="android:fontWeight">500</item>
+        <item name="android:color">@color/text</item>
+    </style>
+
+    <style name="ClashDisplayFontSemiBoldStyle">
+        <item name="android:fontFamily">@font/clash_display_semi_bold</item>
+        <item name="android:fontWeight">600</item>
+        <item name="android:color">@color/text</item>
+    </style>
+
+</resources>

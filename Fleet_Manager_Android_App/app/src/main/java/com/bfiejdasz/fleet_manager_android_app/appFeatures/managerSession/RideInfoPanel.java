@@ -20,6 +20,7 @@ import retrofit2.Response;
 public class RideInfoPanel extends AppCompatActivity {
     private TableLayout tableLayout;
     private RidesController ridesController;
+    private final boolean isWhiteBackground = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

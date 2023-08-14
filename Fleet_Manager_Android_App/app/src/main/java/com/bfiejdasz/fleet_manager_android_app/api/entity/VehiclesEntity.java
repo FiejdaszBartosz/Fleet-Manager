@@ -6,8 +6,8 @@ import com.bfiejdasz.fleet_manager_android_app.api.api_controllers.PlanedRepairs
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CountDownLatch;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -120,19 +120,17 @@ public class VehiclesEntity implements ITableItem {
         VehiclesEntity that = (VehiclesEntity) o;
 
         if (idVehicles != that.idVehicles) return false;
-        if (manufacture != null ? !manufacture.equals(that.manufacture) : that.manufacture != null)
+        if (!Objects.equals(manufacture, that.manufacture))
             return false;
-        if (model != null ? !model.equals(that.model) : that.model != null) return false;
-        if (year != null ? !year.equals(that.year) : that.year != null) return false;
-        if (vin != null ? !vin.equals(that.vin) : that.vin != null) return false;
-        if (licensePlate != null ? !licensePlate.equals(that.licensePlate) : that.licensePlate != null)
+        if (!Objects.equals(model, that.model)) return false;
+        if (!Objects.equals(year, that.year)) return false;
+        if (!Objects.equals(vin, that.vin)) return false;
+        if (!Objects.equals(licensePlate, that.licensePlate))
             return false;
-        if (mileage != null ? !mileage.equals(that.mileage) : that.mileage != null) return false;
-        if (insurance != null ? !insurance.equals(that.insurance) : that.insurance != null)
+        if (!Objects.equals(mileage, that.mileage)) return false;
+        if (!Objects.equals(insurance, that.insurance))
             return false;
-        if (inUse != null ? !inUse.equals(that.inUse) : that.inUse != null) return false;
-
-        return true;
+        return Objects.equals(inUse, that.inUse);
     }
 
     @Override

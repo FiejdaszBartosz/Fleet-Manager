@@ -7,7 +7,6 @@ import com.bfiejdasz.fleet_manager_android_app.api.entity.RidesEntity;
 import com.bfiejdasz.fleet_manager_android_app.api.entity.VehiclesEntity;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.EndRide;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.errors.ParameterNotSetError;
-import com.bfiejdasz.fleet_manager_android_app.exceptions.ErrorHandler;
 
 import java.time.LocalDateTime;
 import java.util.concurrent.CompletableFuture;
@@ -17,7 +16,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class EndRideDriver extends EndRide {
-    private VehiclesController vehiclesController;
+    private final VehiclesController vehiclesController;
 
     public EndRideDriver() {
         super();

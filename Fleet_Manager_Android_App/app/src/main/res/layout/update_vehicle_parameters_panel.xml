@@ -1,20 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp">
+
+    <!-- Logo -->
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/moloft"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="30dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Wpisz kilometraż:"
+        android:text="Wpisz stan licznika:"
+        android:textAppearance="@style/ClashDisplayFontMediumStyle"
         android:textSize="18sp"
         android:id="@+id/textViewKilometers"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintVertical_bias="0.3"/>
+        android:layout_marginTop="30dp"/>
 
     <EditText
         android:id="@+id/editTextKilometers"
@@ -22,43 +32,58 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewKilometers" />
+        android:layout_gravity="center"
+        android:textAppearance="@style/ClashDisplayFontMediumStyle"
+        android:layout_marginTop="10dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:id="@+id/textViewFuelLevel"
-        app:layout_constraintTop_toBottomOf="@id/editTextKilometers"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintVertical_bias="0.1"/>
+        android:textAppearance="@style/ClashDisplayFontMediumStyle"
+        android:text="Wpisz stan paliwa:"
+        android:layout_marginTop="10dp"/>
 
     <EditText
         android:id="@+id/editTextFuelLevel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
+        android:textAppearance="@style/ClashDisplayFontMediumStyle"
         android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewFuelLevel" />
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"/>
 
-    <Button
-        android:id="@+id/buttonNext"
-        android:layout_width="wrap_content"
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/editTextFuelLevel"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        android:text="Dalej"
-        android:layout_marginTop="16dp"/>
+        android:orientation="horizontal"
+        android:layout_gravity="bottom">
 
+        <!-- Przycisk previous -->
+        <ImageButton
+            android:id="@+id/previousButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:src="@drawable/arrow_left_button" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Przycisk next -->
+        <ImageButton
+            android:id="@+id/nextButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:src="@drawable/arrow_right_button" />
+
+    </LinearLayout>
+
+</LinearLayout>

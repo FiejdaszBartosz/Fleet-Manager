@@ -2,6 +2,8 @@ package com.bfiejdasz.fleet_manager_android_app.api.entity;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Objects;
+
 public class EmployeesEntity {
     @SerializedName("idEmployees")
     private long idEmployees;
@@ -72,13 +74,11 @@ public class EmployeesEntity {
         EmployeesEntity that = (EmployeesEntity) o;
 
         if (idEmployees != that.idEmployees) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (surname != null ? !surname.equals(that.surname) : that.surname != null) return false;
-        if (login != null ? !login.equals(that.login) : that.login != null) return false;
-        if (password != null ? !password.equals(that.password) : that.password != null) return false;
-        if (role != null ? !role.equals(that.role) : that.role != null) return false;
-
-        return true;
+        if (!Objects.equals(name, that.name)) return false;
+        if (!Objects.equals(surname, that.surname)) return false;
+        if (!Objects.equals(login, that.login)) return false;
+        if (!Objects.equals(password, that.password)) return false;
+        return Objects.equals(role, that.role);
     }
 
     @Override

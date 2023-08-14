@@ -1,59 +1,71 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp">
 
+    <!-- Logo -->
+    <ImageView
+        android:id="@+id/logoImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/moloft"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp" />
+
+    <!-- Panel napraw -->
     <TextView
         android:id="@+id/welcomeTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Witaj:"
+        android:text="Panel napraw"
+        android:textAppearance="@style/ClashDisplayFontSemiBoldStyle"
+        android:textAlignment="center"
         android:textSize="20sp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="MissingConstraints" />
+        android:layout_marginTop="61dp" />
 
-    <TextView
-        android:id="@+id/userNameTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@id/welcomeTextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="MissingConstraints" />
+    <!-- Nowy LinearLayout dla przycisków -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:orientation="vertical"
+        android:layout_marginTop="16dp">
 
-    <Button
-        android:id="@+id/addRepairButtonToPanel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Dodaj naprawe"
-        app:layout_constraintTop_toBottomOf="@id/userNameTextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="MissingConstraints" />
+        <!-- Przycisk "Dodaj naprawę" -->
+        <Button
+            android:id="@+id/addRepairButtonToPanel"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Dodaj naprawe"
+            style="@drawable/main_button" />
 
-    <Button
-        android:id="@+id/repairStatusButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Zmien stastus naprawy"
-        app:layout_constraintTop_toBottomOf="@id/addRepairButtonToPanel"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="MissingConstraints" />
+        <!-- Przycisk "Zmień status naprawy" -->
+        <Button
+            android:id="@+id/repairStatusButton"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Zmien stastus naprawy"
+            style="@drawable/main_button" />
 
-    <Button
-        android:id="@+id/vehicleStatusButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Status pojazdów"
-        app:layout_constraintTop_toBottomOf="@id/repairStatusButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="MissingConstraints" />
+        <!-- Przycisk "Status pojazdów" -->
+        <Button
+            android:id="@+id/vehicleStatusButton"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Status pojazdów"
+            style="@drawable/main_button" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+</LinearLayout>

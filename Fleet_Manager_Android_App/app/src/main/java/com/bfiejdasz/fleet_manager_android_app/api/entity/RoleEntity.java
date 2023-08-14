@@ -1,6 +1,7 @@
 package com.bfiejdasz.fleet_manager_android_app.api.entity;
 
 import java.util.Collection;
+import java.util.Objects;
 
 public class RoleEntity {
     private long idRoles;
@@ -31,9 +32,7 @@ public class RoleEntity {
         RoleEntity that = (RoleEntity) o;
 
         if (idRoles != that.idRoles) return false;
-        if (roleName != null ? !roleName.equals(that.roleName) : that.roleName != null) return false;
-
-        return true;
+        return Objects.equals(roleName, that.roleName);
     }
 
     @Override

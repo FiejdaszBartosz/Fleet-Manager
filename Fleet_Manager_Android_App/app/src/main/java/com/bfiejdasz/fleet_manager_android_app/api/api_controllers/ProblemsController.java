@@ -4,7 +4,6 @@ import com.bfiejdasz.fleet_manager_android_app.api.ApiClient;
 import com.bfiejdasz.fleet_manager_android_app.api.api_interfaces.IApiProblems;
 import com.bfiejdasz.fleet_manager_android_app.api.entity.ProblemsEntity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;

@@ -1,6 +1,7 @@
 package com.bfiejdasz.fleet_manager_android_app.api.entity;
 
 import java.sql.Date;
+import java.util.Objects;
 
 public class PlanedRepairsEntity {
     private long idPlanedRepairs;
@@ -67,13 +68,11 @@ public class PlanedRepairsEntity {
         PlanedRepairsEntity that = (PlanedRepairsEntity) o;
 
         if (idPlanedRepairs != that.idPlanedRepairs) return false;
-        if (vehicle != null ? !vehicle.equals(that.vehicle) : that.vehicle != null) return false;
-        if (date != null ? !date.equals(that.date) : that.date != null) return false;
-        if (description != null ? !description.equals(that.description) : that.description != null) return false;
-        if (km != null ? !km.equals(that.km) : that.km != null) return false;
-        if (time != null ? !time.equals(that.time) : that.time != null) return false;
-
-        return true;
+        if (!Objects.equals(vehicle, that.vehicle)) return false;
+        if (!Objects.equals(date, that.date)) return false;
+        if (!Objects.equals(description, that.description)) return false;
+        if (!Objects.equals(km, that.km)) return false;
+        return Objects.equals(time, that.time);
     }
 
     @Override

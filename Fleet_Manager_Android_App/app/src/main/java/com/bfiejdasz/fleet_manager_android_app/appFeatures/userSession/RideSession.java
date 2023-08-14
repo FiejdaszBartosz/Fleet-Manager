@@ -3,12 +3,10 @@ package com.bfiejdasz.fleet_manager_android_app.appFeatures.userSession;
 import android.util.Log;
 
 import com.bfiejdasz.fleet_manager_android_app.api.api_controllers.RidesController;
-import com.bfiejdasz.fleet_manager_android_app.api.api_controllers.RidesEmployeesController;
 import com.bfiejdasz.fleet_manager_android_app.api.entity.RidesEntity;
 import com.bfiejdasz.fleet_manager_android_app.exceptions.ErrorHandler;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 import retrofit2.Call;
@@ -18,7 +16,7 @@ import retrofit2.Response;
 public class RideSession {
     private static RideSession instance = null;
     private RidesEntity ride;
-    private RidesController ridesController;
+    private final RidesController ridesController;
 
 
     private RideSession() {

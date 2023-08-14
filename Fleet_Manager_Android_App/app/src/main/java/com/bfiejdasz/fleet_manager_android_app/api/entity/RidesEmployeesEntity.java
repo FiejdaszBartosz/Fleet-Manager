@@ -1,5 +1,7 @@
 package com.bfiejdasz.fleet_manager_android_app.api.entity;
 
+import java.util.Objects;
+
 public class RidesEmployeesEntity {
     private long idRidesEmployees;
     private Long rideId;
@@ -38,10 +40,8 @@ public class RidesEmployeesEntity {
         RidesEmployeesEntity that = (RidesEmployeesEntity) o;
 
         if (idRidesEmployees != that.idRidesEmployees) return false;
-        if (rideId != null ? !rideId.equals(that.rideId) : that.rideId != null) return false;
-        if (idEmployee != null ? !idEmployee.equals(that.idEmployee) : that.idEmployee != null) return false;
-
-        return true;
+        if (!Objects.equals(rideId, that.rideId)) return false;
+        return Objects.equals(idEmployee, that.idEmployee);
     }
 
     @Override

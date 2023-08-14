@@ -12,8 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bfiejdasz.fleet_manager_android_app.R;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.ApplicationContextSingleton;
-import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.RideFactorySingleton;
-import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.dirver.AddVehicleParameterDriver;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.dirver.EndRideDriver;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.errors.ParameterNotSetError;
 
@@ -41,7 +39,7 @@ public class EndRidePanel extends AppCompatActivity {
         editTextKilometers = findViewById(R.id.editTextKilometers);
         textViewFuelLevel = findViewById(R.id.textViewFuelLevel);
         editTextFuelLevel = findViewById(R.id.editTextFuelLevel);
-        buttonNext = findViewById(R.id.buttonNext);
+        buttonNext = findViewById(R.id.nextButton);
 
         textViewKilometers.setText("Wpisz stan licznika:");
         textViewFuelLevel.setText("Wpisz koncowy stan paliwa:");

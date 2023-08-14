@@ -1,6 +1,6 @@
 package com.bfiejdasz.fleet_manager_android_app.api.entity;
 
-import java.sql.Timestamp;
+import java.util.Objects;
 
 public class RepairsEntity {
     private long idRepairs;
@@ -68,13 +68,11 @@ public class RepairsEntity {
         RepairsEntity that = (RepairsEntity) o;
 
         if (idRepairs != that.idRepairs) return false;
-        if (vehicle != null ? !vehicle.equals(that.vehicle) : that.vehicle != null) return false;
-        if (problem != null ? !problem.equals(that.problem) : that.problem != null) return false;
-        if (description != null ? !description.equals(that.description) : that.description != null) return false;
-        if (complete != null ? !complete.equals(that.complete) : that.complete != null) return false;
-        if (date != null ? !date.equals(that.date) : that.date != null) return false;
-
-        return true;
+        if (!Objects.equals(vehicle, that.vehicle)) return false;
+        if (!Objects.equals(problem, that.problem)) return false;
+        if (!Objects.equals(description, that.description)) return false;
+        if (!Objects.equals(complete, that.complete)) return false;
+        return Objects.equals(date, that.date);
     }
 
     @Override

@@ -18,7 +18,6 @@ import com.bfiejdasz.fleet_manager_android_app.appFeatures.userSession.UserSessi
 
 public class ManagerRepairPanel extends AppCompatActivity implements IUser {
     private TextView welcomeTextView;
-    private TextView userNameTextView;
     private Button addRepairButton;
     private Button repairStatusButton;
     private Button vehicleStatusButton;
@@ -31,14 +30,12 @@ public class ManagerRepairPanel extends AppCompatActivity implements IUser {
         setContentView(R.layout.manager_repairs_panel);
 
         welcomeTextView = findViewById(R.id.welcomeTextView);
-        userNameTextView = findViewById(R.id.userNameTextView);
         addRepairButton = findViewById(R.id.addRepairButtonToPanel);
         repairStatusButton = findViewById(R.id.repairStatusButton);
         vehicleStatusButton = findViewById(R.id.vehicleStatusButton);
 
         this.employee = UserSession.getInstance().getEmployee();
 
-        userNameTextView.setText(employee.getName());
 
         appContext = ApplicationContextSingleton.getInstance();
         Context context = this;
