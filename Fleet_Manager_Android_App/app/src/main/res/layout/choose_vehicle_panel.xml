@@ -17,9 +17,9 @@
 
     <!-- Label: Wprowadź numer rejestracyjny -->
     <TextView
+        android:id="@+id/licensePlateTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Wprowadź numer rejestracyjny"
         android:textAppearance="@style/ClashDisplayFontMediumStyle"
         android:textSize="16sp"
         android:layout_marginTop="61dp" />
@@ -30,6 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="text"
+        android:textSize="12sp"
         android:textAppearance="@style/ClashDisplayFontMediumStyle"
         android:layout_marginBottom="16dp" />
 

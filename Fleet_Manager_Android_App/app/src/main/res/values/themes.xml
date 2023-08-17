@@ -13,6 +13,8 @@
         <!-- Background color. -->
         <item name="android:windowBackground">@color/background_color</item>
 
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
 </resources>

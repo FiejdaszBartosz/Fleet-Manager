@@ -17,6 +17,7 @@ import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.RideLoop;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.rideFactory.errors.ContextNotSetException;
 
 public class RidePanel extends AppCompatActivity {
+    private TextView userNameLabelTextView;
     private TextView userNameTextView;
     private TextView timerTextView;
     private Button stopButton;
@@ -41,10 +42,12 @@ public class RidePanel extends AppCompatActivity {
             throw new RuntimeException(e);
         }
 
+        userNameLabelTextView = findViewById(R.id.userNameLabel);
         userNameTextView = findViewById(R.id.userName);
         timerTextView = findViewById(R.id.timer);
         stopButton = findViewById(R.id.stopButton);
 
+        userNameLabelTextView.setText(getString(R.string.username_label));
         userNameTextView.setText(userSession.getEmployee().getName());
         stopButton.setOnClickListener(new View.OnClickListener() {
             @Override

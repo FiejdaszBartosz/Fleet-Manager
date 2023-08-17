@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,8 +31,10 @@ import retrofit2.Response;
 public class StandardUser extends AppCompatActivity implements IUser {
     private EmployeesEntity employee;
     private ApplicationContextSingleton appContext;
-    private Button startButton;
-    private TextView userNameTextView;
+    private ImageButton startButton;
+    private TextView welcomeTextView;
+    private TextView greetingTextView;
+    private TextView startRideTextView;
     private RidesEmployeesController ridesEmployeesController;
 
     @Override
@@ -39,7 +42,9 @@ public class StandardUser extends AppCompatActivity implements IUser {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.standar_user_main_panel);
 
-        userNameTextView = findViewById(R.id.additionalText);
+        welcomeTextView = findViewById(R.id.welcomeTextView);
+        greetingTextView = findViewById(R.id.additionalText);
+        startRideTextView = findViewById(R.id.startText);
         startButton = findViewById(R.id.nextButton);
 
         this.employee = UserSession.getInstance().getEmployee();
@@ -49,7 +54,9 @@ public class StandardUser extends AppCompatActivity implements IUser {
         Context context = this;
         appContext.setAppContext(context);
 
-        userNameTextView.setText(employee.getName());
+        welcomeTextView.setText(getString(R.string.welcome_text_2) + " " + employee.getName());
+        greetingTextView.setText(getString(R.string.greeting));
+        startRideTextView.setText(getString(R.string.start_ride));
 
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override

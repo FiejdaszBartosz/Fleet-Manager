@@ -24,12 +24,18 @@ import retrofit2.Response;
 
 public class RepairStatusPanel extends AppCompatActivity {
     private Spinner repairSpinner;
+    private TextView titleLabel;
     private TextView idRepairEditText;
     private TextView idVehicleEditText;
     private TextView idProblemEditText;
     private TextView statusEditText;
     private TextView dateEditText;
     private Button completeRepairButton;
+    private TextView repairIDTextView;
+    private TextView vehicleIDTextView;
+    private TextView problemIDTextView;
+    private TextView statusTextView;
+    private TextView dateTextView;
     private RepairsController repairsController;
     private List<RepairsEntity> repairsList;
 
@@ -38,6 +44,7 @@ public class RepairStatusPanel extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repair_status_panel);
 
+        titleLabel = findViewById(R.id.titleLabel);
         repairSpinner = findViewById(R.id.repairSpinner);
         idRepairEditText = findViewById(R.id.idRepairEditText);
         idVehicleEditText = findViewById(R.id.idVehicleEditText);
@@ -45,6 +52,20 @@ public class RepairStatusPanel extends AppCompatActivity {
         statusEditText = findViewById(R.id.statusEditText);
         dateEditText = findViewById(R.id.dateEditText);
         completeRepairButton = findViewById(R.id.completeRepairButton);
+
+        repairIDTextView = findViewById(R.id.repairID);
+        vehicleIDTextView = findViewById(R.id.vehicleID);
+        problemIDTextView = findViewById(R.id.problemID);
+        statusTextView = findViewById(R.id.statusTextView);
+        dateTextView = findViewById(R.id.dateTextView);
+
+        repairIDTextView.setText(getString(R.string.label_repair_id));
+        vehicleIDTextView.setText(getString(R.string.label_vehicle_id));
+        problemIDTextView.setText(getString(R.string.label_problem_id));
+        statusTextView.setText(getString(R.string.label_status));
+        dateTextView.setText(getString(R.string.label_date));
+        completeRepairButton.setText(getString(R.string.button_complete_repair));
+
         repairsController = new RepairsController();
 
         loadRepairsData();

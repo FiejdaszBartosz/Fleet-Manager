@@ -43,6 +43,11 @@ public class ManagerMainPanel extends AppCompatActivity implements IUser {
         openManagerRepairsPanel = findViewById(R.id.repairsPanelButtonToPanel);
         vehiclePreviewButton = findViewById(R.id.vehiclesPreviewButton);
 
+        rideListButton.setText(getString(R.string.button_ride_list));
+        ridePreviewButton.setText(getString(R.string.button_ride_preview));
+        openManagerRepairsPanel.setText(getString(R.string.button_repairs_panel));
+        vehiclePreviewButton.setText(getString(R.string.button_vehicle_preview));
+
         this.employee = UserSession.getInstance().getEmployee();
 
         userNameTextView.setText(employee.getName());

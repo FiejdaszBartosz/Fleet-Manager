@@ -40,7 +40,6 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="Dodaj naprawe"
             style="@drawable/main_button" />
 
         <!-- Przycisk "Zmień status naprawy" -->
@@ -49,7 +48,6 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="Zmien stastus naprawy"
             style="@drawable/main_button" />
 
         <!-- Przycisk "Status pojazdów" -->
@@ -58,7 +56,6 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="Status pojazdów"
             style="@drawable/main_button" />
 
         <Space

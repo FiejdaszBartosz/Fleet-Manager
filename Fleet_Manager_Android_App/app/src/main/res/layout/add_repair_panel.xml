@@ -17,19 +17,19 @@
         android:layout_marginTop="16dp" />
 
     <TextView
+        android:id="@+id/repairTextView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:text="Dodaj naprawe"
         android:layout_marginTop="24dp"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textColor="@color/text"
         android:fontFamily="@font/clash_display_semi_bold"/>
 
     <TextView
+        android:id="@+id/vehicleIDTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Pojazd"
         android:layout_marginTop="16dp"
         android:textColor="@color/text"
         android:fontFamily="@font/clash_display_medium"/>
@@ -38,15 +38,14 @@
         android:id="@+id/vehicleEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="wpisz..."
-        android:textSize="12dp"
+        android:textSize="12sp"
         android:inputType="text"
         />
 
     <TextView
+        android:id="@+id/problemTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Problem"
         android:layout_marginTop="16dp"
         android:textColor="@color/text"
         android:fontFamily="@font/clash_display_medium"/>
@@ -55,14 +54,13 @@
         android:id="@+id/problemEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="wpisz..."
-        android:textSize="12dp"
+        android:textSize="12sp"
         android:inputType="text"/>
 
     <TextView
+        android:id="@+id/descriptionTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Opis"
         android:layout_marginTop="16dp"
         android:textColor="@color/text"
         android:fontFamily="@font/clash_display_medium"/>
@@ -71,14 +69,13 @@
         android:id="@+id/descriptionEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="wpisz..."
-        android:textSize="12dp"
+        android:textSize="12sp"
         android:inputType="textMultiLine"/>
 
     <TextView
+        android:id="@+id/dateTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Data"
         android:layout_marginTop="16dp"
         android:textColor="@color/text"
         android:fontFamily="@font/clash_display_medium"/>
@@ -87,8 +84,7 @@
         android:id="@+id/dateEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="wpisz..."
-        android:textSize="12dp"
+        android:textSize="12sp"
         android:inputType="datetime"/>
 
     <Space
@@ -100,7 +96,6 @@
         android:id="@+id/addRepairButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Dodaj naprawę"
         android:layout_marginTop="16dp"/>
 
 </LinearLayout>

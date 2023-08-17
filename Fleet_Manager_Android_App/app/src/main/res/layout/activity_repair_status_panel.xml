@@ -80,41 +80,41 @@
             tools:ignore="Suspicious0dp">
 
             <TextView
+                android:id="@+id/repairID"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ID Naprawy"
                 android:fontFamily="@font/clash_display_medium"
                 android:textColor="@color/colorOnPrimary"
                 android:layout_marginBottom="35dp"/>
 
             <TextView
+                android:id="@+id/vehicleID"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ID Pojazdu"
                 android:fontFamily="@font/clash_display_medium"
                 android:textColor="@color/colorOnPrimary"
                 android:layout_marginBottom="15dp"/>
 
             <TextView
+                android:id="@+id/problemID"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ID Problemu"
                 android:fontFamily="@font/clash_display_medium"
                 android:textColor="@color/colorOnPrimary"
                 android:layout_marginBottom="15dp"/>
 
             <TextView
+                android:id="@+id/statusTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Status"
                 android:fontFamily="@font/clash_display_medium"
                 android:textColor="@color/colorOnPrimary"
                 android:layout_marginBottom="15dp"/>
 
             <TextView
+                android:id="@+id/dateTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Data"
                 android:fontFamily="@font/clash_display_medium"
                 android:textColor="@color/colorOnPrimary"/>
 
@@ -178,7 +178,6 @@
         android:id="@+id/completeRepairButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Zakończ naprawę"
         app:layout_constraintTop_toBottomOf="@+id/columnContainer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

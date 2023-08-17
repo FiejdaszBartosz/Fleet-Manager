@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,6 +33,11 @@ public class AddRepairPanel extends AppCompatActivity {
     private EditText descriptionEditText;
     private EditText dateEditText;
     private Button addRepairButton;
+    private TextView repairTextView;
+    private TextView vehicleIDTextView;
+    private TextView problemIDTextView;
+    private TextView descriptionTextView;
+    private TextView dateTextView;
     private RepairsController repairsController;
     private ApplicationContextSingleton appContext;
 
@@ -45,6 +51,28 @@ public class AddRepairPanel extends AppCompatActivity {
         descriptionEditText = findViewById(R.id.descriptionEditText);
         dateEditText = findViewById(R.id.dateEditText);
         addRepairButton = findViewById(R.id.addRepairButton);
+
+        repairTextView = findViewById(R.id.repairTextView);
+        vehicleIDTextView = findViewById(R.id.vehicleIDTextView);
+        problemIDTextView = findViewById(R.id.problemTextView);
+        descriptionTextView = findViewById(R.id.descriptionTextView);
+        dateTextView = findViewById(R.id.dateTextView);
+
+        repairTextView.setText(getString(R.string.add_repair_title));
+
+        vehicleIDTextView.setText(getString(R.string.label_vehicle));
+        vehicleEditText.setText(getString(R.string.input_text_hint));
+
+        problemIDTextView.setText(getString(R.string.label_problem));
+        problemEditText.setText(getString(R.string.input_text_hint));
+
+        descriptionTextView.setText(getString(R.string.label_description));
+        descriptionEditText.setText(getString(R.string.input_text_hint));
+
+        dateTextView.setText(getString(R.string.label_date));
+        dateEditText.setText(getString(R.string.input_text_hint));
+
+        addRepairButton.setText(getString(R.string.button_add_repair));
 
         appContext = ApplicationContextSingleton.getInstance();
         Context context = this;

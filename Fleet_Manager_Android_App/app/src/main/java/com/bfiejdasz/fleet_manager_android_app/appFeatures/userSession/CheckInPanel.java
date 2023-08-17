@@ -8,6 +8,7 @@ import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,7 +26,7 @@ import java.util.concurrent.CompletableFuture;
 public class CheckInPanel extends AppCompatActivity {
     private TextView questionTextView;
     private EditText answerEditText;
-    private Button nextButton;
+    private ImageButton nextButton;
     private ApplicationContextSingleton appContext;
     private QuestionHolder questionHolder;
     private Pair<String, Integer> question;

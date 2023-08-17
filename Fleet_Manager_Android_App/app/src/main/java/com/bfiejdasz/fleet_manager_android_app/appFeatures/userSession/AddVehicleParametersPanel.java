@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,7 +25,7 @@ public class AddVehicleParametersPanel extends AppCompatActivity {
     private EditText editTextKilometers;
     private TextView textViewFuelLevel;
     private EditText editTextFuelLevel;
-    private Button buttonNext;
+    private ImageButton buttonNext;
     private AddVehicleParameterDriver addVehicleParameterDriver;
     private ApplicationContextSingleton appContext;
 
@@ -45,8 +46,10 @@ public class AddVehicleParametersPanel extends AppCompatActivity {
         editTextFuelLevel = findViewById(R.id.editTextFuelLevel);
         buttonNext = findViewById(R.id.nextButton);
 
-        textViewKilometers.setText("Wpisz liczbę kilometrów:");
-        textViewFuelLevel.setText("Wpisz stan paliwa:");
+        textViewKilometers.setText(getString(R.string.insert_milage_status));
+        editTextKilometers.setText(getString(R.string.input_text_hint));
+        textViewFuelLevel.setText(getString(R.string.insert_fuel_status));
+        editTextFuelLevel.setText(getString(R.string.input_text_hint));
 
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -21,10 +21,9 @@
 
     <!-- Sekcja nazwy użytkownika -->
     <TextView
-        android:id="@+id/usernameLabel"
+        android:id="@+id/usernameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nazwa użytkownika"
         android:textSize="16sp"
         android:textAppearance="@style/ClashDisplayFontMediumStyle"
         android:textAlignment="viewStart"
@@ -37,17 +36,16 @@
         android:id="@+id/usernameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/usernameLabel"
+        app:layout_constraintTop_toBottomOf="@id/usernameTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         style="@style/ClashDisplayFontMediumStyle"/>
 
     <!-- Sekcja hasła -->
     <TextView
-        android:id="@+id/passwordLabel"
+        android:id="@+id/passwordTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hasło"
         style="@style/ClashDisplayFontMediumStyle"
         android:textSize="16sp"
         android:textAppearance="@style/ClashDisplayFontSemiBoldStyle"
@@ -60,7 +58,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
-        app:layout_constraintTop_toBottomOf="@id/passwordLabel"
+        app:layout_constraintTop_toBottomOf="@id/passwordTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         style="@style/ClashDisplayFontMediumStyle"/>
@@ -73,7 +71,6 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         style="@style/FleetManager.PrimaryButton"
-        android:text="Zaloguj"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

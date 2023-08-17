@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +28,8 @@ import retrofit2.Response;
 public class LoginPanel extends AppCompatActivity {
     private EditText usernameEditText;
     private EditText passwordEditText;
+    private TextView usernameTextView;
+    private TextView passwordTextView;
     private Button loginButton;
     private ApplicationContextSingleton appContext;
     private UserSession userSession;
@@ -37,8 +40,14 @@ public class LoginPanel extends AppCompatActivity {
         setContentView(R.layout.login_panel);
 
         usernameEditText = findViewById(R.id.usernameEditText);
+        usernameTextView = findViewById(R.id.usernameTextView);
         passwordEditText = findViewById(R.id.passwordEditText);
+        passwordTextView = findViewById(R.id.passwordTextView);
         loginButton = findViewById(R.id.loginButton);
+
+        usernameTextView.setText(getString(R.string.usernameTextView));
+        passwordTextView.setText(getString(R.string.passwordTextView));
+        loginButton.setText(getString(R.string.loginButton));
 
         appContext = ApplicationContextSingleton.getInstance();
         Context context = this;

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -22,12 +23,16 @@ import com.bfiejdasz.fleet_manager_android_app.appFeatures.userSession.LoginPane
 public class PermissionsActivity extends AppCompatActivity {
     private static final int REQUEST_PERMISSIONS_CODE = 1;
 
+    private TextView titleTextView;
+    private Button grantPermissionsButton;
+
     private final String[] requiredPermissions = {
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.INTERNET,
             Manifest.permission.ACCESS_NETWORK_STATE,
-            Manifest.permission.ACCESS_BACKGROUND_LOCATION
+            Manifest.permission.ACCESS_BACKGROUND_LOCATION,
+
     };
 
     @Override
@@ -35,9 +40,14 @@ public class PermissionsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_permissions);
 
+        titleTextView = findViewById(R.id.welcomeTextView);
+        grantPermissionsButton = findViewById(R.id.grantPermissionsButton);
+
+        titleTextView.setText(getString(R.string.welcome_text));
+        grantPermissionsButton.setText(getString(R.string.permision_button));
+
         checkPermissions();
 
-        Button grantPermissionsButton = findViewById(R.id.grantPermissionsButton);
         grantPermissionsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

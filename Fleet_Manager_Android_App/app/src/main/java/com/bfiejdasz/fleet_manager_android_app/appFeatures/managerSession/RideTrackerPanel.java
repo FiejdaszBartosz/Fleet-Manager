@@ -1,12 +1,18 @@
 package com.bfiejdasz.fleet_manager_android_app.appFeatures.managerSession;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.preference.PreferenceManager;
 
 import com.bfiejdasz.fleet_manager_android_app.R;
 import com.bfiejdasz.fleet_manager_android_app.api.entity.PositionsEntity;
@@ -18,16 +24,16 @@ import org.osmdroid.config.Configuration;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.BoundingBox;
 import org.osmdroid.util.GeoPoint;
+import org.osmdroid.views.CustomZoomButtonsController;
 import org.osmdroid.views.MapView;
-import org.osmdroid.views.overlay.ItemizedIconOverlay;
-import org.osmdroid.views.overlay.ItemizedOverlayWithFocus;
-import org.osmdroid.views.overlay.OverlayItem;
+import org.osmdroid.views.overlay.Marker;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class RideTrackerPanel extends AppCompatActivity implements ILocationPointsCallback {
+    private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 1;
     private TextView rideIdTextView;
     private MapView mapView;
     private List<PositionsEntity> positionsEntityList;
@@ -36,29 +42,65 @@ public class RideTrackerPanel extends AppCompatActivity implements ILocationPoin
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.ride_tracker_panel);
+
+        Context ctx = getApplicationContext();
+        Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
 
         appContext = ApplicationContextSingleton.getInstance();
-        Context context = this;
-        appContext.setAppContext(context);
+        appContext.setAppContext(this);
+
+        setContentView(R.layout.ride_tracker_panel);
+
+        String[] temp = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
+        requestPermissionsIfNecessary(temp);
 
         rideIdTextView = findViewById(R.id.rideIdTextView);
         mapView = findViewById(R.id.mapView);
         mapView.setTileSource(TileSourceFactory.MAPNIK);
-        mapView.setBuiltInZoomControls(true);
+        mapView.getZoomController().setVisibility(CustomZoomButtonsController.Visibility.ALWAYS);
         mapView.setMultiTouchControls(true);
 
-        Configuration.getInstance().load(this, getPreferences(MODE_PRIVATE));
-
         Bundle b = getIntent().getExtras();
-        int id = b.getInt("rideID");
+        int id = b != null ? b.getInt("rideID") : 0;
 
-        setRideId(b.toString());
+        setRideId(String.valueOf(id));
 
         positionsEntityList = new ArrayList<>();
 
         LocationPoints locationPoints = new LocationPoints(id);
         locationPoints.downloadPoints(this);
+    }
+
+    private void requestPermissionsIfNecessary(String[] permissions) {
+        ArrayList<String> permissionsToRequest = new ArrayList<>();
+        for (String permission : permissions) {
+            if (ContextCompat.checkSelfPermission(this, permission)
+                    != PackageManager.PERMISSION_GRANTED) {
+                permissionsToRequest.add(permission);
+            }
+        }
+        if (permissionsToRequest.size() > 0) {
+            ActivityCompat.requestPermissions(
+                    this,
+                    permissionsToRequest.toArray(new String[0]),
+                    REQUEST_PERMISSIONS_REQUEST_CODE);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_PERMISSIONS_REQUEST_CODE) {
+            for (int i = 0; i < grantResults.length; i++) {
+                if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
+                    // Permission granted
+                } else {
+                    // Permission denied
+                    Toast.makeText(this, "Permission denied: " + permissions[i], Toast.LENGTH_SHORT).show();
+                    finish(); // Finish the activity if permissions are not granted
+                }
+            }
+        }
     }
 
     @Override
@@ -81,9 +123,11 @@ public class RideTrackerPanel extends AppCompatActivity implements ILocationPoin
     public void showPositionsOnMap(List<PositionsEntity> positions) {
         List<GeoPoint> geoPointList = convertToGeoPoint(positions);
 
-        List<OverlayItem> overlayItems = createOverlayItems(geoPointList);
-        ItemizedOverlayWithFocus<OverlayItem> itemOverlay = createItemizedOverlay(overlayItems);
-        mapView.getOverlays().add(itemOverlay);
+        for (GeoPoint point : geoPointList) {
+            Marker marker = new Marker(mapView);
+            marker.setPosition(point);
+            mapView.getOverlayManager().add(marker);
+        }
 
         if (!positions.isEmpty()) {
             GeoPoint firstPoint = geoPointList.get(0);
@@ -97,18 +141,10 @@ public class RideTrackerPanel extends AppCompatActivity implements ILocationPoin
             for (GeoPoint point : geoPointList) {
                 double lat = point.getLatitude();
                 double lon = point.getLongitude();
-                if (lat < minLat) {
-                    minLat = lat;
-                }
-                if (lat > maxLat) {
-                    maxLat = lat;
-                }
-                if (lon < minLon) {
-                    minLon = lon;
-                }
-                if (lon > maxLon) {
-                    maxLon = lon;
-                }
+                minLat = Math.min(minLat, lat);
+                maxLat = Math.max(maxLat, lat);
+                minLon = Math.min(minLon, lon);
+                maxLon = Math.max(maxLon, lon);
             }
 
             BoundingBox boundingBox = new BoundingBox(maxLat, maxLon, minLat, minLon);
@@ -116,33 +152,6 @@ public class RideTrackerPanel extends AppCompatActivity implements ILocationPoin
 
             mapView.invalidate();
         }
-    }
-
-    private List<OverlayItem> createOverlayItems(List<GeoPoint> positions) {
-        List<OverlayItem> overlayItems = new ArrayList<>();
-        for (GeoPoint point : positions) {
-            OverlayItem overlayItem = new OverlayItem("Punkt", "Opis punktu", point);
-            overlayItems.add(overlayItem);
-        }
-        return overlayItems;
-    }
-
-    private ItemizedOverlayWithFocus<OverlayItem> createItemizedOverlay(List<OverlayItem> overlayItems) {
-        return new ItemizedOverlayWithFocus<>(
-                overlayItems,
-                new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
-                    @Override
-                    public boolean onItemSingleTapUp(final int index, final OverlayItem item) {
-                        return true;
-                    }
-
-                    @Override
-                    public boolean onItemLongPress(final int index, final OverlayItem item) {
-                        return false;
-                    }
-                },
-                getApplicationContext()
-        );
     }
 
     private List<GeoPoint> convertToGeoPoint(List<PositionsEntity> positionsEntityList) {

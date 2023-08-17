@@ -34,8 +34,12 @@ public class ManagerRepairPanel extends AppCompatActivity implements IUser {
         repairStatusButton = findViewById(R.id.repairStatusButton);
         vehicleStatusButton = findViewById(R.id.vehicleStatusButton);
 
-        this.employee = UserSession.getInstance().getEmployee();
+        welcomeTextView.setText(getString(R.string.repair_panel_title));
+        addRepairButton.setText(getString(R.string.add_repair_button));
+        repairStatusButton.setText(getString(R.string.change_repair_status_button));
+        vehicleStatusButton.setText(getString(R.string.vehicle_status_button));
 
+        this.employee = UserSession.getInstance().getEmployee();
 
         appContext = ApplicationContextSingleton.getInstance();
         Context context = this;
