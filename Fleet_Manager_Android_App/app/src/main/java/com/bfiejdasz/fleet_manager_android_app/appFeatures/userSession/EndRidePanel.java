@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,7 +21,7 @@ public class EndRidePanel extends AppCompatActivity {
     private EditText editTextKilometers;
     private TextView textViewFuelLevel;
     private EditText editTextFuelLevel;
-    private Button buttonNext;
+    private ImageButton buttonNext;
     private EndRideDriver endRideDriver;
     private ApplicationContextSingleton appContext;
 
@@ -41,8 +42,8 @@ public class EndRidePanel extends AppCompatActivity {
         editTextFuelLevel = findViewById(R.id.editTextFuelLevel);
         buttonNext = findViewById(R.id.nextButton);
 
-        textViewKilometers.setText("Wpisz stan licznika:");
-        textViewFuelLevel.setText("Wpisz koncowy stan paliwa:");
+        textViewKilometers.setText(R.string.insert_milage_status);
+        textViewFuelLevel.setText(R.string.insert_fuel_status);
 
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override

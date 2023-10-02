@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -26,7 +25,8 @@ public class ChooseVehiclePanel extends AppCompatActivity {
 
     private TextView licensePlateTextView;
     private EditText editTextLicensePlate;
-    private ImageButton buttonSubmit;
+    private ImageButton nextButton;
+    private ImageButton previousButton;
     private ApplicationContextSingleton appContext;
     private IRideFactory rideFactory;
     private ChooseVehicle chooseVehicle;
@@ -50,19 +50,27 @@ public class ChooseVehiclePanel extends AppCompatActivity {
 
         licensePlateTextView = findViewById(R.id.licensePlateTextView);
         editTextLicensePlate = findViewById(R.id.editTextLicensePlate);
-        buttonSubmit = findViewById(R.id.nextButton);
+        nextButton = findViewById(R.id.nextButton);
+        previousButton = findViewById(R.id.previousButton);
 
         licensePlateTextView.setText(getString(R.string.license_plate_edit_text));
         editTextLicensePlate.setText(getString(R.string.input_text_hint));
-        buttonSubmit.setOnClickListener(new View.OnClickListener() {
+        nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onButtonSubmitClicked();
+                onButtonNextClicked();
+            }
+        });
+
+        previousButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onButtonPreviousClicked();
             }
         });
     }
 
-    private void onButtonSubmitClicked() {
+    private void onButtonNextClicked() {
         String licensePlate = editTextLicensePlate.getText().toString();
 
         if (licensePlate.isEmpty()) {
@@ -101,6 +109,11 @@ public class ChooseVehiclePanel extends AppCompatActivity {
         });
     }
 
+    private void onButtonPreviousClicked() {
+        Intent intent = new Intent(this, StandardUser.class);
+        startActivity(intent);
+        finish();
+    }
 
 }
 

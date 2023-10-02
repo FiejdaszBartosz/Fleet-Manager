@@ -26,6 +26,7 @@ public class AddVehicleParametersPanel extends AppCompatActivity {
     private TextView textViewFuelLevel;
     private EditText editTextFuelLevel;
     private ImageButton buttonNext;
+    private ImageButton buttonPrevious;
     private AddVehicleParameterDriver addVehicleParameterDriver;
     private ApplicationContextSingleton appContext;
 
@@ -45,6 +46,7 @@ public class AddVehicleParametersPanel extends AppCompatActivity {
         textViewFuelLevel = findViewById(R.id.textViewFuelLevel);
         editTextFuelLevel = findViewById(R.id.editTextFuelLevel);
         buttonNext = findViewById(R.id.nextButton);
+        buttonPrevious = findViewById(R.id.previousButton);
 
         textViewKilometers.setText(getString(R.string.insert_milage_status));
         editTextKilometers.setText(getString(R.string.input_text_hint));
@@ -55,6 +57,13 @@ public class AddVehicleParametersPanel extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 onNextButtonClicked();
+            }
+        });
+
+        buttonPrevious.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onPreviousButtonClicked();
             }
         });
     }
@@ -86,5 +95,11 @@ public class AddVehicleParametersPanel extends AppCompatActivity {
         } else {
             Toast.makeText(appContext.getAppContext(), "Uzupelnij pola", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void onPreviousButtonClicked() {
+        Intent intent = new Intent(this, ChooseVehiclePanel.class);
+        startActivity(intent);
+        finish();
     }
 }
