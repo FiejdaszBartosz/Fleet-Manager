@@ -1,5 +1,7 @@
 package com.bfiejdasz.fleet_manager_android_app.api.api_controllers;
 
+import android.util.Log;
+
 import com.bfiejdasz.fleet_manager_android_app.api.CustomHttpException;
 
 import retrofit2.Call;

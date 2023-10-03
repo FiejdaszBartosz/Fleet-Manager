@@ -3,6 +3,7 @@ package com.bfiejdasz.fleet_manager_android_app.appFeatures.managerSession;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -33,7 +34,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class RideTrackerPanel extends AppCompatActivity implements ILocationPointsCallback {
-    private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 1;
+
+    private final int REQUEST_PERMISSIONS_REQUEST_CODE = 1;
+    private static final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1; // Dodaj stałą dla żądania dostępu do lokalizacji
     private TextView rideIdTextView;
     private MapView mapView;
     private List<PositionsEntity> positionsEntityList;
@@ -49,16 +52,18 @@ public class RideTrackerPanel extends AppCompatActivity implements ILocationPoin
         appContext = ApplicationContextSingleton.getInstance();
         appContext.setAppContext(this);
 
-        setContentView(R.layout.ride_tracker_panel);
+        // Poproś użytkownika o uprawnienia do lokalizacji
+        requestLocationPermissions();
 
-        String[] temp = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
-        requestPermissionsIfNecessary(temp);
+        setContentView(R.layout.ride_tracker_panel);
 
         rideIdTextView = findViewById(R.id.rideIdTextView);
         mapView = findViewById(R.id.mapView);
         mapView.setTileSource(TileSourceFactory.MAPNIK);
         mapView.getZoomController().setVisibility(CustomZoomButtonsController.Visibility.ALWAYS);
         mapView.setMultiTouchControls(true);
+
+
 
         Bundle b = getIntent().getExtras();
         int id = b != null ? b.getInt("rideID") : 0;
@@ -71,36 +76,16 @@ public class RideTrackerPanel extends AppCompatActivity implements ILocationPoin
         locationPoints.downloadPoints(this);
     }
 
-    private void requestPermissionsIfNecessary(String[] permissions) {
-        ArrayList<String> permissionsToRequest = new ArrayList<>();
-        for (String permission : permissions) {
-            if (ContextCompat.checkSelfPermission(this, permission)
-                    != PackageManager.PERMISSION_GRANTED) {
-                permissionsToRequest.add(permission);
-            }
-        }
-        if (permissionsToRequest.size() > 0) {
-            ActivityCompat.requestPermissions(
-                    this,
-                    permissionsToRequest.toArray(new String[0]),
-                    REQUEST_PERMISSIONS_REQUEST_CODE);
-        }
+    public void onResume(){
+        super.onResume();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        Configuration.getInstance().load(this, PreferenceManager.getDefaultSharedPreferences(this));
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_PERMISSIONS_REQUEST_CODE) {
-            for (int i = 0; i < grantResults.length; i++) {
-                if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
-                    // Permission granted
-                } else {
-                    // Permission denied
-                    Toast.makeText(this, "Permission denied: " + permissions[i], Toast.LENGTH_SHORT).show();
-                    finish(); // Finish the activity if permissions are not granted
-                }
-            }
-        }
+    public void onPause(){
+        super.onPause();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        Configuration.getInstance().save(this, prefs);
     }
 
     @Override
@@ -109,7 +94,7 @@ public class RideTrackerPanel extends AppCompatActivity implements ILocationPoin
             showPositionsOnMap(positions);
             positionsEntityList.addAll(positions);
         } else {
-            Toast.makeText(appContext.getAppContext(), "Podane RideID nieistnieje", Toast.LENGTH_SHORT).show();
+            Toast.makeText(appContext.getAppContext(), "Podane RideID nie istnieje", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, ManagerMainPanel.class);
             startActivity(intent);
             finish();
@@ -163,5 +148,33 @@ public class RideTrackerPanel extends AppCompatActivity implements ILocationPoin
     @Override
     public void onBackPressed() {
         finish();
+    }
+
+    private void requestLocationPermissions() {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Jeśli uprawnienia nie zostały jeszcze udzielone, poproś o nie
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION) {
+            // Sprawdź, czy użytkownik przyznał uprawnienia
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Jeśli użytkownik przyznał uprawnienia, możesz kontynuować działanie, np. ładowanie mapy
+                // Tutaj możesz umieścić kod do ładowania mapy
+            } else {
+                // Jeśli użytkownik odrzucił uprawnienia, możesz wyświetlić komunikat lub podjąć odpowiednie działania
+                Toast.makeText(this, "Brak uprawnień do dostępu do lokalizacji.", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }
