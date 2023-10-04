@@ -6,10 +6,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -20,72 +22,58 @@ import com.bfiejdasz.fleet_manager_android_app.api.entity.PositionsEntity;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.ApplicationContextSingleton;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.managerBackend.ILocationPointsCallback;
 import com.bfiejdasz.fleet_manager_android_app.appFeatures.managerBackend.LocationPoints;
-
-import org.osmdroid.config.Configuration;
-import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
-import org.osmdroid.util.BoundingBox;
-import org.osmdroid.util.GeoPoint;
-import org.osmdroid.views.CustomZoomButtonsController;
-import org.osmdroid.views.MapView;
-import org.osmdroid.views.overlay.Marker;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class RideTrackerPanel extends AppCompatActivity implements ILocationPointsCallback {
+public class RideTrackerPanel extends AppCompatActivity implements ILocationPointsCallback, OnMapReadyCallback {
 
-    private final int REQUEST_PERMISSIONS_REQUEST_CODE = 1;
-    private static final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1; // Dodaj stałą dla żądania dostępu do lokalizacji
+    private final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     private TextView rideIdTextView;
-    private MapView mapView;
+    private GoogleMap googleMap;
     private List<PositionsEntity> positionsEntityList;
     private ApplicationContextSingleton appContext;
+    private int rideID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        Context ctx = getApplicationContext();
-        Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
-
-        appContext = ApplicationContextSingleton.getInstance();
-        appContext.setAppContext(this);
-
-        // Poproś użytkownika o uprawnienia do lokalizacji
-        requestLocationPermissions();
-
         setContentView(R.layout.ride_tracker_panel);
 
         rideIdTextView = findViewById(R.id.rideIdTextView);
-        mapView = findViewById(R.id.mapView);
-        mapView.setTileSource(TileSourceFactory.MAPNIK);
-        mapView.getZoomController().setVisibility(CustomZoomButtonsController.Visibility.ALWAYS);
-        mapView.setMultiTouchControls(true);
-
-
+        positionsEntityList = new ArrayList<>();
+        appContext = ApplicationContextSingleton.getInstance();
+        appContext.setAppContext(this);
 
         Bundle b = getIntent().getExtras();
-        int id = b != null ? b.getInt("rideID") : 0;
+        rideID = b != null ? b.getInt("rideID") : 0;
 
-        setRideId(String.valueOf(id));
+        setRideId(String.valueOf(rideID));
 
-        positionsEntityList = new ArrayList<>();
-
-        LocationPoints locationPoints = new LocationPoints(id);
-        locationPoints.downloadPoints(this);
+        // Inicjalizacja mapy Google
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapFragment);
+        mapFragment.getMapAsync(this);
     }
 
-    public void onResume(){
+    @Override
+    protected void onResume() {
         super.onResume();
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        Configuration.getInstance().load(this, PreferenceManager.getDefaultSharedPreferences(this));
     }
 
-    public void onPause(){
+    @Override
+    protected void onPause() {
         super.onPause();
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        Configuration.getInstance().save(this, prefs);
     }
 
     @Override
@@ -101,79 +89,99 @@ public class RideTrackerPanel extends AppCompatActivity implements ILocationPoin
         }
     }
 
+    private void showPositionsOnMap(List<PositionsEntity> positions) {
+        if (googleMap != null && !positions.isEmpty()) {
+            LatLngBounds.Builder builder = new LatLngBounds.Builder();
+
+            for (PositionsEntity position : positions) {
+                Double xCord = position.getxCord();
+                Double yCord = position.getyCord();
+
+                Log.d("LOKALIZACJA", "xCord: " + xCord + ", yCord: " + yCord);
+
+                if (xCord != null && yCord != null) {
+                    LatLng positionLatLng = new LatLng(yCord, xCord);
+
+                    googleMap.addMarker(new MarkerOptions().position(positionLatLng).title("Pinezka"));
+                    builder.include(positionLatLng); // Dodaj punkt do obszaru wyznaczania granic mapy
+                }
+            }
+
+            LatLngBounds bounds = builder.build();
+            int padding = 100; // Odstęp od krawędzi widoku
+            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+
+            googleMap.moveCamera(cameraUpdate);
+        }
+    }
+
     public void setRideId(String rideId) {
         rideIdTextView.setText("Ride ID: " + rideId);
     }
 
-    public void showPositionsOnMap(List<PositionsEntity> positions) {
-        List<GeoPoint> geoPointList = convertToGeoPoint(positions);
-
-        for (GeoPoint point : geoPointList) {
-            Marker marker = new Marker(mapView);
-            marker.setPosition(point);
-            mapView.getOverlayManager().add(marker);
-        }
-
-        if (!positions.isEmpty()) {
-            GeoPoint firstPoint = geoPointList.get(0);
-            mapView.getController().setCenter(firstPoint);
-
-            double minLat = firstPoint.getLatitude();
-            double maxLat = firstPoint.getLatitude();
-            double minLon = firstPoint.getLongitude();
-            double maxLon = firstPoint.getLongitude();
-
-            for (GeoPoint point : geoPointList) {
-                double lat = point.getLatitude();
-                double lon = point.getLongitude();
-                minLat = Math.min(minLat, lat);
-                maxLat = Math.max(maxLat, lat);
-                minLon = Math.min(minLon, lon);
-                maxLon = Math.max(maxLon, lon);
-            }
-
-            BoundingBox boundingBox = new BoundingBox(maxLat, maxLon, minLat, minLon);
-            mapView.zoomToBoundingBox(boundingBox, true);
-
-            mapView.invalidate();
-        }
-    }
-
-    private List<GeoPoint> convertToGeoPoint(List<PositionsEntity> positionsEntityList) {
-        return positionsEntityList.stream()
-                .map(temp -> new GeoPoint(temp.getyCord(), temp.getxCord()))
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public void onBackPressed() {
-        finish();
-    }
-
     private void requestLocationPermissions() {
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // Jeśli uprawnienia nie zostały jeszcze udzielone, poproś o nie
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
         }
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
         if (requestCode == MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION) {
             // Sprawdź, czy użytkownik przyznał uprawnienia
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Jeśli użytkownik przyznał uprawnienia, możesz kontynuować działanie, np. ładowanie mapy
-                // Tutaj możesz umieścić kod do ładowania mapy
+                // Uprawnienia zostały przyznane, ale nie uruchamiamy loadGoogleMap() tutaj
             } else {
                 // Jeśli użytkownik odrzucił uprawnienia, możesz wyświetlić komunikat lub podjąć odpowiednie działania
                 Toast.makeText(this, "Brak uprawnień do dostępu do lokalizacji.", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    @Override
+    public void onMapReady(GoogleMap map) {
+        googleMap = map;
+        requestLocationPermissions();
+
+        LocationPoints locationPoints = new LocationPoints(rideID);
+        locationPoints.downloadPoints(this);
+    }
+
+    private void loadGoogleMap() {
+        // Tutaj możesz dodać kod do ładowania mapy Google
+        if (googleMap != null) {
+            // Przykład: Usunięcie wstępnego markeru
+            googleMap.clear();
+
+            // Przykład: Dodać pinezki z pobranych danych
+            for (PositionsEntity position : positionsEntityList) {
+                Double xCord = position.getxCord();
+                Double yCord = position.getyCord();
+
+                if (xCord != null && yCord != null) {
+                    LatLng positionLatLng = new LatLng(yCord, xCord);
+                    googleMap.addMarker(new MarkerOptions().position(positionLatLng).title("Pinezka"));
+                }
+            }
+
+            // Przykład: Jeśli istnieją pinezki, wyznaczenie granic i przybliżenie
+            if (!positionsEntityList.isEmpty()) {
+                LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                for (PositionsEntity position : positionsEntityList) {
+                    Double xCord = position.getxCord();
+                    Double yCord = position.getyCord();
+                    if (xCord != null && yCord != null) {
+                        LatLng positionLatLng = new LatLng(yCord, xCord);
+                        builder.include(positionLatLng);
+                    }
+                }
+                LatLngBounds bounds = builder.build();
+                int padding = 100; // Odstęp od krawędzi widoku
+                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+                googleMap.moveCamera(cameraUpdate);
             }
         }
     }

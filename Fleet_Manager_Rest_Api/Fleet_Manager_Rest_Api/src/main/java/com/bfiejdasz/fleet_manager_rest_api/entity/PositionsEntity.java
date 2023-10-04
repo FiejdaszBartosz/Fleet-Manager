@@ -28,7 +28,7 @@ public class PositionsEntity {
     private Double yCord;
     @Basic
     @Column(name = "time")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
     private LocalDateTime time;
     @ManyToOne
     @JoinColumn(name = "rideid", referencedColumnName = "id_rides", insertable=false, updatable=false)
@@ -66,12 +66,12 @@ public class PositionsEntity {
     public void setyCord(Double yCord) {
         this.yCord = yCord;
     }
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
     public LocalDateTime getTime() {
         return time;
     }
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
     public void setTime(LocalDateTime time) {
         this.time = time;
     }

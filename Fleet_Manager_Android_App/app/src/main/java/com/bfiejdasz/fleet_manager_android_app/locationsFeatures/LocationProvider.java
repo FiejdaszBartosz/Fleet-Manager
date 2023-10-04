@@ -10,9 +10,6 @@ import android.location.LocationManager;
 
 import androidx.core.app.ActivityCompat;
 
-import org.osmdroid.config.Configuration;
-
-
 public class LocationProvider implements LocationListener {
     private final Context context;
     private final LocationManager locationManager;
@@ -26,7 +23,6 @@ public class LocationProvider implements LocationListener {
 
     public LocationProvider(Context context) {
         this.context = context;
-        Configuration.getInstance().load(context, androidx.preference.PreferenceManager.getDefaultSharedPreferences(context));
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
     }
 
